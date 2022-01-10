@@ -1,2 +1,13 @@
 format: jb-book
-root: timesteppers
+root: overview
+parts:
+    - caption: dg/algorithm.h
+      chapters:
+      - file: vector-juggling
+      - file: timesteppers
+      - file: grids
+      - file: solvers
+      - file: tutorial_lvl5
+    - caption: dg/geometries/geometries.h
+      chapters:
+      - file: geometries
