@@ -1,7 +1,6 @@
 # The Feltor guide book project
 
 The user guid for the feltor project.
-Generate the site https://mwiesenberger.github.io/xeus-cling-docu
 
 ## Install
 In order to generate the static website we use
@@ -11,9 +10,9 @@ In order to generate the static website we use
 # install jupyter-book
 pip install -U jupyter-book
 # clone this repository
-git clone https://github.com/mwiesenberger/xeus-cling-docu
+git clone https://github.com/feltor-dev/user-guide
 # build the book
-jupyter-book build path/to/xeus-cling-docu
+jupyter-book build path/to/user-guide
 # we use ghp-import to publish changes on the github pages
 pip install ghp-import
 ```
@@ -26,12 +25,12 @@ repository next to each other.  If you prefer not to, you need to set the
 ## Usage
 Build the book with
 ```bash
-jupyter-book build path/to/xeus-cling-docu
+jupyter-book build path/to/user-guide
 ```
 To publish changes after the book was built
 ```bash
 cd path/to/advection
-ghp-import -n -f -p _build/html
+ghp-import -n -f -p -o _build/html
 ```
 
 ## Author
