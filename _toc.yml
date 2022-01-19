@@ -1,5 +1,5 @@
 format: jb-book
-root: overview
+root: welcome
 parts:
     - caption: dg/algorithm.h
       chapters:
@@ -7,7 +7,16 @@ parts:
       - file: timesteppers
       - file: grids
       - file: solvers
-      - file: tutorial_lvl5
     - caption: dg/geometries/geometries.h
       chapters:
       - file: geometries
+    - caption: dg/file/file.h
+      chapters:
+      - file: json-utilities
+      - file: netcdf-utilities
+    - caption: dg/exblas/exblas.h
+      chapters:
+      - file: reproducibility
+    - caption: Projects
+      chapters:
+      - file: new-project

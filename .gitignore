@@ -1,2 +1,4 @@
 .ipynb_checkpoints
 _build
+test.ipynb
+outputfile.nc
