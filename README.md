@@ -29,7 +29,7 @@ jupyter-book build path/to/user-guide
 ```
 To publish changes after the book was built
 ```bash
-cd path/to/advection
+cd path/to/user-guide
 ghp-import -n -f -p -o _build/html
 ```
 
