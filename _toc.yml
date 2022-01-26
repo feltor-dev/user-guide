@@ -20,3 +20,4 @@ parts:
     - caption: Projects
       chapters:
       - file: new-project
+      - file: timesteppers2
