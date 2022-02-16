@@ -10,6 +10,9 @@ parts:
     - caption: dg/geometries/geometries.h
       chapters:
       - file: geometries
+    - caption: dg/matrix/matrix.h
+      chapters:
+      - file: matrixfunction
     - caption: dg/file/file.h
       chapters:
       - file: json-utilities

@@ -28,8 +28,9 @@ scientific software package that can roughly be divided into six parts described
 
 The core dg library `dg/algorithm.h` is a **header-only** template C++ library, which provides the core elements of the first four levels in the above structure
 
-FELTOR currently ships with three **extensions** to the basic dg library.
+FELTOR currently ships with four **extensions** to the basic dg library.
 - `dg/geometries/geometries.h` adds several grid generators, magnetic field structure and the flux-coordinate independent approach (levels 3 and 4).
+- `dg/matrix/matrix.h` adds matrix-function computations and a few new elliptic operators (levels 2 and 4)
 - `dg/file/file.h` simplifies common I/O operations in our programs (level 5 and 6).
 - `dg/exblas/exblas.h` is special because it is already included in the dg library (level 1) but can also be used as a standalone library. It provides binary reproducible and accurate scalar products on various architectures.
 
