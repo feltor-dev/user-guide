@@ -1,0 +1,512 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON utilities &#8212; The Feltor guide book</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="NetCDF utilities" href="netcdf-utilities.html" />
+    <link rel="prev" title="Matrix functions" href="matrixfunction.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">The Feltor guide book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="welcome.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/algorithm.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="vector-juggling.html">
+   Vectors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="timesteppers.html">
+   Timesteppers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="grids.html">
+   Grids and derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="solvers.html">
+   Solvers in Feltor
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/geometries/geometries.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="geometries.html">
+   Curvilinear grids
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/matrix/matrix.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="matrixfunction.html">
+   Matrix functions
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/file/file.h
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   JSON utilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="netcdf-utilities.html">
+   NetCDF utilities
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/exblas/exblas.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="reproducibility.html">
+   Reproducibility and Accuracy
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Projects
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="new-project.html">
+   Create your own project
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="timesteppers2.html">
+   Advanced Timesteppers
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/json-utilities.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/feltor-dev/user-guide"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/feltor-dev/user-guide/issues/new?title=Issue%20on%20page%20%2Fjson-utilities.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/feltor-dev/user-guide/main?urlpath=tree/docs/json-utilities.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-dg-file-file2json-function">
+   The
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     dg::file::file2Json
+    </span>
+   </code>
+   function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-dg-file-wrappedjsonvalue-class">
+   The
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     dg::file::WrappedJsonValue
+    </span>
+   </code>
+   class
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="json-utilities">
+<h1>JSON utilities<a class="headerlink" href="#json-utilities" title="Permalink to this headline">¶</a></h1>
+<p>We use the <a class="reference external" href="https://github.com/open-source-parsers/jsoncpp">jsoncpp</a> library to parse json files. We chose it because it is widely used, very well maintained and even available as a linux package <code class="docutils literal notranslate"><span class="pre">libjsoncpp</span></code>.</p>
+<div class="section" id="the-dg-file-file2json-function">
+<h2>The <code class="docutils literal notranslate"><span class="pre">dg::file::file2Json</span></code> function<a class="headerlink" href="#the-dg-file-file2json-function" title="Permalink to this headline">¶</a></h2>
+<p>The first simplification regards how comments and errors are treated on file opening. We provide a shortcut:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dg/file/json_utilities.h&quot;</span><span class="cp"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">WrappedJsonValue</span><span class="w"> </span><span class="n">js</span><span class="p">;</span><span class="w"></span>
+<span class="k">try</span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">file2Json</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;does_not_exist.json&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">js</span><span class="p">.</span><span class="n">asJson</span><span class="p">(),</span><span class="w"></span>
+<span class="w">                    </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">comments</span><span class="o">::</span><span class="n">are_discarded</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">error</span><span class="o">::</span><span class="n">is_throw</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>An error occured while parsing does_not_exist.json
+*** File does not exist! *** 
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example we open a file where C-style comments are allowed but discarded, while an error on opening or reading the file leads to a throw (which if not captured leads to immediate abortion of the program).</p>
+</div>
+<div class="section" id="the-dg-file-wrappedjsonvalue-class">
+<h2>The <code class="docutils literal notranslate"><span class="pre">dg::file::WrappedJsonValue</span></code> class<a class="headerlink" href="#the-dg-file-wrappedjsonvalue-class" title="Permalink to this headline">¶</a></h2>
+<p>For our purposes the only downside of jsoncpp is that missing values do not trigger a throw and to manually check existence somewhat clutters the code. At the same time missing values often result from silly mistakes, which in a high performance computing environment result in real avoidable cost (for example because you ran a simulation with a default value that you did not really intend to).</p>
+<p>For this reason we provide the <code class="docutils literal notranslate"><span class="pre">dg::file::WrappedJsonValue</span></code> class.
+It basically wraps the
+access to a <code class="docutils literal notranslate"><span class="pre">Json::Value</span></code> with guards that raise exceptions or display warnings in case an error occurs, for example when a key is misspelled,
+missing or has the wrong type.
+The goal is the composition of a good error message that helps a user
+quickly debug the input file.</p>
+<p>The Wrapper is necessary because Jsoncpp by default silently
+generates a new key in case it is not present which in our scenario is an
+invitation for stupid mistakes.
+You can use the <code class="docutils literal notranslate"><span class="pre">WrappedJsonValue</span></code> like a <code class="docutils literal notranslate"><span class="pre">Json::Value</span></code> with read-only access:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">WrappedJsonValue</span><span class="w"> </span><span class="n">ws</span><span class="p">;</span><span class="w"></span>
+<span class="k">try</span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">file2Json</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;test.json&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ws</span><span class="p">.</span><span class="n">asJson</span><span class="p">(),</span><span class="w"></span>
+<span class="w">                    </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">comments</span><span class="o">::</span><span class="n">are_discarded</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">error</span><span class="o">::</span><span class="n">is_throw</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">){</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">();}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">{</span><span class="w">   </span>
+<span class="w">    </span><span class="c1">// Access a nested unsigned value</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ws</span><span class="p">[</span><span class="s">&quot;grid&quot;</span><span class="p">][</span><span class="s">&quot;n&quot;</span><span class="p">].</span><span class="n">asUInt</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Access a nested unsigned value</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">Nx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ws</span><span class="p">[</span><span class="s">&quot;grid&quot;</span><span class="p">][</span><span class="s">&quot;Nx&quot;</span><span class="p">].</span><span class="n">asUInt</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Access a list item</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ws</span><span class="p">[</span><span class="s">&quot;grid&quot;</span><span class="p">][</span><span class="s">&quot;x&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="n">asDouble</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Acces using default initializer </span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ws</span><span class="p">[</span><span class="s">&quot;grid&quot;</span><span class="p">][</span><span class="s">&quot;x&quot;</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">42.0</span><span class="p">).</span><span class="n">asDouble</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Access a string</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">bc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ws</span><span class="p">[</span><span class="s">&quot;bc&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="n">asString</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Example of a throw</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">hello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ws</span><span class="p">[</span><span class="w"> </span><span class="s">&quot;does not exist&quot;</span><span class="p">].</span><span class="n">asString</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">){</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Error in file test.json</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error in file test.json
+*** Key error: &quot;does not exist&quot;:  not found.
+</pre></div>
+</div>
+</div>
+</div>
+<p>A feature of the class is that it keeps track of how a value is called.
+For example</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">some_function</span><span class="p">(</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">WrappedJsonValue</span><span class="w"> </span><span class="n">ws</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ws</span><span class="p">[</span><span class="w"> </span><span class="s">&quot;some_non_existent_key&quot;</span><span class="p">].</span><span class="n">asUInt</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">value</span><span class="o">&lt;&lt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">some_function</span><span class="p">(</span><span class="w"> </span><span class="n">ws</span><span class="p">[</span><span class="s">&quot;grid&quot;</span><span class="p">]);</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">){</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>*** Key error: &quot;grid&quot;: &quot;some_non_existent_key&quot;:  not found.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The what string knows that “some_non_existent_key” is expected to be
+contained in the “grid” key, which simplifies debugging to a great extent.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "xcpp14"
+        },
+        kernelOptions: {
+            kernelName: "xcpp14",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'xcpp14'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="matrixfunction.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Matrix functions</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="netcdf-utilities.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">NetCDF utilities</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Matthias Wiesenberger<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

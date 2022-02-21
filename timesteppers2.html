@@ -1,0 +1,717 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced Timesteppers &#8212; The Feltor guide book</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Create your own project" href="new-project.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">The Feltor guide book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="welcome.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/algorithm.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="vector-juggling.html">
+   Vectors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="timesteppers.html">
+   Timesteppers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="grids.html">
+   Grids and derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="solvers.html">
+   Solvers in Feltor
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/geometries/geometries.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="geometries.html">
+   Curvilinear grids
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/matrix/matrix.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="matrixfunction.html">
+   Matrix functions
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/file/file.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="json-utilities.html">
+   JSON utilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="netcdf-utilities.html">
+   NetCDF utilities
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/exblas/exblas.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="reproducibility.html">
+   Reproducibility and Accuracy
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Projects
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="new-project.html">
+   Create your own project
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Advanced Timesteppers
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/timesteppers2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/feltor-dev/user-guide"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/feltor-dev/user-guide/issues/new?title=Issue%20on%20page%20%2Ftimesteppers2.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/feltor-dev/user-guide/main?urlpath=tree/docs/timesteppers2.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#explicit-stepping">
+   Explicit stepping
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#explicit-advection-implicit-diffusion">
+   Explicit advection - implicit diffusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implicit-advection-diffusion-solver">
+   Implicit advection-diffusion solver
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implicit-mass-matrix-timestepper">
+   Implicit mass-matrix -  timestepper
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="advanced-timesteppers">
+<span id="sec-pdes"></span><h1>Advanced Timesteppers<a class="headerlink" href="#advanced-timesteppers" title="Permalink to this headline">¶</a></h1>
+<p>We now want to demonstrate how to use Feltor to solve partial differential equations.
+We use the simple advection diffusion equation as a model equation</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c9ef17e1-f9cc-4c22-bf2b-17de07a0434e">
+<span class="eqno">(18)<a class="headerlink" href="#equation-c9ef17e1-f9cc-4c22-bf2b-17de07a0434e" title="Permalink to this equation">¶</a></span>\[\begin{align}
+    \frac{\partial \omega}{\partial t} &amp;= -v\cdot \nabla\omega + D \Delta \omega \\
+     -\Delta \phi &amp;= \omega \\
+     v_x &amp;:= -\partial_y \phi \\
+     v_y &amp;:= \partial_x \phi
+\end{align}\]</div>
+<div class="section" id="explicit-stepping">
+<h2>Explicit stepping<a class="headerlink" href="#explicit-stepping" title="Permalink to this headline">¶</a></h2>
+<p>As long as the diffusion coefficient is small enough to not influence the CFL condition we can compute everything explicitly. In Feltor we simply need a functor implementing the right hand side like we did in the
+last chapter. We here repeat the building blocks that regard the timestepper:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">Geometry</span><span class="p">,</span><span class="w"> </span><span class="k">class</span> <span class="nc">Matrix</span><span class="p">,</span><span class="w"> </span><span class="k">class</span> <span class="nc">Container</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">Equations</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">omegaDot</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// solve Poisson equation</span>
+<span class="w">        </span><span class="c1">// implement advection term</span>
+<span class="w">        </span><span class="c1">// implement diffusion term</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+<span class="c1">// Construct init condition</span>
+<span class="n">omega</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myproject</span><span class="o">::</span><span class="n">initial_conditions</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">js</span><span class="p">[</span><span class="s">&quot;init&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Construct Equations</span>
+<span class="n">myproject</span><span class="o">::</span><span class="n">Equations</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">CartesianGrid2d</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DMatrix</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rhs</span><span class="p">(</span><span class="w"> </span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">js</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// The timestepper</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">Adaptive</span><span class="o">&lt;</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">ERKStep</span><span class="o">&lt;</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">adapt</span><span class="p">(</span><span class="n">tableau</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// The timeloop</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">AdaptiveTimeloop</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&gt;</span><span class="w"> </span><span class="n">timeloop</span><span class="p">(</span><span class="w"> </span><span class="n">adapt</span><span class="p">,</span><span class="w"> </span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                    </span><span class="n">dg</span><span class="o">::</span><span class="n">pid_control</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">l2norm</span><span class="p">,</span><span class="w"> </span><span class="n">rtol</span><span class="p">,</span><span class="w"> </span><span class="n">atol</span><span class="p">);</span><span class="w"></span>
+<span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">u</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="o">&lt;=</span><span class="n">maxout</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">   </span>
+<span class="w">    </span><span class="n">timeloop</span><span class="p">.</span><span class="n">integrate</span><span class="p">(</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="o">*</span><span class="n">deltaT</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">u</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxout</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">to</span><span class="o">::</span><span class="nl">at_least</span> <span class="p">:</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">to</span><span class="o">::</span><span class="n">exact</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="explicit-advection-implicit-diffusion">
+<h2>Explicit advection - implicit diffusion<a class="headerlink" href="#explicit-advection-implicit-diffusion" title="Permalink to this headline">¶</a></h2>
+<p>We want to split the PDE into two parts: <span class="math notranslate nohighlight">\(E(\phi, \omega) = -\vec v \cdot \nabla \omega\)</span> and <span class="math notranslate nohighlight">\(I(\omega) = D\Delta\omega\)</span> with <span class="math notranslate nohighlight">\(\phi = S(\omega) = \Delta^{-1}\omega\)</span>.
+We intend to use a semi-implicit time integrator:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">Geometry</span><span class="p">,</span><span class="w"> </span><span class="k">class</span> <span class="nc">Matrix</span><span class="p">,</span><span class="w"> </span><span class="k">class</span> <span class="nc">Container</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">Explicit</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Explicit</span><span class="p">(...){}</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Solve Phi = S(omega) with e.g. Multigrid</span>
+<span class="w">        </span><span class="c1">// Compute k = E(phi,omega)</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">implicit_part</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Compute k = D Delta omega</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are several possibilities to partition the explicit, implicit and solver parts into functors (or lambdas in the main program). Generally, it is a good idea to keep all equation related functionality in one class. Since we cannot overload the <code class="docutils literal notranslate"><span class="pre">operator()</span></code> twice we reverted to a little trick, writing the <code class="docutils literal notranslate"><span class="pre">implicit_part</span></code> method that we later bind to the <code class="docutils literal notranslate"><span class="pre">operator()</span></code> of the Implicit class below.</p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">Geometry</span><span class="p">,</span><span class="w"> </span><span class="k">class</span> <span class="nc">Matrix</span><span class="p">,</span><span class="w"> </span><span class="k">class</span> <span class="nc">Container</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">Implicit</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Implicit</span><span class="p">(</span><span class="w"> </span><span class="n">Explicit</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">exp</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span><span class="o">:</span><span class="w"> </span><span class="n">m_exp</span><span class="p">(</span><span class="n">exp</span><span class="p">)</span><span class="w"> </span><span class="p">{...}</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">m_exp</span><span class="o">-&gt;</span><span class="n">implicit_part</span><span class="p">(</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">);</span><span class="w">      </span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the solve method we here chose a PCG solver since the Laplace is self-adjoint. Note, how we used  a small lambda wrapper to compute the implicit left hand side.</p>
+<p>Typically, the solver would also write some information about its performance to <code class="docutils literal notranslate"><span class="pre">std::cout</span></code> so that a user is kept informed about the status of the integration.</p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">wrapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">){</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// x - a I (x,t)</span>
+<span class="w">            </span><span class="k">operator</span><span class="p">()(</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"> </span><span class="c1">// calls the above operator</span>
+<span class="w">            </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="w"> </span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">);</span><span class="w"> </span><span class="c1">// use rhs as initial guess</span>
+<span class="w">        </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_pcg</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="w"> </span><span class="n">wrapper</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">m_weights</span><span class="p">,</span><span class="w"> </span><span class="n">m_eps_time</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">private</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">Explicit</span><span class="o">&lt;</span><span class="n">Geometry</span><span class="p">,</span><span class="n">Matrix</span><span class="p">,</span><span class="n">Container</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">m_exp</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">PCG</span><span class="o">&lt;</span><span class="w"> </span><span class="n">Container</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_pcg</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Container</span><span class="w"> </span><span class="n">m_weights</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">value_type</span><span class="w"> </span><span class="n">m_eps_time</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="c1">// Construct equations</span>
+<span class="n">Explicit</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ex</span><span class="p">(</span><span class="w"> </span><span class="p">...);</span><span class="w"></span>
+<span class="n">Implicit</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="n">im</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span><span class="w"></span>
+
+<span class="c1">// The timestepper</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">Adaptive</span><span class="o">&lt;</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">ARKStep</span><span class="o">&lt;</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">adapt</span><span class="p">(</span><span class="n">tableau</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// The timeloop</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">AdaptiveTimeloop</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&gt;</span><span class="w"> </span><span class="n">timeloop</span><span class="p">(</span><span class="w"> </span><span class="n">adapt</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="w"> </span><span class="n">ex</span><span class="p">,</span><span class="w"> </span><span class="n">im</span><span class="p">,</span><span class="w"> </span><span class="n">im</span><span class="p">),</span><span class="w"> </span>
+<span class="w">                    </span><span class="n">dg</span><span class="o">::</span><span class="n">pid_control</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">l2norm</span><span class="p">,</span><span class="w"> </span><span class="n">rtol</span><span class="p">,</span><span class="w"> </span><span class="n">atol</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implicit-advection-diffusion-solver">
+<h2>Implicit advection-diffusion solver<a class="headerlink" href="#implicit-advection-diffusion-solver" title="Permalink to this headline">¶</a></h2>
+<p>In order to solve the entire system implicitly we have to write both equations and Solvers.
+To make it more clear let us reformulate the structure of equations that we have</p>
+<div class="amsmath math notranslate nohighlight" id="equation-dcb9ccd1-246c-4031-b934-3a80587316d3">
+<span class="eqno">(19)<a class="headerlink" href="#equation-dcb9ccd1-246c-4031-b934-3a80587316d3" title="Permalink to this equation">¶</a></span>\[\begin{align}
+    \dot \omega &amp;= I(\omega, \phi)\\
+     0 &amp;= R(\omega, \phi)
+\end{align}\]</div>
+<p>with</p>
+<div class="amsmath math notranslate nohighlight" id="equation-402f3b65-8927-49c4-8fc4-4fcce4883888">
+<span class="eqno">(20)<a class="headerlink" href="#equation-402f3b65-8927-49c4-8fc4-4fcce4883888" title="Permalink to this equation">¶</a></span>\[\begin{align}
+I( \omega, \phi) &amp;= -\vec v \cdot \nabla \omega + D\Delta\omega \\
+R( \omega, \phi) &amp;= \Delta \phi + \omega
+\end{align}\]</div>
+<p>To implement an implicit timestepper we need to solve the equation (the mass matrix is the identity)</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e296f817-5b56-4686-b7f9-84b06af65fed">
+<span class="eqno">(21)<a class="headerlink" href="#equation-e296f817-5b56-4686-b7f9-84b06af65fed" title="Permalink to this equation">¶</a></span>\[\begin{align}
+\begin{cases}
+    \omega - \alpha I(\omega, \phi) &amp;= \omega^*  \\
+    \omega+\Delta\phi &amp;= 0
+\end{cases}
+\end{align}\]</div>
+<p>We can solve this equation for <span class="math notranslate nohighlight">\(\omega\)</span> by first solving</p>
+<div class="amsmath math notranslate nohighlight" id="equation-22b3ea74-cbdc-4d63-a74e-b6503e71ee94">
+<span class="eqno">(22)<a class="headerlink" href="#equation-22b3ea74-cbdc-4d63-a74e-b6503e71ee94" title="Permalink to this equation">¶</a></span>\[\begin{align}
+    -\Delta\phi - \alpha I(-\Delta\phi, \phi) = \omega^*
+\end{align}\]</div>
+<p>for <span class="math notranslate nohighlight">\(\phi\)</span> and then using <span class="math notranslate nohighlight">\(\omega = -\Delta\phi\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The solution for <span class="math notranslate nohighlight">\(\phi\)</span> is the same for both variants but the solution for <span class="math notranslate nohighlight">\(\omega\)</span> is not (numerically). This can be seen by setting <span class="math notranslate nohighlight">\(\alpha=0\)</span>. Then in the first version <span class="math notranslate nohighlight">\(\omega=\omega^*\)</span> but in the second version <span class="math notranslate nohighlight">\(\omega=-\Delta\phi = \omega^* + \mathcal O(\epsilon)\)</span>, depends on how well the equation is solved. For this reason the accuracy of the implicit solver should be well higher than the accuracy of the timestepper.</p>
+</div>
+<p>Since these equations are non-linear the solver needs to be a non-linear solver. Our idea is to use a multigrid FAS solver. For this solver we need to implement both the operator as well as its inverse on multiple grids.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">Geometry</span><span class="p">,</span><span class="w"> </span><span class="k">class</span> <span class="nc">Matrix</span><span class="p">,</span><span class="w"> </span><span class="k">class</span> <span class="nc">Container</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">Equations</span><span class="w"> </span><span class="c1">//corresponds to I</span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">phi</span><span class="p">,</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">omegaDot</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// compute: omegaDot = I(omega, phi, t)</span>
+<span class="w">        </span><span class="c1">// implement advection term</span>
+<span class="w">        </span><span class="c1">// implement diffusion term</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">compute_omega</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">phi</span><span class="p">,</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">omega</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// compute -Delta phi</span>
+<span class="w">        </span><span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w"> </span><span class="n">m_lapM</span><span class="p">,</span><span class="w"> </span><span class="n">phi</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">Geometry</span><span class="p">,</span><span class="w"> </span><span class="k">class</span> <span class="nc">Matrix</span><span class="p">,</span><span class="w"> </span><span class="k">class</span> <span class="nc">Container</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">Implicit</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Implicit</span><span class="p">(...)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// constructed nested grids</span>
+<span class="w">        </span><span class="p">...</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">u</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="o">&lt;</span><span class="n">stages</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// construct Equations </span>
+<span class="w">            </span><span class="n">m_eqs</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...</span><span class="w"></span>
+<span class="w">            </span><span class="n">m_imp</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">m_omega</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_weights</span><span class="p">[</span><span class="n">u</span><span class="p">]]</span><span class="w"></span>
+<span class="w">                </span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">phi</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="k">mutable</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// omega - a I(omega, phi)</span>
+<span class="w">                </span><span class="n">m_eqs</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">compute_omega</span><span class="p">(</span><span class="w"> </span><span class="n">phi</span><span class="p">,</span><span class="w"> </span><span class="n">m_omega</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">m_eqs</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">rhs</span><span class="p">(</span><span class="w"> </span><span class="n">m_time</span><span class="p">,</span><span class="w"> </span><span class="n">m_omega</span><span class="p">,</span><span class="w"> </span><span class="n">phi</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">m_omega</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">m_alpha</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="n">m_inv_imp</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">AndersonAcceleration</span><span class="p">(</span><span class="w"> </span><span class="p">...),</span><span class="w"></span>
+<span class="w">                           </span><span class="o">&amp;</span><span class="n">I</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_imp</span><span class="p">[</span><span class="n">u</span><span class="p">],</span><span class="w"></span>
+<span class="w">                           </span><span class="o">&amp;</span><span class="n">m_weights</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_weights</span><span class="p">[</span><span class="n">u</span><span class="p">]]</span><span class="w"></span>
+<span class="w">                </span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">omS</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">phi</span><span class="p">)</span><span class="w"> </span><span class="k">mutable</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w">  </span>
+<span class="w">                </span><span class="c1">// Solve Implicit( phi) = omS</span>
+<span class="w">                </span><span class="n">acc</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="w"> </span><span class="n">I</span><span class="p">,</span><span class="w"> </span><span class="n">phi</span><span class="p">,</span><span class="w"> </span><span class="n">omS</span><span class="p">,</span><span class="w"> </span><span class="n">m_weights</span><span class="p">...);</span><span class="w"></span>
+<span class="w">            </span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">omS</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Note how the operators and solvers hold these as references</span>
+<span class="w">        </span><span class="c1">// so they know when they are updated</span>
+<span class="w">        </span><span class="n">m_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">m_alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span>
+<span class="w">        </span><span class="c1">// Solve the implicit equation</span>
+<span class="w">        </span><span class="n">nested_iterations</span><span class="p">(</span><span class="w"> </span><span class="n">m_imp</span><span class="p">,</span><span class="w"> </span><span class="n">m_phi</span><span class="p">,</span><span class="w"> </span><span class="n">omS</span><span class="p">,</span><span class="w"> </span><span class="n">m_inv_imp</span><span class="p">,</span><span class="w"> </span><span class="n">m_nested</span><span class="p">);</span><span class="w"> </span>
+<span class="w">        </span><span class="n">m_eqs</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">compute_omega</span><span class="p">(</span><span class="w"> </span><span class="n">m_phi</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">private</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">m_time</span><span class="p">,</span><span class="w"> </span><span class="n">m_alpha</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">Nested</span><span class="o">&lt;</span><span class="w"> </span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_nested</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Container</span><span class="w"> </span><span class="n">m_phi</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Container</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_weights</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Equations</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">m_eqs</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_imp</span><span class="p">,</span><span class="w"> </span><span class="n">m_inv_imp</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="c1">// Construct init condition</span>
+<span class="n">omega</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myproject</span><span class="o">::</span><span class="n">initial_conditions</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">js</span><span class="p">[</span><span class="s">&quot;init&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// Construct Equations</span>
+<span class="n">myproject</span><span class="o">::</span><span class="n">Equations</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">CartesianGrid2d</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DMatrix</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rhs</span><span class="p">(</span><span class="w"> </span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">js</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// The timestepper</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">Adaptive</span><span class="o">&lt;</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">DIRKStep</span><span class="o">&lt;</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">adapt</span><span class="p">(</span><span class="n">tableau</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">);</span><span class="w"></span>
+
+<span class="c1">// The timeloop</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">AdaptiveTimeloop</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&gt;</span><span class="w"> </span><span class="n">timeloop</span><span class="p">(</span><span class="w"> </span><span class="n">adapt</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">imp</span><span class="p">,</span><span class="n">imp</span><span class="p">),</span><span class="w"> </span>
+<span class="w">                    </span><span class="n">dg</span><span class="o">::</span><span class="n">pid_control</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">l2norm</span><span class="p">,</span><span class="w"> </span><span class="n">rtol</span><span class="p">,</span><span class="w"> </span><span class="n">atol</span><span class="p">);</span><span class="w"></span>
+<span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">u</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="o">&lt;=</span><span class="n">maxout</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">   </span>
+<span class="w">    </span><span class="n">timeloop</span><span class="p">.</span><span class="n">integrate</span><span class="p">(</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="o">*</span><span class="n">deltaT</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">u</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxout</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">to</span><span class="o">::</span><span class="nl">at_least</span> <span class="p">:</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">to</span><span class="o">::</span><span class="n">exact</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implicit-mass-matrix-timestepper">
+<h2>Implicit mass-matrix -  timestepper<a class="headerlink" href="#implicit-mass-matrix-timestepper" title="Permalink to this headline">¶</a></h2>
+<p>Consider the following general equation:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-dc1f7134-431c-4917-9cd4-43a563696bc3">
+<span class="eqno">(23)<a class="headerlink" href="#equation-dc1f7134-431c-4917-9cd4-43a563696bc3" title="Permalink to this equation">¶</a></span>\[\begin{align}
+    M(y,t)\frac{d y}{d t} &amp;= F(y,t)
+\end{align}\]</div>
+<p>We intend to solve the resulting implicit equation with multigrid nested iteration. We thus have to implement and solve the following operators on multiply grids:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e18444b3-44d2-42a1-9ab5-d3b63ea56c3e">
+<span class="eqno">(24)<a class="headerlink" href="#equation-e18444b3-44d2-42a1-9ab5-d3b63ea56c3e" title="Permalink to this equation">¶</a></span>\[\begin{align}
+     M(y,t) k &amp;= F(y,t) \\
+     M(y,t) ( y - y^* ) - \alpha F(y,t) &amp;= 0 
+\end{align}\]</div>
+<p>To simplify the implementation we restrict ourselves to solvers that
+use the implicit solve only (i.e. Multistep, symplectic DIRK and SDIRK timesteppers).</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">Equations</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Equations</span><span class="p">(...){}</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">mass_matrix</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                    </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Compute result = a M(y,t) k + b result</span>
+<span class="w">        </span><span class="c1">//...</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">rhs</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w">  </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Compute k = F(y,t)</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+<span class="k">template</span><span class="o">&lt;</span><span class="w"> </span><span class="p">...</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">class</span> <span class="nc">ImplicitSolver</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ImplicitSolver</span><span class="p">(</span><span class="w"> </span><span class="p">...){</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Construct nested grids</span>
+<span class="w">        </span><span class="p">...</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Construct nested objects m_eqs</span>
+<span class="w">        </span><span class="p">...</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Construct nested Operators and Solvers:</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">unsigend</span><span class="w"> </span><span class="n">u</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="o">&lt;</span><span class="n">stages</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">m_imp</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="n">ys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_ys</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_time</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_alpha</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_weights</span><span class="p">[</span><span class="n">u</span><span class="p">]]</span><span class="w"></span>
+<span class="w">                </span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">I</span><span class="p">)</span><span class="w"> </span><span class="k">mutable</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w">  </span>
+<span class="w">                </span><span class="c1">//compute M(y,t) ( y- y^*) - a F(y,t)</span>
+<span class="w">                </span><span class="n">m_eqs</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">rhs</span><span class="p">(</span><span class="w">  </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">I</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="mf">-1.</span><span class="p">,</span><span class="w"> </span><span class="n">ys</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">m_eqs</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">mass_matrix</span><span class="p">(</span><span class="w">  </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">alpha</span><span class="p">,</span><span class="w">  </span><span class="n">I</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">};</span><span class="w"></span>
+<span class="w">            </span><span class="n">m_inv_imp</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">AndersonAcceleration</span><span class="p">(</span><span class="w"> </span><span class="p">...),</span><span class="w"></span>
+<span class="w">                                 </span><span class="o">&amp;</span><span class="n">I</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_implicit</span><span class="p">[</span><span class="n">u</span><span class="p">],</span><span class="w"></span>
+<span class="w">                                 </span><span class="o">&amp;</span><span class="n">m_weights</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_weights</span><span class="p">[</span><span class="n">u</span><span class="p">]]</span><span class="w"></span>
+<span class="w">                </span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">zero</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="k">mutable</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w">  </span>
+<span class="w">                </span><span class="c1">// Solve Implicit( y) = 0</span>
+<span class="w">                </span><span class="n">acc</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="w"> </span><span class="n">I</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">zero</span><span class="p">,</span><span class="w"> </span><span class="n">m_weights</span><span class="p">...);</span><span class="w"></span>
+<span class="w">            </span><span class="p">};</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w">  </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">assert</span><span class="p">(</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s">&quot;This should not be called&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">ys</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Note how the operators and solvers hold these as references</span>
+<span class="w">        </span><span class="c1">// so they know when they are updated</span>
+<span class="w">        </span><span class="n">m_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">m_alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">m_nested</span><span class="p">.</span><span class="n">project</span><span class="p">(</span><span class="w"> </span><span class="n">ys</span><span class="p">,</span><span class="w"> </span><span class="n">m_ys</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Solve the implicit equation</span>
+<span class="w">        </span><span class="n">nested_iterations</span><span class="p">(</span><span class="w"> </span><span class="n">m_imp</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="n">m_inv_imp</span><span class="p">,</span><span class="w"> </span><span class="n">m_nested</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">private</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">m_time</span><span class="p">,</span><span class="w"> </span><span class="n">m_alpha</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">Nested</span><span class="o">&lt;</span><span class="w"> </span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_nested</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Container</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_weights</span><span class="p">,</span><span class="w"> </span><span class="n">m_ys</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Equations</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">m_eqs</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_imp</span><span class="p">,</span><span class="w"> </span><span class="n">m_inv_imp</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="c1">// in main</span>
+<span class="n">Implicit</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="n">imp</span><span class="p">(...);</span><span class="w"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">ImplicitMultistep</span><span class="o">&lt;</span><span class="n">Vector</span><span class="o">&gt;</span><span class="w"> </span><span class="n">multistep</span><span class="p">(</span><span class="s">&quot;BDF-3-3&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y0</span><span class="p">);</span><span class="w"></span>
+<span class="n">multistep</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="w"> </span><span class="n">imp</span><span class="p">,</span><span class="w"> </span><span class="n">imp</span><span class="p">),</span><span class="w"> </span><span class="n">t0</span><span class="p">,</span><span class="w"> </span><span class="n">y0</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">);</span><span class="w"></span>
+<span class="n">multistep</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="w"> </span><span class="n">imp</span><span class="p">,</span><span class="w"> </span><span class="n">imp</span><span class="p">),</span><span class="w"> </span><span class="n">t0</span><span class="p">,</span><span class="w"> </span><span class="n">y0</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "xcpp14"
+        },
+        kernelOptions: {
+            kernelName: "xcpp14",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'xcpp14'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="new-project.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Create your own project</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Matthias Wiesenberger<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

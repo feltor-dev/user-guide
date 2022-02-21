@@ -1,0 +1,682 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grids and derivatives &#8212; The Feltor guide book</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Solvers in Feltor" href="solvers.html" />
+    <link rel="prev" title="Timesteppers" href="timesteppers.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">The Feltor guide book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="welcome.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/algorithm.h
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="vector-juggling.html">
+   Vectors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="timesteppers.html">
+   Timesteppers
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Grids and derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="solvers.html">
+   Solvers in Feltor
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/geometries/geometries.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="geometries.html">
+   Curvilinear grids
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/matrix/matrix.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="matrixfunction.html">
+   Matrix functions
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/file/file.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="json-utilities.html">
+   JSON utilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="netcdf-utilities.html">
+   NetCDF utilities
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/exblas/exblas.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="reproducibility.html">
+   Reproducibility and Accuracy
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Projects
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="new-project.html">
+   Create your own project
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="timesteppers2.html">
+   Advanced Timesteppers
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/grids.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/feltor-dev/user-guide"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/feltor-dev/user-guide/issues/new?title=Issue%20on%20page%20%2Fgrids.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/feltor-dev/user-guide/main?urlpath=tree/docs/grids.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#function-evaluation-and-integration">
+   Function evaluation and integration
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivatives">
+   Derivatives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-note-on-boundary-conditions">
+   A note on boundary conditions
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="grids-and-derivatives">
+<h1>Grids and derivatives<a class="headerlink" href="#grids-and-derivatives" title="Permalink to this headline">¶</a></h1>
+<p>In the first two chapters we saw how to deal with vectors and how to integrate
+our first ordinary differential equation. But how about partial
+differential equations? In order to define a partial differential
+equation we need an actual physical space in two dimensions say and
+define derivatives on it. However, there is such a multitude of possible
+ways to discretize the physical space and the derivatives on it that we cannot
+hope to cover them all in one library. We have chosen so-called
+<strong>discontinuous Galerkin</strong> methods. You never heard of those before?
+In simple words these methods use
+a polynomial of arbitrary order in each grid cell instead of just one single
+point as do finite difference methods. The order of the polynomial
+defines the order of the method.
+To help you get started we have written an
+<a class="reference external" href="https://www.overleaf.com/read/rpbjsqmmfzyj">introduction to dG methods</a>.</p>
+<div class="section" id="function-evaluation-and-integration">
+<h2>Function evaluation and integration<a class="headerlink" href="#function-evaluation-and-integration" title="Permalink to this headline">¶</a></h2>
+<p>Let us look at a first example of what we can do with these methods. Let’s
+integrate a function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="c1">//include the dg-library</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dg/algorithm.h&quot;</span><span class="cp"></span>
+<span class="c1">//define a function to integrate</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">){</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">//create a discretization of [0,2]x[0,2] with</span>
+<span class="c1">//3 polynomial coefficients and 20 cells in x and y</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">CartesianGrid2d</span><span class="w"> </span><span class="nf">g2d</span><span class="p">(</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span><span class="w"></span>
+<span class="c1">//discretize a function on this grid</span>
+<span class="k">const</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">evaluate</span><span class="p">(</span><span class="w"> </span><span class="n">function</span><span class="p">,</span><span class="w"> </span><span class="n">g2d</span><span class="p">);</span><span class="w"></span>
+<span class="c1">//create the volume element</span>
+<span class="k">const</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="n">vol2d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">create</span><span class="o">::</span><span class="n">volume</span><span class="p">(</span><span class="w"> </span><span class="n">g2d</span><span class="p">);</span><span class="w"></span>
+<span class="c1">//compute the integral on the device</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">integral</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">vol2d</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// output approximates (exp(2)-exp(0))^2</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">integral</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40.82
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this program we encounter a new class, the <code class="docutils literal notranslate"><span class="pre">dg::CartesianGrid2d</span></code> and
+two new functions, <code class="docutils literal notranslate"><span class="pre">dg::evaluate</span></code> and <code class="docutils literal notranslate"><span class="pre">dg::create::volume</span></code>.
+The grid class represents the topology (what point is neighbor to what other
+point) and the geometry (the metric) that we use. In this
+case it is a two-dimensional Cartesian geometry, that is, the metric tensor
+is the unit tensor.  Furthermore, it is a structured product space grid,
+which means that the topology is given implicitly by the grid coordinates.
+In the above example there are <code class="docutils literal notranslate"><span class="pre">60x60=3600</span></code> grid points in total.
+This number comes from the 20 cells that we use in both x and y direction
+and the 3 polynomial coefficients (that we use for both directions).</p>
+<div class="admonition-choose-polynomials admonition">
+<p class="admonition-title">Choose polynomials</p>
+<p>Per default the number of polynomials is the same in both x and y direction.
+If you want the freedom to choose each individually you could use</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">dg</span><span class="o">::</span><span class="n">CartesianGrid2d</span><span class="w"> </span><span class="nf">g2d</span><span class="p">(</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">});</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Now we have a grid with 5 coefficients and 18 cells in the y direction.
+This highlights that the two-dimensional grid is made as a product
+of 2 one-dimensional grids.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">dg::evaluate</span></code> function is a template function that takes a <strong>binary</strong>
+function or Functor as a first parameter.  In our example we aptly named
+the function <code class="docutils literal notranslate"><span class="pre">function</span></code> and it depends on the x and y coordinate and
+returns the result. The <code class="docutils literal notranslate"><span class="pre">dg::evaluate</span></code> function now takes our Cartesian grid,
+constructs the grid coordinates from it and inserts the coordinate into the
+function, one by one. The result is a vector containing the values of <code class="docutils literal notranslate"><span class="pre">function</span></code>
+for all the grid coordinates. We effectively discretized our <code class="docutils literal notranslate"><span class="pre">function</span></code> on the
+grid.</p>
+<div class="admonition-evaluation-direction-do-you-really-need-it admonition">
+<p class="admonition-title">Evaluation direction, do you really need it?</p>
+<p>If you think of the computational space as a box the first point in the result vector
+corresponds to the lower left corner. The next one is the point to the right, that
+is the x-direction is contiguous in memory. However, if you find that you need
+this information, stop! You should not need it.
+Use <code class="docutils literal notranslate"><span class="pre">dg::interpolate</span></code> or <code class="docutils literal notranslate"><span class="pre">dg::create::interpolation</span></code> if you want to access individual points
+and the <code class="docutils literal notranslate"><span class="pre">dg::blas</span></code> functions to operate on them.</p>
+</div>
+<p>The last function is the <code class="docutils literal notranslate"><span class="pre">dg::create::volume</span></code> function. This function takes
+our Cartesian grid and computes the volume form from the metric and also takes
+the Gaussian weights (from our discontinuous Galerkin methods) into account.
+The volume form is the <code class="docutils literal notranslate"><span class="pre">dxdy</span></code> in an integration of <code class="docutils literal notranslate"><span class="pre">Int</span> <span class="pre">f(x,y)</span> <span class="pre">dxdy</span></code>.</p>
+<p>Finally, we use the familiar <code class="docutils literal notranslate"><span class="pre">dg::blas1::dot</span></code> function to compute the scalar
+product between the function and the volume form and actually get
+a very good approximation of the analytical result.</p>
+<p>If we want to use MPI we have to change our code a little bit. When we use
+MPI we have to distribute the vector <code class="docutils literal notranslate"><span class="pre">f</span></code> among all processes in the
+communicator. We do this in the most direct way, namely simply allocating
+an equally sized portion of the grid to every process in the communicator.
+Then, each process can evaluate <code class="docutils literal notranslate"><span class="pre">function</span></code> only on the portion of the
+grid that it was assigned to. The result looks like this:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following cell will not exectute because we do not have MPI installed in the notebook. You will need to copy-paste the below code to a file and compile it using the instructions in the quick-start guide.</p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="c1">//activate MPI in FELTOR</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;mpi.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dg/algorithm.h&quot;</span><span class="cp"></span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">){</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//init MPI and create a 2d Cartesian Communicator assuming 4 MPI threads</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">periods</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="n">np</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="n">MPI_Comm</span><span class="w"> </span><span class="n">comm</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">MPI_Cart_create</span><span class="p">(</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">np</span><span class="p">,</span><span class="w"> </span><span class="n">periods</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">comm</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//create a 2d discretization of [0,2]x[0,2] with</span>
+<span class="w">    </span><span class="c1">// 3 polynomial coefficients and 20 cells in x and y.</span>
+<span class="w">    </span><span class="c1">// Each process gets 10 by 10 cells</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">CartesianMPIGrid2d</span><span class="w"> </span><span class="n">g2d</span><span class="p">(</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="n">comm</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//discretize a function on this grid</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">MDVec</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">evaluate</span><span class="p">(</span><span class="w"> </span><span class="n">function</span><span class="p">,</span><span class="w"> </span><span class="n">g2d</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//create the volume element</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">MDVec</span><span class="w"> </span><span class="n">vol2d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">create</span><span class="o">::</span><span class="n">volume</span><span class="p">(</span><span class="w"> </span><span class="n">g2d</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//compute the square L2 norm</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">norm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">vol2d</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//on every thread norm is now: (exp(2)-exp(0))^2</span>
+<span class="w">    </span><span class="c1">//be a good MPI citizen and clean up</span>
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="derivatives">
+<h2>Derivatives<a class="headerlink" href="#derivatives" title="Permalink to this headline">¶</a></h2>
+<p>The next step after evaluating functions is to compute derivatives of course.
+Consider this example code, which computes the Arakawa bracket <span class="math notranslate nohighlight">\(\{ f , g\} = \partial_x f \partial_y g - \partial_y f \partial_x g\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">//define some test functions</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">left</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="nf">right</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// The analytical solution</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">jacobian</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">lx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.</span><span class="o">*</span><span class="n">M_PI</span><span class="p">,</span><span class="w"> </span><span class="n">ly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lx</span><span class="p">;</span><span class="w"></span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">Nx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="n">Ny</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span><span class="w"></span>
+<span class="c1">//boundary conditions</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">bc</span><span class="w"> </span><span class="n">bcx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">PER</span><span class="p">,</span><span class="w"> </span><span class="n">bcy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">PER</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">//create a grid with Cartesian geometry</span>
+<span class="k">const</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">CartesianGrid2d</span><span class="w"> </span><span class="nf">grid</span><span class="p">(</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">lx</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ly</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">Nx</span><span class="p">,</span><span class="w"> </span><span class="n">Ny</span><span class="p">,</span><span class="w"> </span><span class="n">bcx</span><span class="p">,</span><span class="w"> </span><span class="n">bcy</span><span class="p">);</span><span class="w"></span>
+<span class="c1">//evaluate functions on the grid coordinates</span>
+<span class="k">const</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="n">lhs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">evaluate</span><span class="p">(</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">);</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="n">rhs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">evaluate</span><span class="p">(</span><span class="w"> </span><span class="n">right</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">);</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="n">sol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">evaluate</span><span class="p">(</span><span class="w"> </span><span class="n">jacobian</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">);</span><span class="w"></span>
+
+
+<span class="c1">//allocate workspace</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="nf">dxlhs</span><span class="p">(</span><span class="n">lhs</span><span class="p">),</span><span class="w"> </span><span class="n">dxrhs</span><span class="p">(</span><span class="n">lhs</span><span class="p">),</span><span class="w"> </span><span class="n">dylhs</span><span class="p">(</span><span class="n">lhs</span><span class="p">),</span><span class="w"> </span><span class="n">dyrhs</span><span class="p">(</span><span class="n">lhs</span><span class="p">),</span><span class="w"> </span><span class="n">jac</span><span class="p">(</span><span class="n">lhs</span><span class="p">);</span><span class="w"></span>
+<span class="c1">//create the derivatives</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">DMatrix</span><span class="w"> </span><span class="n">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">create</span><span class="o">::</span><span class="n">dx</span><span class="p">(</span><span class="w"> </span><span class="n">grid</span><span class="p">),</span><span class="w"> </span><span class="n">dy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">create</span><span class="o">::</span><span class="n">dy</span><span class="p">(</span><span class="n">grid</span><span class="p">);</span><span class="w"></span>
+<span class="c1">//apply the derivative to the functions</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w"> </span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="n">lhs</span><span class="p">,</span><span class="w"> </span><span class="n">dxlhs</span><span class="p">);</span><span class="w"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w"> </span><span class="n">dy</span><span class="p">,</span><span class="w"> </span><span class="n">lhs</span><span class="p">,</span><span class="w"> </span><span class="n">dylhs</span><span class="p">);</span><span class="w"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w"> </span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span><span class="n">dxrhs</span><span class="p">);</span><span class="w"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w"> </span><span class="n">dy</span><span class="p">,</span><span class="w"> </span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span><span class="n">dyrhs</span><span class="p">);</span><span class="w"></span>
+<span class="c1">//combine the results</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">pointwiseDot</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span><span class="w"> </span><span class="n">dxlhs</span><span class="p">,</span><span class="w"> </span><span class="n">dyrhs</span><span class="p">,</span><span class="w"> </span><span class="mf">-1.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span><span class="w"> </span><span class="n">dylhs</span><span class="p">,</span><span class="w"> </span><span class="n">dxrhs</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="n">jac</span><span class="p">);</span><span class="w"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">pointwiseDot</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span><span class="w">   </span><span class="n">lhs</span><span class="p">,</span><span class="w"> </span><span class="n">dyrhs</span><span class="p">,</span><span class="w"> </span><span class="mf">-1.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span><span class="w"> </span><span class="n">dylhs</span><span class="p">,</span><span class="w">   </span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="n">dylhs</span><span class="p">);</span><span class="w"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">pointwiseDot</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span><span class="w"> </span><span class="n">dxlhs</span><span class="p">,</span><span class="w">   </span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span><span class="mf">-1.</span><span class="o">/</span><span class="mf">3.</span><span class="p">,</span><span class="w">   </span><span class="n">lhs</span><span class="p">,</span><span class="w"> </span><span class="n">dxrhs</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="n">dxrhs</span><span class="p">);</span><span class="w"></span>
+<span class="c1">//add the remaining derivatives</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="n">dylhs</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">jac</span><span class="p">);</span><span class="w"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">dy</span><span class="p">,</span><span class="w"> </span><span class="n">dxrhs</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">jac</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">//create the volume form</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="n">vol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">create</span><span class="o">::</span><span class="n">volume</span><span class="p">(</span><span class="n">grid</span><span class="p">);</span><span class="w"></span>
+<span class="c1">//test conservative property</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">integral</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">vol</span><span class="p">,</span><span class="w"> </span><span class="n">jac</span><span class="p">);</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Integrated Jacobian is &quot;</span><span class="o">&lt;&lt;</span><span class="n">integral</span><span class="o">&lt;&lt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integrated Jacobian is 1.70093e-16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">//now compute the distance to solution in L2 norm</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">sol</span><span class="p">,</span><span class="w"> </span><span class="mf">-1.</span><span class="p">,</span><span class="w"> </span><span class="n">jac</span><span class="p">);</span><span class="w"></span>
+<span class="kt">double</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">jac</span><span class="p">,</span><span class="w"> </span><span class="n">vol</span><span class="p">,</span><span class="w"> </span><span class="n">jac</span><span class="p">));</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Distance to solution &quot;</span><span class="o">&lt;&lt;</span><span class="n">error</span><span class="o">&lt;&lt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Distance to solution 0.000754106
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we encounter the <code class="docutils literal notranslate"><span class="pre">dg::create::dx</span></code> and <code class="docutils literal notranslate"><span class="pre">dg::create::dy</span></code> functions that,
+as the names suggest, create derivatives in x and y direction respectively.
+The only parameter is the grid. Per default the boundary condition for the
+derivative is periodic and we use a centered discretization.
+The type of the matrix is a <code class="docutils literal notranslate"><span class="pre">dg::DMatrix</span></code> which is a typedef for an obscure
+dg-specific data type that holds a block-strcutured sparse matrix. The important
+thing is that a <code class="docutils literal notranslate"><span class="pre">dg::DMatrix</span></code> can be used together with a <code class="docutils literal notranslate"><span class="pre">dg::DVec</span></code>
+in the <code class="docutils literal notranslate"><span class="pre">dg::blas2::symv</span></code> functions. These are level 1 functions that do
+nothing but applying a given matrix to a vector and storing the result in
+another vector. Just as the <code class="docutils literal notranslate"><span class="pre">dg::blas1</span></code> functions the <code class="docutils literal notranslate"><span class="pre">dg::blas2</span></code> functions
+are templates that work for a variety of data types. In an MPI implementation
+we would use a <code class="docutils literal notranslate"><span class="pre">dg::MDMatrix</span></code>.</p>
+</div>
+<div class="section" id="a-note-on-boundary-conditions">
+<h2>A note on boundary conditions<a class="headerlink" href="#a-note-on-boundary-conditions" title="Permalink to this headline">¶</a></h2>
+<p>The matrices in the ‘dg’ library only know <strong>homogeneous</strong> boundary conditions.
+For example when choosing <code class="docutils literal notranslate"><span class="pre">dg::DIR</span></code> as the boundary condition in <code class="docutils literal notranslate"><span class="pre">dg::create::dx</span></code>
+the assumed boundary value is zero and when choosing <code class="docutils literal notranslate"><span class="pre">dg::NEU</span></code> the assumed
+derivative on the boundary is also zero.
+This has the advantage that our matrices are always linear. However, how do I
+implement other boundary conditions then, you ask. For example when the
+boundary value of my function is 1 and not 0?</p>
+<p>The answer is that you’ll have to manually subtract the value from the function
+<strong>before</strong> you apply the derivative. For example if we assume that ‘lhs’ in the
+previous example has non-homogeneous boundary conditions we would do something like</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="nf">function_with_dir_boundary</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">){</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mf">1.</span><span class="o">+</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="n">fun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">evaluate</span><span class="p">(</span><span class="w"> </span><span class="n">function_with_dir_boundary</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">),</span><span class="w"> </span><span class="n">der</span><span class="p">(</span><span class="n">fun</span><span class="p">);</span><span class="w"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">plus</span><span class="p">(</span><span class="w"> </span><span class="n">fun</span><span class="p">,</span><span class="w"> </span><span class="mf">-1.</span><span class="p">);</span><span class="w"> </span><span class="c1">// subtract boundary value before deriving</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w"> </span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="n">fun</span><span class="p">,</span><span class="w"> </span><span class="n">der</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This procedure can be done similarly for Neumann boundary conditions, where
+you’ll have to construct a function with your boundary conditions and subtract
+it before applying the derivative.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "xcpp14"
+        },
+        kernelOptions: {
+            kernelName: "xcpp14",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'xcpp14'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="timesteppers.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Timesteppers</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="solvers.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Solvers in Feltor</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Matthias Wiesenberger<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

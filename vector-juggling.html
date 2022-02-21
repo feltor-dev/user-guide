@@ -1,0 +1,737 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vectors &#8212; The Feltor guide book</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Timesteppers" href="timesteppers.html" />
+    <link rel="prev" title="Welcome" href="welcome.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">The Feltor guide book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="welcome.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/algorithm.h
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Vectors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="timesteppers.html">
+   Timesteppers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="grids.html">
+   Grids and derivatives
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="solvers.html">
+   Solvers in Feltor
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/geometries/geometries.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="geometries.html">
+   Curvilinear grids
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/matrix/matrix.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="matrixfunction.html">
+   Matrix functions
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/file/file.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="json-utilities.html">
+   JSON utilities
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="netcdf-utilities.html">
+   NetCDF utilities
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  dg/exblas/exblas.h
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="reproducibility.html">
+   Reproducibility and Accuracy
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Projects
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="new-project.html">
+   Create your own project
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="timesteppers2.html">
+   Advanced Timesteppers
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/vector-juggling.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/feltor-dev/user-guide"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/feltor-dev/user-guide/issues/new?title=Issue%20on%20page%20%2Fvector-juggling.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/feltor-dev/user-guide/main?urlpath=tree/docs/vector-juggling.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-first-example">
+   A first example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#platform-independent-code">
+   Platform independent code
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#arbitrarily-parallel-the-blas1-subroutine">
+   Arbitrarily parallel - The blas1 subroutine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-collection-of-vectors-recursive-execution">
+   A collection of vectors - recursive execution
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="vectors">
+<span id="sec-vectors"></span><h1>Vectors<a class="headerlink" href="#vectors" title="Permalink to this headline">¶</a></h1>
+<p>Assume we want to compute <span class="math notranslate nohighlight">\(\vec y =  a\vec x+b\vec y\)</span> where <span class="math notranslate nohighlight">\(\vec x\)</span> and <span class="math notranslate nohighlight">\(\vec y\)</span> are vectors and a and b are constants.
+Furthermore, assume we wish to compute the dot product
+of <span class="math notranslate nohighlight">\(\vec x\)</span> and <span class="math notranslate nohighlight">\(\vec y\)</span>. And finally assume that we want to do this for both small
+and large vectors, that is we want to eventually write parallel code using for example GPUs.
+The following tutorial shows how to do exactly that
+and more using the dg library.</p>
+<div class="section" id="a-first-example">
+<h2>A first example<a class="headerlink" href="#a-first-example" title="Permalink to this headline">¶</a></h2>
+<p>First, we have to include the main feltor library header:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// include the dg-library</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dg/algorithm.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.25</span><span class="p">;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">};</span><span class="w"></span>
+<span class="c1">// compute a*x+b*y and store it in y</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// compute Sum_i x_i y_i</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// output should be 8</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this code we encounter our first two dg functions, namely <code class="docutils literal notranslate"><span class="pre">dg::blas1::axpby</span></code>
+and <code class="docutils literal notranslate"><span class="pre">dg::blas1::dot</span></code>. They perform very basic operations, namely adding vectors
+and computing scalar products respectively. (You can look up their formal documentation <a class="reference external" href="https://feltor-dev.github.io/doc/dg/html/group__blas1.html">here</a>).
+The remarkable thing about these two functions is that they are templates.
+This means you can call them for many different vector classes. We can change the type of <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>;</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// works as well</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">y</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span><span class="w"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">//or</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">host_vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">y</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span><span class="w"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
+</pre></div>
+</div>
+</div>
+</div>
+<p>All three versions have the same result.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All of these examples
+execute on a single CPU thread, that is the compiler chooses the same
+<strong>serial</strong> implementation of the vector addition and the scalar product.</p>
+</div>
+<p>So let us increase the vector size to say, a Million. Wouldn’t it
+be better to perform these operations in parallel? And a measurement
+of the execution time would also be nice:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">//use the thrust library to allocate memory on the device</span>
+<span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="mf">1e6</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">y</span><span class="p">(</span><span class="mf">1e6</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span><span class="w"></span>
+<span class="c1">//create a Timer</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">Timer</span><span class="w"> </span><span class="n">t</span><span class="p">;</span><span class="w"></span>
+<span class="c1">//start the clock</span>
+<span class="n">t</span><span class="p">.</span><span class="n">tic</span><span class="p">();</span><span class="w"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="c1">//stop the clock</span>
+<span class="n">t</span><span class="p">.</span><span class="n">toc</span><span class="p">();</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Axpby took &quot;</span><span class="o">&lt;&lt;</span><span class="n">t</span><span class="p">.</span><span class="n">diff</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&quot;s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">t</span><span class="p">.</span><span class="n">tic</span><span class="p">();</span><span class="w"></span>
+<span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="n">t</span><span class="p">.</span><span class="n">toc</span><span class="p">();</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Dot   took &quot;</span><span class="o">&lt;&lt;</span><span class="n">t</span><span class="p">.</span><span class="n">diff</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&quot;s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="c1">//output should be ... large</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Axpby took 0.84732s
+Dot   took 0.916315s
+4e+06
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first thing to notice is that we now use the
+<code class="docutils literal notranslate"><span class="pre">thrust::device_vector&lt;double&gt;</span></code> class. This is a vector class of
+the <a class="reference external" href="https://thrust.github.io/">thrust</a> library, which allocates memory on a GPU.
+The compiler recognizes that <code class="docutils literal notranslate"><span class="pre">dg::blas1::axpby</span></code> and <code class="docutils literal notranslate"><span class="pre">dg::blas1::dot</span></code>
+are now called with a GPU vector class and redirects the call to the
+corresponding CUDA implementation.</p>
+<div class="admonition-no-need-to-manually-synchronize admonition">
+<p class="admonition-title">No need to manually synchronize</p>
+<p>When using a GPU a natural question is how the synchronization is done between the GPU kernel queue and the host execution. The good news is that you do not need to manually synchronize the GPUs. The library will do it for you whenever it is needed.</p>
+</div>
+<p>If you do not have a GPU you can also
+define the <code class="docutils literal notranslate"><span class="pre">THRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_OMP</span></code> Macro, then
+the call redirects to a OpenMP parallelized version or <code class="docutils literal notranslate"><span class="pre">THRUST_DEVICE_SYSTEM=THRUST_DEVICE_SYSTEM_CPP</span></code> (like it is done in this notebook because xeus-cling does not support OpenMP or cuda very well) then the calls redirect to the serial version again. This is a
+specialty of the <code class="docutils literal notranslate"><span class="pre">thrust::device_vector</span></code> class of the thrust library
+that is included in <code class="docutils literal notranslate"><span class="pre">dg/algorithm.h</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You could also use your own
+vector class in the <code class="docutils literal notranslate"><span class="pre">dg::blas1</span></code> functions. This is an advanced feature
+and requires you to provide a specialization of <code class="docutils literal notranslate"><span class="pre">dg::TensorTraits</span></code>
+for your class, where you specify the parallelization strategy that
+the libary should choose and how the data is laid out in memory.
+Please consult the <a class="reference external" href="https://feltor-dev.github.io/doc/dg/html/index.html#dispatch">documentation</a> for further details on
+how we dispatch the blas functions
+and our template traits system.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">dg::Timer</span></code>
+measures the time it took to execute the functions.</p>
+<p>So, what if the vector size is even larger <code class="docutils literal notranslate"><span class="pre">1e8</span></code> say? Then an MPI implementation
+would be handy, wouldn’t it:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following cell will not exectute because we do not have MPI installed in the notebook. You will need to copy-paste the below code to a file and compile it using the instructions in the quick-start guide.</p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//activate MPI in FELTOR</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;mpi.h&quot;</span><span class="c1"> //needs to be included **before** dg/algorithm.h</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dg/algorithm.h&quot;</span><span class="cp"></span>
+
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//init MPI</span>
+<span class="w">    </span><span class="n">MPI_Init</span><span class="p">(</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">argv</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//let&#39;s take all processes</span>
+<span class="w">    </span><span class="n">MPI_Comm</span><span class="w"> </span><span class="n">comm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//get the number of MPI processes in the communicator</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">np</span><span class="p">,</span><span class="n">rank</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">comm</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">np</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//get the rank of the calling process</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">comm</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//allocate and initialize local memory</span>
+<span class="w">    </span><span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x_local</span><span class="p">(</span><span class="w"> </span><span class="mf">1e8</span><span class="o">/</span><span class="n">np</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">y_local</span><span class="p">(</span><span class="mf">1e8</span><span class="o">/</span><span class="n">np</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//combine the local vectors to a global MPI vector</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">MPI_Vector</span><span class="o">&lt;</span><span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="n">x_local</span><span class="p">,</span><span class="w"> </span><span class="n">comm</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">MPI_Vector</span><span class="o">&lt;</span><span class="n">thrust</span><span class="o">::</span><span class="n">device_vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">(</span><span class="n">y_local</span><span class="p">,</span><span class="w"> </span><span class="n">comm</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">//now repeat the operations from before...</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.25</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">Timer</span><span class="w"> </span><span class="n">t</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">t</span><span class="p">.</span><span class="n">tic</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">t</span><span class="p">.</span><span class="n">toc</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">rank</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Axpby took &quot;</span><span class="o">&lt;&lt;</span><span class="n">t</span><span class="p">.</span><span class="n">diff</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&quot;s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">t</span><span class="p">.</span><span class="n">tic</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">t</span><span class="p">.</span><span class="n">toc</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">rank</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Dot   took &quot;</span><span class="o">&lt;&lt;</span><span class="n">t</span><span class="p">.</span><span class="n">diff</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&quot;s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">rank</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//be a good MPI citizen and clean up</span>
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We have just written a hybrid MPI + X code, where X can be either serial, OpenMP or CUDA depending on how the code is compiled!</p>
+</div>
+<p>One remaining thing is that we quickly get tired
+of writing <code class="docutils literal notranslate"><span class="pre">thrust::device_vector&lt;double&gt;</span></code> and
+especially <code class="docutils literal notranslate"><span class="pre">dg::MPI_Vector&lt;thrust::device_vector&lt;double&gt;&gt;</span></code>.
+So we invented convenient typedefs:
+<code class="docutils literal notranslate"><span class="pre">dg::DVec</span> <span class="pre">x_local(</span> <span class="pre">1e8/np,</span> <span class="pre">2),</span> <span class="pre">y_local(1e8/np,</span> <span class="pre">4)</span> <span class="pre">dg::x::DVec</span> <span class="pre">x(x_local,</span> <span class="pre">comm),</span> <span class="pre">y(y_local,</span> <span class="pre">comm);</span></code></p>
+<p>which is completely equivalent to the corresponding lines 18 and 20/ 21 above.</p>
+</div>
+<div class="section" id="platform-independent-code">
+<h2>Platform independent code<a class="headerlink" href="#platform-independent-code" title="Permalink to this headline">¶</a></h2>
+<p>The remarkable thing in the above examples is that two lines of code never changed, even if we changed the class of vectors that we use it on</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// This is platform independent code</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is a first example of <strong>platform independent code</strong>.
+It gives us an abstract way to perform vector operations on many different types and with different parallelization. If we implement an algorithm only in terms of <code class="docutils literal notranslate"><span class="pre">dg::blas1</span></code> or similar functions, then
+this algorithm is <strong>automatically parallelized</strong> for a variety of hardware and works with <strong>many different vector types</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is in fact exactly what the dg library does. It provides a set of algorithms all implemented as templates of (at least) the vector class using only the dg::blas1 (and later dg::blas2) functions. We will encounter a first example of such an algorithm in the next chapter of the tutorial: timesteppers.</p>
+</div>
+</div>
+<div class="section" id="arbitrarily-parallel-the-blas1-subroutine">
+<h2>Arbitrarily parallel - The blas1 subroutine<a class="headerlink" href="#arbitrarily-parallel-the-blas1-subroutine" title="Permalink to this headline">¶</a></h2>
+<p>One remaining question in this chapter is: what if we do not want to add vectors
+but multiply them instead? Or take the exponential of each element?
+There is a selection of predefined <code class="docutils literal notranslate"><span class="pre">dg::blas1</span></code> operations
+you can choose from for example <code class="docutils literal notranslate"><span class="pre">dg::blas1::pointwiseDot</span></code> or <code class="docutils literal notranslate"><span class="pre">dg::blas1::scal</span></code>. Check out the
+<a class="reference external" href="https://feltor-dev.github.io/doc/dg/html/group__blas1.html">documentation</a>.</p>
+<p>If this still does not satisfy your needs, the answer probably is
+the <code class="docutils literal notranslate"><span class="pre">dg::blas1::subroutine</span></code>.</p>
+<div class="admonition-really-blas1 admonition">
+<p class="admonition-title">Really blas1?</p>
+<p><code class="docutils literal notranslate"><span class="pre">blas</span></code> stands for basic linear algebra subroutins, the 1 stands for pure vector operations. In this sense <code class="docutils literal notranslate"><span class="pre">blas1::pointwiseDot</span></code> or <code class="docutils literal notranslate"><span class="pre">blas1::subroutine</span></code> are actually misnomers, since neither function is linear, nor are they part of the original blas library.</p>
+</div>
+<p>As an example, let us assume that we have two vectors <code class="docutils literal notranslate"><span class="pre">v</span></code> and <code class="docutils literal notranslate"><span class="pre">w</span></code> and we want to compute the elementwise expression <span class="math notranslate nohighlight">\(v_i = v_i v_i + a\sin(w_i)\)</span>, where <span class="math notranslate nohighlight">\(a\)</span> is a given scalar. The first thing is to write a lambda with our expression and then apply it to all elements in <code class="docutils literal notranslate"><span class="pre">v</span></code> and <code class="docutils literal notranslate"><span class="pre">w</span></code></p>
+<div class="admonition-lambdas-are-amazing admonition">
+<p class="admonition-title">Lambdas are amazing</p>
+<p>Lambda functions are very useful and will appear continuously throughout this guide, so it is a good idea to refresh your knowledge about them.
+A good watch on youtube is for example <a class="reference external" href="https://www.youtube.com/watch?v=3jCOwajNch0">Lambdas from Scratch - Arthur O’Dwye</a></p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">8.</span><span class="p">;</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="n">DG_DEVICE</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="o">&amp;</span><span class="w"> </span><span class="n">vi</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">wi</span><span class="w"> </span><span class="p">){</span><span class="w"></span>
+<span class="w">                              </span><span class="n">vi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vi</span><span class="o">*</span><span class="n">vi</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">wi</span><span class="p">);</span><span class="w"></span>
+<span class="w">                          </span><span class="p">};</span><span class="w"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">HVec</span><span class="w"> </span><span class="nf">v</span><span class="p">(</span><span class="w"> </span><span class="mf">1e6</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">w</span><span class="p">(</span><span class="mf">1e6</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span><span class="w"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">subroutine</span><span class="p">(</span><span class="w"> </span><span class="n">lambda</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="p">);</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2.05442
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the above example we have two host vectors <code class="docutils literal notranslate"><span class="pre">dg::HVec</span> <span class="pre">v</span></code> and <code class="docutils literal notranslate"><span class="pre">w</span></code>. In a shared
+memory code these will be declared as <code class="docutils literal notranslate"><span class="pre">dg::DVec</span></code>
+In an MPI implementation we would simply write <code class="docutils literal notranslate"><span class="pre">dg::x::DVec</span></code> instead of <code class="docutils literal notranslate"><span class="pre">dg::DVec</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">dg::blas1::subroutine</span></code> simply calls the given <strong>custom Functor</strong> (in the above case a lambda) for each element in <code class="docutils literal notranslate"><span class="pre">v</span></code> and <code class="docutils literal notranslate"><span class="pre">w</span></code>. There can be an <strong>arbitrary</strong> number of arguments to the subroutine function (in fact there have to be as many as arguments to the functor/lambda).</p>
+<p>This in fact means that <code class="docutils literal notranslate"><span class="pre">dg::blas1::subroutine</span></code> is able to compute <strong>any</strong> trivially parallel
+operation with <strong>any</strong> number of inputs and outputs.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you do not think this is pure magic, stop here and read again :)
+(On a technical note, this neat behaviour is possible through <code class="docutils literal notranslate"><span class="pre">C++-11</span></code>-style
+template parameter packs).</p>
+</div>
+</div>
+<div class="section" id="a-collection-of-vectors-recursive-execution">
+<h2>A collection of vectors - recursive execution<a class="headerlink" href="#a-collection-of-vectors-recursive-execution" title="Permalink to this headline">¶</a></h2>
+<p>In many practical problems of fluid dynamics we not only want to integrate one variable, <code class="docutils literal notranslate"><span class="pre">x</span></code> say in time, but several. For example we may want to integrate both density <span class="math notranslate nohighlight">\(n\)</span> and velocity <span class="math notranslate nohighlight">\(v\)</span>. Then, the complete
+set of variables should be tied together in a single entity.
+In Feltor you do this simply by allocating “Vectors of vectors”. The underlying engine automatically (and recursively) expands such constructions.
+Let us see an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.25</span><span class="p">;</span><span class="w"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="nf">two</span><span class="p">(</span><span class="w"> </span><span class="mf">1e3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">four</span><span class="p">(</span><span class="w"> </span><span class="mf">1e3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">two</span><span class="p">,</span><span class="n">two</span><span class="p">},</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">four</span><span class="p">,</span><span class="n">four</span><span class="p">};</span><span class="w"></span>
+<span class="c1">// compute a*x+b*y and store it in y</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// compute Sum_i x_i y_i</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// output should be large ...</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8000
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example we have an array of two large vectors (that are not filled with too exciting values, but it is just to show that the code still works). It is also possible to have a vector or map of vectors</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.25</span><span class="p">;</span><span class="w"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="nf">two</span><span class="p">(</span><span class="w"> </span><span class="mf">1e3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">four</span><span class="p">(</span><span class="w"> </span><span class="mf">1e3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="n">two</span><span class="p">},</span><span class="w"> </span><span class="n">y</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="n">four</span><span class="p">};</span><span class="w"></span>
+<span class="c1">// compute a*x+b*y and store it in y</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// compute Sum_i x_i y_i</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// output should be large ...</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.25</span><span class="p">;</span><span class="w"></span>
+<span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="nf">two</span><span class="p">(</span><span class="w"> </span><span class="mf">1e3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">four</span><span class="p">(</span><span class="w"> </span><span class="mf">1e3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{{</span><span class="w"> </span><span class="s">&quot;density&quot;</span><span class="p">,</span><span class="n">two</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;velocity&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">two</span><span class="p">}},</span><span class="w"></span>
+<span class="w">                                </span><span class="n">y</span><span class="w"> </span><span class="p">{{</span><span class="w"> </span><span class="s">&quot;density&quot;</span><span class="p">,</span><span class="n">four</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;velocity&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">four</span><span class="p">}};</span><span class="w"></span>
+<span class="c1">// compute a*x+b*y and store it in y</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// compute Sum_i x_i y_i</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// output should be large ...</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8000
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since the implementation works recursively, the “innver vector” can be a recusive vector again that is something like  <code class="docutils literal notranslate"><span class="pre">std::vector&lt;std::array&lt;dg::DVec,2&gt;&gt;</span></code> is also possible.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "xcpp14"
+        },
+        kernelOptions: {
+            kernelName: "xcpp14",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'xcpp14'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="welcome.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Welcome</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="timesteppers.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Timesteppers</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Matthias Wiesenberger<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
