@@ -27,8 +27,11 @@ Build the book with
 ```bash
 jupyter-book build path/to/user-guide
 ```
-To publish changes after the book was built
+To publish changes after the book was built we use the
+`ghp-import` python package (using the `-o` option
+to only keep a single commit on the `gh-pages` branch)
 ```bash
+pip install ghp-import
 cd path/to/user-guide
 ghp-import -n -f -p -o _build/html
 ```
