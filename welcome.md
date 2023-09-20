@@ -24,7 +24,7 @@ You can look up any class or function beginning with `dg::` in the [doxygen docu
 FELTOR (Full-F ELectromagnetic code in TORoidal geometry) is a modular
 scientific software package that can roughly be divided into six parts described as follows. 
 
-![The structure of the FELTOR project](https://feltor-dev/github.io/images/FeltorStructure.png)
+![The structure of the FELTOR project](https://feltor-dev.github.io/images/FeltorStructure.png)
 
 The core dg library `dg/algorithm.h` is a **header-only** template C++ library, which provides the core elements of the first four levels in the above structure
 
