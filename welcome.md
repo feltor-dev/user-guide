@@ -1,6 +1,6 @@
 # Welcome
 This guide explains how to use Feltor.
-It's structure follows the basic structure of Feltor itself as described 
+It's structure follows the basic structure of Feltor itself as described
 further below.
 If you want, you can also follow a
 [lecture by Matthias Wiesenberger](https://events.prace-ri.eu/event/989/sessions/3081/attachments/1199/2017/Wiesenberger_PRACE_high.mp4) held at the PRACE winter school on
@@ -22,53 +22,50 @@ You can look up any class or function beginning with `dg::` in the [doxygen docu
 ## What is FELTOR?
 
 FELTOR (Full-F ELectromagnetic code in TORoidal geometry) is a modular
-scientific software package that can roughly be divided into six parts described as follows. 
+scientific software package. The following Figure shows its structure
 
 ![The structure of the FELTOR project](https://feltor-dev.github.io/images/FeltorStructure.png)
 
-The core dg library `dg/algorithm.h` is a **header-only** template C++ library, which provides the core elements of the first four levels in the above structure
 
-FELTOR currently ships with four **extensions** to the basic dg library.
-- `dg/geometries/geometries.h` adds several grid generators, magnetic field structure and the flux-coordinate independent approach (levels 3 and 4).
-- `dg/matrix/matrix.h` adds matrix-function computations and a few new elliptic operators (levels 2 and 4)
-- `dg/file/file.h` simplifies common I/O operations in our programs (level 5 and 6).
-- `dg/exblas/exblas.h` is special because it is already included in the dg library (level 1) but can also be used as a standalone library. It provides binary reproducible and accurate scalar products on various architectures.
+### Application codes
 
-### User Zone:
 A collection of actual simulation projects and diagnostic
-programs for two- and three-dimensional drift- and gyro-fluid models
+programs.  Execute one- two- and three-dimensional simulations or simply run a numerical algorithm for given parameters. Typically these programs read in input file(s), simulate, and either write results to disk or directly visualize them on screen. Some examples led to journal [publications](https://feltor-dev.github.io/publications) in the past.
 
-<span>6.<span> Diagonstics:
+### The dg library
 
-These programs are designed to analyse the output from the application programs
+The dg library is a **header-only** template C++ library separated into modules.
+The core dg library header `dg/algorithm.h` includes the core modules in the above structure
 
-<span>5.<span> Applications:
-
-Programs that execute two- and three-dimensional simulations: read in input file(s), simulate, and either write results to disk or directly visualize them on screen. Some examples led to journal [publications](https://feltor-dev.github.io/publications) in the past.
-
-### Developper Zone
-The core dg library of optimized numerical algorithms
-and functions centered around discontinuous Galerkin methods on structured grids. Can be used as a standalone library.
-
-<span>4.<span> Advanced algorithms:
+**Advanced numerical algorithms**
 
 Numerical schemes that are based on the existence of a geometry and/or a topology. These include notably the discretization of elliptic equations in arbitrary coordinates, multigrid algorithms and the flux coordinate independent approach in arbitrary coordinates (available through the _geometries_ extension `dg/geometries/geometries.h`).
 
-<span>3.<span> Topology and Geometry:
+**Topology and Geometry**
 
 Here, we introduce data structures and functions that represent the concepts of Topology and Geometry and operations defined on them (for example the discontinuous Galerkin discretization of derivatives). The _geometries_ extension implements a large variety of grids and grid generation algorithms that can be used here.
 
-<span>2.<span> Basic algorithms:
+**Basic numerical algorithms**
 
-Algorithms like conjugate gradient (CG) or Runge-Kutta schemes that can be implemented with linear algebra functions alone.
+Algorithms like conjugate gradient (CG) or Runge-Kutta schemes that can be implemented with vector operations alone.
 
-<span>1.<span> Vector and Matrix operations:
+**Basic parallel operations**
 
-In this "hardware abstraction" level we define the interface for various vector and matrix operations like additions, multiplications, scalar products and so on. These functions are then implemented  and optimized on a variety of hardware architectures and serve as building blocks for all higher
+In this "hardware abstraction" module we define the interface for various vector and matrix operations like additions, multiplications, scalar products and so on. These functions are then implemented  and optimized on a variety of hardware architectures and serve as building blocks for all higher
 level algorithms.
 
+**Geometries extension** `dg/geometries/geometries.h`
 
+adds several grid generators, magnetic field structure and the flux-coordinate independent approach
 
-```python
+**Matrix functions** `dg/matrix/matrix.h`
 
-```
+ adds matrix-function computations and exponential integrators (depends on boost and lapack libraries)
+
+**File I/O operations** `dg/file/file.h`
+
+simplifies common I/O operations in our programs (depends on NetCDF and jsoncpp libraries)
+
+**Exblas** `dg/exblas/exblas.h`
+
+is special because it is already included in the dg library  but can also be used as a standalone library. It provides binary reproducible and accurate scalar products on various architectures.
