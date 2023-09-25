@@ -1,3 +1,4 @@
+(sec:welcome)=
 # Welcome
 This guide explains how to use Feltor.
 It's structure follows the basic structure of Feltor itself as described
@@ -10,9 +11,8 @@ If you haven't done so yet, please read the
 explains how to install the library and compile programs.
 
 ```{note}
-This guide is generated using [jupyter-book](https://jupyterbook.org/intro.html) from [jupyter-notebooks](https://jupyter.org/) with the [xeus-cling](https://github.com/jupyter-xeus/xeus-cling) extension, which allows to run C++ code in a jupyter-notebook. This means that you can download and execute the notebooks yourself and we encourage you to do so and play around with the provided examples. Or, you can simply copy-paste the code examples into a textfile and compile the code yourself.
-
-Unfortunately, xeus-cling does not generate terribly fast code and only works unparallelized so compiling yourself probably yields faster executables.
+This guide is generated using [jupyter-book](https://jupyterbook.org/intro.html) from [jupyter-notebooks](https://jupyter.org/) and Markdown files.
+You can simply copy-paste the code examples into a textfile and compile the code yourself and we encourage you to do so and play around with the provided examples.
 ```
 
 ```{seealso}

@@ -1,5 +1,5 @@
+(sec:grids)=
 # Grids and derivatives
-
 In the first two chapters we saw how to deal with vectors and how to integrate
 our first ordinary differential equation. But how about partial
 differential equations? In order to define a partial differential

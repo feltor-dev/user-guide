@@ -7,19 +7,12 @@ In order to generate the static website we use
 [jupyter-book](https://jupyterbook.org).
 
 ```bash
-# install xeus-cling for the C++ kernel
-conda create -n cling # we need a new environment
-source activate cling
-conda install xeus-cling -c conda-forge
-conda install notebook # the global jupyter-notebook does not see the new C++ kernel
 # install jupyter-book
 conda install jupyter-book -c conda-forge
 # clone this repository
 git clone https://github.com/feltor-dev/user-guide
 # build the book
 jupyter-book build path/to/user-guide
-# we use ghp-import to publish changes on the github pages
-pip install ghp-import
 ```
 In order to locally generate the simulation data you will need the
 [Feltor](https://github.com/feltor-dev/feltor) code repository.  Follow the
@@ -40,6 +33,15 @@ pip install ghp-import
 cd path/to/user-guide
 ghp-import -n -f -p -o _build/html
 ```
-
+## Last succesful build
+```bash
+Jupyter Book      : 0.12.1
+External ToC      : 0.2.3
+MyST-Parser       : 0.15.2
+MyST-NB           : 0.13.1
+Sphinx Book Theme : 0.1.10
+Jupyter-Cache     : 0.4.3
+NbClient          : 0.5.3
+```
 ## Author
 Matthias Wiesenberger

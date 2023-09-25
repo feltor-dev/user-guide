@@ -19,10 +19,10 @@ try{
 {
     std::cout << e.what();
 }
+// An error occured while parsing does_not_exist.json
+// *** File does not exist! ***
 ```
 
-An error occured while parsing does_not_exist.json
-*** File does not exist! ***
 
 In this example we open a file where C-style comments are allowed but discarded, while an error on opening or reading the file leads to a throw (which if not captured leads to immediate abortion of the program).
 
@@ -65,10 +65,10 @@ try{
     std::cout << "Error in file test.json\n";
     std::cout << e.what()<<std::endl;
 }
+// Error in file test.json
+// *** Key error: "does not exist":  not found.
 ```
 
-Error in file test.json
-*** Key error: "does not exist":  not found.
 
 A feature of the class is that it keeps track of how a value is called.
 For example

@@ -1,4 +1,5 @@
-# Timesteppers
+(sec:timesteppers)=
+# ODE integrators
 This chapter deals with how to integrate differential equations of the form
 \begin{align}
 M(y,t) \frac{d}{dt}y = F(y,t)
