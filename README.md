@@ -35,13 +35,13 @@ ghp-import -n -f -p -o _build/html
 ```
 ## Last succesful build
 ```bash
-Jupyter Book      : 0.12.1
-External ToC      : 0.2.3
-MyST-Parser       : 0.15.2
-MyST-NB           : 0.13.1
-Sphinx Book Theme : 0.1.10
-Jupyter-Cache     : 0.4.3
-NbClient          : 0.5.3
+Jupyter Book      : 1.0.0
+External ToC      : 1.0.1
+MyST-Parser       : 2.0.0
+MyST-NB           : 1.0.0
+Sphinx Book Theme : 1.1.0
+Jupyter-Cache     : 0.6.1
+NbClient          : 0.5.13
 ```
 ## Author
 Matthias Wiesenberger
