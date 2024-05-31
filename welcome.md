@@ -16,7 +16,7 @@ You can simply copy-paste the code examples into a textfile and compile the code
 ```
 
 ```{seealso}
-You can look up any class or function beginning with `dg::` in the [doxygen documentation](https://feltor-dev.github.io/doc/dg/html/modules.html)
+You can look up any class or function beginning with `dg::` in the [doxygen documentation](https://mwiesenberger.github.io/feltor/dg/html/modules.html)
 ```
 
 ## What is FELTOR?
