@@ -38,7 +38,7 @@ in which in particular the error norm $|| v || = \sqrt{ \langle v, v\rangle }$ i
 
 Section [Operators](sec:operator) details the format and how to write the function $f$ in code, while [Preconditioners](sec:preconditioner) deal with the inverse operators.
 ```{seealso}
-The [doxygen documentation](https://feltor-dev.github.io/doc/dg/html/group__invert.html) holds the complete list of solvers and details the parameters they use.
+The [doxygen documentation](https://mwiesenberger.github.io/feltor/dg/html/group__invert.html) holds the complete list of solvers and details the parameters they use.
 ```
 
 Furthermore, we have the **multigrid family** of solvers, which we designed as a customizable combination of the above solvers into
@@ -47,7 +47,7 @@ Furthermore, we have the **multigrid family** of solvers, which we designed as a
 
 Here, we refer to section [The multigrid solvers](sec:multigrid) for how to construct and use these solvers.
 ```{seealso}
-The multigrid section in the [doxygen documentation](https://feltor-dev.github.io/doc/dg/html/group__multigrid.html)  holds the complete list of solvers and details the parameters they use.
+The multigrid section in the [doxygen documentation](https://mwiesenberger.github.io/feltor/dg/html/group__multigrid.html)  holds the complete list of solvers and details the parameters they use.
 ```
 
 ```{admonition} Initial guess

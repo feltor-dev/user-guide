@@ -20,7 +20,7 @@ The `dg` library provides a wide selection of explicit, implicit and imex timest
 - `dg::ExplicitMultistep`
 - `dg::ImplicitMultistep`
 - `dg::ImExMultistep`
--  see [doxygen documentation](https://feltor-dev.github.io/doc/dg/html/group__time.html) for a full list
+-  see [doxygen documentation](https://mwiesenberger.github.io/feltor/dg/html/group__time.html) for a full list
 
 The `dg::ERKStep`, `dg::DIRKStep` and `dg::ARKStep` (and in general any embedded method) can be used as a driver for an adaptive Timestepper
 - `dg::Adaptive`
@@ -97,7 +97,7 @@ std::array<double,2> solution( double t)
 ```
 ### Explicit Runge-Kutta - fixed step
 
-First, show how to implement a simple timeloop with a fixed stepsize Runge Kutta integrator. We choose the classic 4-th order scheme, but consult the [documentation](https://feltor-dev.github.io/doc/dg/html/group__time.html) for an extensive list of available tableaus.
+First, show how to implement a simple timeloop with a fixed stepsize Runge Kutta integrator. We choose the classic 4-th order scheme, but consult the [documentation](https://mwiesenberger.github.io/feltor/dg/html/group__time.html) for an extensive list of available tableaus.
 
 ```cpp
 // The right hand side needs to be a callable function in Feltor.

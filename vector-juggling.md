@@ -26,7 +26,7 @@ std::cout << sum << std::endl;
 ```
 In this code we encounter our first two dg functions, namely `dg::blas1::axpby`
 and `dg::blas1::dot`. They perform very basic operations, namely adding vectors
- and computing scalar products respectively. (You can look up their formal documentation [here](https://feltor-dev.github.io/doc/dg/html/group__blas1.html)).
+ and computing scalar products respectively. (You can look up their formal documentation [here](https://mwiesenberger.github.io/feltor/dg/html/group__blas1.html)).
 The remarkable thing about these two functions is that they are templates.
 This means you can call them for many different vector classes. We can change the type of `x` and `y`;
 
@@ -91,7 +91,7 @@ If you do not have a GPU you can also define the THRUST_DEVICE_SYSTEM=THRUST_DEV
  and requires you to provide a specialization of `dg::TensorTraits`
  for your class, where you specify the parallelization strategy that
  the libary should choose and how the data is laid out in memory.
- Please consult the [documentation](https://feltor-dev.github.io/doc/dg/html/index.html#dispatch) for further details on
+ Please consult the [documentation](https://mwiesenberger.github.io/feltor/dg/html/index.html#dispatch) for further details on
 how we dispatch the blas functions
 and our template traits system.
 
@@ -179,7 +179,7 @@ One remaining question in this chapter is: what if we do not want to add vectors
 but multiply them instead? Or take the exponential of each element?
 There is a selection of predefined `dg::blas1` operations
 you can choose from for example `dg::blas1::pointwiseDot` or `dg::blas1::scal`. Check out the
-[documentation](https://feltor-dev.github.io/doc/dg/html/group__blas1.html).
+[documentation](https://mwiesenberger.github.io/feltor/dg/html/group__blas1.html).
 
 If this still does not satisfy your needs, the answer probably is
 the `dg::blas1::subroutine`.
