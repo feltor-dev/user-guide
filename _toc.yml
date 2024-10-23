@@ -17,6 +17,7 @@ parts:
       chapters:
       - file: json-utilities
       - file: netcdf-utilities
+      - file: netcdf-json
     - caption: dg/exblas/exblas.h
       chapters:
       - file: reproducibility
