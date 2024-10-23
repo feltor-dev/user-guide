@@ -1,6 +1,6 @@
 # NetCDF utilities
 
-As a binary output format we recommend [netCDF-4](https://www.unidata.ucar.edu/software/netcdf/). This format is widely used and bases on the HDF5 data format. Even though netCDF-4 offers an enhanced data model we usually do not create groups in files. In short, we use netcdf-4 for its HDF5 compatibility but only write the [The classic data model](https://www.unidata.ucar.edu/software/netcdf/docs/netcdf_data_model.html#classic_model) consisting of _Variables_, _Dimensions_ and _Attributes_.
+As a binary output format we recommend [netCDF-4](https://www.unidata.ucar.edu/software/netcdf/). This format is widely used and bases on the HDF5 data format. A good start is to read about the [The NetCDF data model](https://www.unidata.ucar.edu/software/netcdf/docs/netcdf_data_model.html) consisting of _Variables_, _Dimensions_ and _Attributes_.
 ```{admonition} Conventions
 We usually provide Meta-data in the file based on the [CF-conventions](https://cfconventions.org/) and [netCDF-conventions](https://www.unidata.ucar.edu/software/netcdf/documentation/NUG/best_practices.html). See the [Create your own project](sec:project) page for more details on how to do this in practice.
 ```
@@ -8,6 +8,9 @@ We usually provide Meta-data in the file based on the [CF-conventions](https://c
 ```{seealso}
 Read more about the [NetCDF user-guide](https://docs.unidata.ucar.edu/nug/current/best_practices.html) and [C documentation](https://www.unidata.ucar.edu/netcdf/docs) and [python documentation](http://unidata.github.io/netcdf4-python/)
 ```
+Unfortunately, netCDF is a C-library with a frankly terrible interface.
+In particular the task of "just write it to file" can be daunting with pure netCDF functions involving many low-level steps like creating and writing dimensions, managing variable ids, creating variables, and then only finally writing a variable. A bit further reaching is the question how to write to file in a MPI environment.
+
 The goal of writing utility functions is to
 - simplify error handling,
 - simplify the creation of Dimensions for quantities that are defined on `dg` grids
@@ -17,16 +20,20 @@ The goal of writing utility functions is to
 We provide a convenient class `dg.:file::NC_Error_Handle` which constructs from a netcdf return integer. If the integer is not zero it will throw.
 
 ``` cpp
+#include <iostream>
 #include "dg/file/nc_utilities.h"
 
-dg::file::NC_Error_Handle err;
-int ncid=-1;
-try{
-    err = nc_create( "outputfile.nc", NC_NETCDF4|NC_CLOBBER, &ncid);
-}catch( std::exception& e)
+int main()
 {
-    std::cerr << "ERROR creating file outputfile.nc"<<std::endl;
-    std::cerr << e.what()<<std::endl;
+    dg::file::NC_Error_Handle err;
+    int ncid=-1;
+    try{
+        err = nc_create( "outputfile.nc", NC_NETCDF4|NC_CLOBBER, &ncid);
+    }catch( std::exception& e)
+    {
+        std::cerr << "ERROR creating file outputfile.nc"<<std::endl;
+        std::cerr << e.what()<<std::endl;
+    }
 }
 ```
 ## Defining dimensions
