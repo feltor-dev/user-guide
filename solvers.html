@@ -1,0 +1,935 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Solvers in Feltor &#8212; The Feltor guide book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'solvers';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Curvilinear grids" href="geometries.html" />
+    <link rel="prev" title="Grids and derivatives" href="grids.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">The Feltor guide book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">dg/algorithm.h</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vector-juggling.html">Vectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timesteppers.html">ODE integrators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grids.html">Grids and derivatives</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Solvers in Feltor</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">dg/geometries/geometries.h</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geometries.html">Curvilinear grids</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">dg/matrix/matrix.h</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="matrixfunction.html">Matrix functions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">dg/file/file.h</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="json-utilities.html">JSON utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netcdf-utilities.html">NetCDF utilities</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">dg/exblas/exblas.h</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="reproducibility.html">Reproducibility and Accuracy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="new-project.html">Create your own project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timesteppers2.html">Advanced Timesteppers</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/solvers.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Solvers in Feltor</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-example-inverting-the-laplace-operator">A first example: inverting the Laplace operator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-an-operator-to-invert">Writing an operator to invert</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lambda-functions">Lambda functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overload-operator">Overload operator()</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preconditioning-and-inverse-operators">Preconditioning and inverse operators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multigrid-solvers">The multigrid solvers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construct-nested-grids">Construct Nested Grids</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construct-nested-operators-and-solvers">Construct Nested operators and solvers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solve">Solve</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="solvers-in-feltor">
+<h1>Solvers in Feltor<a class="headerlink" href="#solvers-in-feltor" title="Link to this heading">#</a></h1>
+<p>In this chapter we will study how to solve</p>
+<div class="amsmath math notranslate nohighlight" id="equation-abd8fa68-6377-4e56-afd7-75b28c7ea97b">
+<span class="eqno">(6)<a class="headerlink" href="#equation-abd8fa68-6377-4e56-afd7-75b28c7ea97b" title="Permalink to this equation">#</a></span>\[\begin{align}
+f(x) = b
+\end{align}\]</div>
+<p>for both linear and nonlinear functions <span class="math notranslate nohighlight">\(f\)</span> in Feltor.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Feltor offers a growing range of solvers. Among others there are linear</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::PCG</span></code> for preconditioned conjugate gradient</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::LGMRES</span></code> for the restarted generalized minimal residual method</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::BICGSTABL</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::ChebyshevIteration</span></code></p></li>
+</ul>
+<p>and non-linear solvers</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::FixedPointSolver</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::AndersonAcceleration</span></code></p></li>
+</ul>
+<div class="admonition-matrix-free-solvers admonition">
+<p class="admonition-title">Matrix-free solvers</p>
+<p>It is important to realize that Feltor’s solvers are <em>matrix-free</em> (and in consequence iterative). What this means is that the actual matrix does not need to be allocated. In fact, the matrix does not need to be known at all, in code or analytically. The only thing that is needed is the <strong>application</strong> of the matrix to a vector. In other words, the solver just needs a “black box” that takes a vector on one side and spits out a vector on the other side. Linearity is just a promise of the “black box” (which our solvers blindly trust).</p>
+</div>
+<p>These solvers have in common that they are used in some variation of</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Operator</span><span class="w"> </span><span class="n">op</span><span class="p">;</span><span class="w"> </span><span class="c1">// some operator f to invert</span>
+<span class="n">Solver</span><span class="w"> </span><span class="nf">solver</span><span class="p">(</span><span class="w"> </span><span class="n">copyable</span><span class="p">,</span><span class="w"> </span><span class="n">construct_params</span><span class="p">...);</span>
+<span class="n">Vector</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">rtol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-8</span><span class="p">,</span><span class="w"> </span><span class="n">atol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rtol</span><span class="p">;</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="w"> </span><span class="n">op</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">solve_params</span><span class="p">...);</span>
+</pre></div>
+</div>
+<p>Importantly, many solvers take a preconditioner and the weights as solve parameters. The latter define the scalar product</p>
+<div class="amsmath math notranslate nohighlight" id="equation-87c61ccb-c0a4-47e5-9950-9e61a0973062">
+<span class="eqno">(7)<a class="headerlink" href="#equation-87c61ccb-c0a4-47e5-9950-9e61a0973062" title="Permalink to this equation">#</a></span>\[\begin{align}
+   \langle x, y \rangle := \sum_i x_i w_i y_i
+\end{align}\]</div>
+<p>in which in particular the error norm <span class="math notranslate nohighlight">\(|| v || = \sqrt{ \langle v, v\rangle }\)</span> is computed.</p>
+<p>Section <a class="reference internal" href="#sec-operator"><span class="std std-ref">Operators</span></a> details the format and how to write the function <span class="math notranslate nohighlight">\(f\)</span> in code, while <a class="reference internal" href="#sec-preconditioner"><span class="std std-ref">Preconditioners</span></a> deal with the inverse operators.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The <a class="reference external" href="https://mwiesenberger.github.io/feltor/dg/html/group__invert.html">doxygen documentation</a> holds the complete list of solvers and details the parameters they use.</p>
+</div>
+<p>Furthermore, we have the <strong>multigrid family</strong> of solvers, which we designed as a customizable combination of the above solvers into</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::nested_iterations</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::fmg_solve</span></code> (experimental).</p></li>
+</ul>
+<p>Here, we refer to section <a class="reference internal" href="#sec-multigrid"><span class="std std-ref">The multigrid solvers</span></a> for how to construct and use these solvers.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>The multigrid section in the <a class="reference external" href="https://mwiesenberger.github.io/feltor/dg/html/group__multigrid.html">doxygen documentation</a>  holds the complete list of solvers and details the parameters they use.</p>
+</div>
+<div class="admonition-initial-guess admonition">
+<p class="admonition-title">Initial guess</p>
+<p>Look at <code class="docutils literal notranslate"><span class="pre">dg::Extrapolation</span></code> to get an initial guess based on past solutions.</p>
+</div>
+</section>
+<section id="a-first-example-inverting-the-laplace-operator">
+<h2>A first example: inverting the Laplace operator<a class="headerlink" href="#a-first-example-inverting-the-laplace-operator" title="Link to this heading">#</a></h2>
+<p>An often encountered problem is the discretization and inversion of elliptic equations, for example Poison’s equation.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c3e18f9c-6f23-4198-8382-60b1de2faf65">
+<span class="eqno">(8)<a class="headerlink" href="#equation-c3e18f9c-6f23-4198-8382-60b1de2faf65" title="Permalink to this equation">#</a></span>\[\begin{align}
+-\Delta \phi = \rho
+\end{align}\]</div>
+<p>Using a local discontinuous Galerkin discretization this equation transforms to</p>
+<div class="amsmath math notranslate nohighlight" id="equation-dedd56a2-893f-4202-8ecf-bc1ca9f41c9f">
+<span class="eqno">(9)<a class="headerlink" href="#equation-dedd56a2-893f-4202-8ecf-bc1ca9f41c9f" title="Permalink to this equation">#</a></span>\[\begin{align}
+ M \vec \phi = \vec \rho
+ \end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(M\)</span> is self-adjoint in the dG weights <span class="math notranslate nohighlight">\(W\)</span>. See the <a class="reference external" href="https://www.overleaf.com/read/rpbjsqmmfzyj">theory guide</a> on overleaf for more details on the discretization.
+Since <span class="math notranslate nohighlight">\(M\)</span> is self-adjoint we can use <code class="docutils literal notranslate"><span class="pre">dg::PCG</span></code> to invert the equation:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="c1">// include the basic dg header</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dg/algorithm.h&quot;</span>
+</pre></div>
+</div>
+<p>We want to solve on the domain <span class="math notranslate nohighlight">\([0,2\pi]\times [0,2\pi]\)</span></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">lx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.</span><span class="o">*</span><span class="n">M_PI</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">ly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.</span><span class="o">*</span><span class="n">M_PI</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>With the somewhat trivial solution <span class="math notranslate nohighlight">\(\phi = \sin(x)\sin(y)\)</span></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="nf">fct</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">){</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">laplace_fct</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">initial</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// The numbers in parentheses are our suggestions ...</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">Nx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">Ny</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">eps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-4</span><span class="p">;</span>
+<span class="c1">// clang as script is unfortunately not very fast so don&#39;t make the numbers too big</span>
+<span class="c1">//std::cout &lt;&lt; &quot;Type n (3), Nx (20) and Ny (20)! \n&quot;;</span>
+<span class="c1">//std::cin &gt;&gt; n &gt;&gt; Nx &gt;&gt; Ny;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Computing on the Grid &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">n</span><span class="o">&lt;&lt;</span><span class="s">&quot; x &quot;</span><span class="o">&lt;&lt;</span><span class="n">Nx</span><span class="o">&lt;&lt;</span><span class="s">&quot; x &quot;</span><span class="o">&lt;&lt;</span><span class="n">Ny</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">CartesianGrid2d</span><span class="w"> </span><span class="nf">grid</span><span class="p">(</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">lx</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ly</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">Nx</span><span class="p">,</span><span class="w"> </span><span class="n">Ny</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="kt">DIR</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">PER</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Evaluate initial guess for iterative scheme</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">evaluate</span><span class="p">(</span><span class="w"> </span><span class="n">initial</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">);</span>
+<span class="c1">// create volume and inverse volume on previously defined grid</span>
+<span class="k">const</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="n">vol2d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">create</span><span class="o">::</span><span class="n">volume</span><span class="p">(</span><span class="w"> </span><span class="n">grid</span><span class="p">);</span>
+
+<span class="c1">// Create negative, unnormalized, positive definite Laplacian</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">Elliptic</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">CartesianGrid2d</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">DMatrix</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="o">&gt;</span><span class="w"> </span><span class="n">laplaceM</span><span class="p">(</span><span class="w"> </span><span class="n">grid</span><span class="p">);</span>
+<span class="c1">// allocate memory in conjugate gradient</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="n">max_iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">Nx</span><span class="o">*</span><span class="n">Ny</span><span class="p">;</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">PCG</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">pcg</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">max_iter</span><span class="p">);</span>
+
+<span class="c1">// Evaluate right hand side and solution on the grid</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">evaluate</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">laplace_fct</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">);</span>
+<span class="k">const</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="n">solution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">evaluate</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">fct</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">);</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">Timer</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+<span class="n">t</span><span class="p">.</span><span class="n">tic</span><span class="p">();</span>
+<span class="c1">// we do not use a preconditioner in solution method</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pcg</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="w"> </span><span class="n">laplaceM</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">vol2d</span><span class="p">,</span><span class="w"> </span><span class="n">eps</span><span class="p">);</span>
+<span class="n">t</span><span class="p">.</span><span class="n">toc</span><span class="p">();</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Number of pcg iterations &quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;For a precision of &quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">eps</span><span class="o">&lt;&lt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Took &quot;</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">diff</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&quot;s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="c1">//Computing on the Grid 3 x 10 x 10</span>
+<span class="c1">//Evaluate initial guess for iterative scheme</span>
+<span class="c1">//Number of pcg iterations 15</span>
+<span class="c1">//For a precision of 0.0001</span>
+<span class="c1">//Took 1.82155s</span>
+</pre></div>
+</div>
+<p>This program executes on the device as is evident from the use of
+<code class="docutils literal notranslate"><span class="pre">dg::DVec</span></code>, a typedef for <code class="docutils literal notranslate"><span class="pre">thrust::device_vector&lt;double&gt;</span></code>, and <code class="docutils literal notranslate"><span class="pre">dg::DMatrix</span></code>.
+The new class that we encounter in this program is <code class="docutils literal notranslate"><span class="pre">dg::Elliptic</span></code>, a
+level 4 class. What this class does is to create and store the <code class="docutils literal notranslate"><span class="pre">dx</span></code> and <code class="docutils literal notranslate"><span class="pre">dy</span></code> matrices from the given grid. Furthermore, it allocates some
+internal workspace and defines a member function that uses <code class="docutils literal notranslate"><span class="pre">dg::blas1</span></code> and <code class="docutils literal notranslate"><span class="pre">dg::blas2</span></code> functions to discretize the Laplacian.
+The class depends on three template parameters,
+the geometry, the matrix and the vector class. The matrix and the
+vector class must fit together, that is, they must be useable in
+a <code class="docutils literal notranslate"><span class="pre">dg::blas2::symv</span></code> function.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">dg::Elliptic</span></code> class
+acts as a matrix itself. This becomes clear in the line <code class="docutils literal notranslate"><span class="pre">dg::blas2::symv(</span> <span class="pre">laplaceM,</span> <span class="pre">x,</span> <span class="pre">lap_x)</span></code> in the example below. The <code class="docutils literal notranslate"><span class="pre">M</span></code> in <code class="docutils literal notranslate"><span class="pre">laplaceM</span></code>
+reminds us that <code class="docutils literal notranslate"><span class="pre">dg::Elliptic</span></code> discretizes the negative Laplacian in order to
+generate a postive definite operator.</p>
+</div>
+<p>The geometry <code class="docutils literal notranslate"><span class="pre">dg::CartesianGrid2d</span></code> defines a two-dimensional Euclidean metric
+tensor. Recall, that in general the Laplacian depends on metric coefficients.</p>
+<p>Since the <code class="docutils literal notranslate"><span class="pre">dg::Elliptic</span></code> is a matrix, we can use it in a
+conjugate gradient solver. The <code class="docutils literal notranslate"><span class="pre">dg::PCG</span></code> is a Level 2 class and
+only depends on the vector class that we use. Recall here that the
+conjugate gradient algorithm can be implemented with vector addition <code class="docutils literal notranslate"><span class="pre">dg::blas1::axpby</span></code>,
+a scalar product (<code class="docutils literal notranslate"><span class="pre">dg::blas1::dot</span></code>) and a matrix-vector multiplication (<code class="docutils literal notranslate"><span class="pre">dg::blas2::symv</span></code>) alone.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">//compute error</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="nf">error</span><span class="p">(</span><span class="w"> </span><span class="n">solution</span><span class="p">);</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="mf">-1.</span><span class="p">,</span><span class="n">error</span><span class="p">);</span>
+
+<span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="nf">lap_x</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">residuum</span><span class="p">(</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w">  </span><span class="n">laplaceM</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">lap_x</span><span class="p">);</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">lap_x</span><span class="p">,</span><span class="w"> </span><span class="mf">-1.</span><span class="p">,</span><span class="w"> </span><span class="n">residuum</span><span class="p">);</span>
+
+<span class="c1">//global relative error in L2 norm is O(h^n)</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">vol2d</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">));</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;L2 Norm of x is               &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span><span class="w"> </span><span class="n">vol2d</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">solution</span><span class="p">));</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;L2 Norm of Solution is        &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="n">error</span><span class="p">,</span><span class="w"> </span><span class="n">vol2d</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">));</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;L2 Norm of Error is           &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">residuum</span><span class="p">,</span><span class="w"> </span><span class="n">vol2d</span><span class="p">,</span><span class="w"> </span><span class="n">residuum</span><span class="p">));</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;L2 Norm of Residuum is        &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="c1">//L2 Norm of x is               3.14152</span>
+<span class="c1">//L2 Norm of Solution is        3.14159</span>
+<span class="c1">//L2 Norm of Error is           0.00348843</span>
+<span class="c1">//L2 Norm of Residuum is        0.000467984</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-an-operator-to-invert">
+<span id="sec-operator"></span><h2>Writing an operator to invert<a class="headerlink" href="#writing-an-operator-to-invert" title="Link to this heading">#</a></h2>
+<p>Feltor has an assortment of already made Operators available that have special implementations, for example the
+<code class="docutils literal notranslate"><span class="pre">dg::Elliptic</span></code> or <code class="docutils literal notranslate"><span class="pre">dg::Helmholtz</span></code> classes. Sometimes, however your own problem deviates slightly from what is already available or you want to start entirely from scratch.</p>
+<p>For example in the first example we inverted the simple Laplacian. However, what if you want to solve the equation</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5c41b04b-53d9-41e7-8340-ecf3cfe1ee58">
+<span class="eqno">(10)<a class="headerlink" href="#equation-5c41b04b-53d9-41e7-8340-ecf3cfe1ee58" title="Permalink to this equation">#</a></span>\[\begin{align}
+ \exp(\phi) - \Delta \phi = \rho
+ \end{align}\]</div>
+<p>which is non-linear. This means our function is now <span class="math notranslate nohighlight">\(f(x) = \exp(x)-\Delta x\)</span> instead of <span class="math notranslate nohighlight">\(f(x) = \Delta x\)</span>. Feltor accepts several ways a function or matrix is implemented. One way you could implement the new <span class="math notranslate nohighlight">\(f\)</span> based on the existing old <span class="math notranslate nohighlight">\(f\)</span> (or in fact any <span class="math notranslate nohighlight">\(f\)</span>) is with <strong>lambda functions</strong>.</p>
+<div class="admonition-dg-apply admonition">
+<p class="admonition-title">dg::apply</p>
+<p>In Feltor the function that enables the implementation of a matrix-free algorithm is <code class="docutils literal notranslate"><span class="pre">dg::blas2::symv</span></code> or its alias <code class="docutils literal notranslate"><span class="pre">dg::apply</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">apply</span><span class="p">(</span><span class="w"> </span><span class="n">op</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span><span class="w"> </span><span class="c1">// compute y = f(x)</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w"> </span><span class="n">op</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="w"> </span><span class="p">);</span><span class="c1">//completely equivalent</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">dg::apply</span></code> will accept many types, you will find the full list in the doxygen documentation.
+Notably, it accepts functors and will try to call</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">op</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span><span class="w"> </span><span class="c1">// compute y = f(x)</span>
+</pre></div>
+</div>
+<p>i.e. the apply call is equivalent to a functor call.
+In order for this to work your own matrix class must be a functor/lambda with the signature <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">operator()(const</span> <span class="pre">container&amp;,container&amp;)</span></code> where <code class="docutils literal notranslate"><span class="pre">container</span></code> is a placeholder for the vector class you use</p>
+</div>
+<section id="lambda-functions">
+<h3>Lambda functions<a class="headerlink" href="#lambda-functions" title="Link to this heading">#</a></h3>
+<p>In C++14 lambda functions are a very powerful tool.
+They are basically compiler generated functors that
+can be written in a very concise and short way.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>If you are unfamiliar with lambdas a good watch on youtube is for example <a class="reference external" href="https://www.youtube.com/watch?v=3jCOwajNch0">Lambdas from Scratch - Arthur O’Dwye</a></p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">op</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="n">lap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">laplaceM</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="o">=</span><span class="n">VectorType</span><span class="p">(</span><span class="n">copyble</span><span class="p">)](</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="k">mutable</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w"> </span><span class="n">lap</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">EXP</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">());</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Several things are noteworthy here</p>
+<ul class="simple">
+<li><p>Our lambda is a template or a “generic lambda” through the use of “auto” in the interface</p></li>
+<li><p>Our lambda uses “init capture”, a feature from C++14. We caught the elliptic object by reference (in order to avoid a deep copy but we should beware “dangling references”) and allocated a “workspace” object tmp</p></li>
+<li><p>Our lambda is declared “mutable” (because we write in the temporary tmp)</p></li>
+</ul>
+<p>Note that the lambda now has the correct interface to be used in a solver. For example</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">dg</span><span class="o">::</span><span class="n">AndersonAcceleration</span><span class="w"> </span><span class="nf">acc</span><span class="p">(</span><span class="w"> </span><span class="n">copyable</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="n">acc</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="w"> </span><span class="n">op</span><span class="p">,</span><span class="w"> </span><span class="n">phi</span><span class="p">,</span><span class="w"> </span><span class="n">rho</span><span class="p">,</span><span class="w"> </span><span class="n">weights</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-5</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-5</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="overload-operator">
+<h3>Overload operator()<a class="headerlink" href="#overload-operator" title="Link to this heading">#</a></h3>
+<p>The equivalent of a lambda function is of course to write an operator yourself. The above lambda can be implemented like:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Geometry</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Matrix</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Container</span><span class="o">&gt;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">Operator</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Operator</span><span class="p">(</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">Elliptic</span><span class="o">&lt;</span><span class="n">Geometry</span><span class="p">,</span><span class="n">Matrix</span><span class="p">,</span><span class="n">Container</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">ell</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">copyable</span><span class="p">)</span><span class="o">:</span>
+<span class="w">        </span><span class="n">m_tmp</span><span class="p">(</span><span class="w"> </span><span class="n">copyable</span><span class="p">),</span><span class="w"> </span><span class="n">m_lap</span><span class="p">(</span><span class="n">ell</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">ContainerType0</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">ContainerType1</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ContainerType0</span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">ContainerType1</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w"> </span><span class="n">m_lap</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="w">        </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">m_tmp</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">EXP</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">());</span>
+<span class="w">        </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">m_tmp</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="n">Container</span><span class="w"> </span><span class="n">m_tmp</span><span class="p">;</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">Elliptic</span><span class="o">&lt;</span><span class="n">Geometry</span><span class="p">,</span><span class="n">Matrix</span><span class="p">,</span><span class="n">Container</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">m_lap</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>As you can see this is a lot more verbose than a lambda function. It is useful for complicated functors that hold
+internal state. It is less useful for very small classes, where the parenthesis operator only consists of a line or two and when the operator is basically only
+an adaptor of another type.</p>
+</section>
+</section>
+<section id="preconditioning-and-inverse-operators">
+<span id="sec-preconditioner"></span><h2>Preconditioning and inverse operators<a class="headerlink" href="#preconditioning-and-inverse-operators" title="Link to this heading">#</a></h2>
+<p>A preconditioner is a matrix that represents the approximate inverse of the matrix to invert.
+From an
+interface point of view, the preconditioner has the same conditions
+as the matrix itself, i.e. must be usable in the <code class="docutils literal notranslate"><span class="pre">dg::blas2::symv</span></code> function</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Precond</span><span class="w"> </span><span class="nf">p</span><span class="p">(...);</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"> </span><span class="c1">// computes y = P(x)</span>
+</pre></div>
+</div>
+<p>This example works if <code class="docutils literal notranslate"><span class="pre">using</span> <span class="pre">Precond</span> <span class="pre">=</span> <span class="pre">Vector</span></code> is a
+vector, which will be interpreted as a <strong>diagonal preconditioner</strong>.
+For example the <code class="docutils literal notranslate"><span class="pre">dg::Elliptic</span></code> class comes with a default diagonal preconditioner:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">unsigned</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pcg</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="w"> </span><span class="n">laplaceM</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">laplaceM</span><span class="p">.</span><span class="n">precond</span><span class="p">(),</span><span class="w"> </span><span class="n">vol2d</span><span class="p">,</span><span class="w"> </span><span class="n">eps</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Here, the <code class="docutils literal notranslate"><span class="pre">precond</span></code> method returns a vector which contains the inverse of the volume per default.</p>
+<p>But what if we want to use a more involved preconditioner? In fact, the interface of the preconditioner
+must look exactly the same as that of the operator, which we discussed in the <a class="reference internal" href="#sec-operator"><span class="std std-ref">previous section</span></a>.
+When constructing a preconditioner manually we thus have again two options: (i) write an entirely new class
+and overload the function call operator or (ii) use lambda functions.</p>
+<p>Consider the following piece of code</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">dg</span><span class="o">::</span><span class="n">PCG</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">pcg</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">max_iter</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">inverse_op</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">pcg</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="w"> </span><span class="n">laplaceM</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">vol2d</span><span class="p">,</span><span class="w"> </span><span class="n">eps</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">inverse_op</span></code> now has the signature of a matrix in Feltor. That is we can write</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w"> </span><span class="n">inverse_op</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>which will compute <span class="math notranslate nohighlight">\(x = \Delta^{-1} b\)</span>. This means that <code class="docutils literal notranslate"><span class="pre">inverse_op</span></code> could be used as a preconditioner.
+Of course, here the “preconditioner” is the exact inverse of the operator which means that any iterative scheme converges in one iteration.</p>
+<div class="admonition-preconditioner admonition">
+<p class="admonition-title">Preconditioner</p>
+<p>A preconditioner is nothing but an approximate inverse to a matrix.</p>
+</div>
+<p>We should remember that the preconditioner only needs to approximately invert the equation.
+In the next example, we show
+how to use a lambda to combine an elliptic operator with a Chebyshev solver that applies 10 iterations as a preconditioner that can be used in PCG (solves <span class="math notranslate nohighlight">\(-\Delta \Phi = \rho \)</span>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// The operator that we want to solve</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">Elliptic</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pol</span><span class="p">(</span><span class="w"> </span><span class="n">grid</span><span class="p">);</span>
+<span class="n">pol</span><span class="p">.</span><span class="n">set_chi</span><span class="p">(</span><span class="w"> </span><span class="n">chi</span><span class="p">);</span>
+<span class="c1">//estimate EigenValue</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">EVE</span><span class="o">&lt;</span><span class="n">Vector</span><span class="o">&gt;</span><span class="w"> </span><span class="n">eve</span><span class="p">(</span><span class="w"> </span><span class="n">copyable</span><span class="p">);</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">eps_ev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-2</span><span class="p">,</span><span class="w"> </span><span class="n">ev</span><span class="p">;</span>
+<span class="c1">// compute largest Eigenvalue in a few iterations</span>
+<span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eve</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="w"> </span><span class="n">pol</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">pol</span><span class="p">.</span><span class="n">weights</span><span class="p">(),</span><span class="w"> </span><span class="n">ev</span><span class="p">,</span><span class="w"> </span><span class="n">eps_ev</span><span class="p">);</span>
+<span class="c1">// Here we combine the Elliptic operator with the Chebyshev solver</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">ChebyshevIterations</span><span class="o">&lt;</span><span class="n">Vector</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cheby</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">precond</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">nu</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">ev</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pol</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cheby</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">cheby</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="w"> </span><span class="n">pol</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">ev</span><span class="o">/</span><span class="mf">100.</span><span class="p">,</span><span class="w"> </span><span class="n">ev</span><span class="o">*</span><span class="mf">1.1</span><span class="p">,</span><span class="w"> </span><span class="n">nu</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="c1">// Now we can call the solver</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">PCG</span><span class="o">&lt;</span><span class="w"> </span><span class="n">Vector</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">pcg</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span>
+<span class="n">pcg</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="w"> </span><span class="n">pol</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">precond</span><span class="p">,</span><span class="w"> </span><span class="n">pol</span><span class="p">.</span><span class="n">weights</span><span class="p">(),</span><span class="w"> </span><span class="n">eps</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition-is-it-faster admonition">
+<p class="admonition-title">Is it faster?</p>
+<p>Preconditioning aims at reducing the number of iterations. But the real question is:
+Is the solve with preconditioner <em>faster</em> than without preconditioner? We emphasize here that <em>faster</em> is not the same as <em>less iterations</em>. In fact, the above example uses less PCG iterations than the unpreconditioned CG method, but is overall slower to execute (on desktop PCs).
+Predicting why code is slower or faster is not always an easy task.
+The hope in the above code for example is that the lack of dot products in the Chebyshev Iteration makes the code faster (because it lacks global communication) and for high enough process number the above code might actually perform better than unpreconditioned CG.
+The only sure way to tell is to try and measure.</p>
+</div>
+</section>
+<section id="the-multigrid-solvers">
+<span id="sec-multigrid"></span><h2>The multigrid solvers<a class="headerlink" href="#the-multigrid-solvers" title="Link to this heading">#</a></h2>
+<p>The basic feature of a multigrid solver is that it (approximately) solves the equation on more than one grid.
+The idea is that on a coarse grid a solver generally works faster than on a fine grids with more resolution.</p>
+<p>The easiest multigrid solver is called <em>nested iterations</em> or <em>full approximation scheme</em> (for the non-linear case). Here the solution on a coarse grid is used as an improved initial guess for the fine grid solution.</p>
+<section id="construct-nested-grids">
+<h3>Construct Nested Grids<a class="headerlink" href="#construct-nested-grids" title="Link to this heading">#</a></h3>
+<p>In Feltor the first thing to do for a multigrid solver is to construct multiple grids:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">unsigned</span><span class="w"> </span><span class="n">stages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="n">Geometry</span><span class="w"> </span><span class="nf">grid</span><span class="p">(...);</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">NestedGrids</span><span class="o">&lt;</span><span class="n">Geometry</span><span class="p">,</span><span class="w"> </span><span class="n">Matrix</span><span class="p">,</span><span class="w"> </span><span class="n">Container</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nested</span><span class="p">(</span><span class="w"> </span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">stages</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The nested grids provide the functionality to project and interpolate between
+various grids and also provides a workspace for a solve function.</p>
+</section>
+<section id="construct-nested-operators-and-solvers">
+<h3>Construct Nested operators and solvers<a class="headerlink" href="#construct-nested-operators-and-solvers" title="Link to this heading">#</a></h3>
+<p>We use the nested grids to construct an operator and a solver on each grid.
+Like a preconditioner the solver needs to be represented as an inverse operator</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Container</span><span class="w"> </span><span class="n">chi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Container</span><span class="o">&gt;</span><span class="w"> </span><span class="n">multi_chi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nested</span><span class="p">.</span><span class="n">project</span><span class="p">(</span><span class="w"> </span><span class="n">chi</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">Elliptic</span><span class="o">&lt;</span><span class="n">Geometry</span><span class="p">,</span><span class="w"> </span><span class="n">Matrix</span><span class="p">,</span><span class="w"> </span><span class="n">Container</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span>
+<span class="w">    </span><span class="n">multi_pol</span><span class="p">(</span><span class="w"> </span><span class="n">stages</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span>
+<span class="w">    </span><span class="n">multi_inv_pol</span><span class="p">(</span><span class="n">stages</span><span class="p">);</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="n">u</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="o">&lt;</span><span class="n">stages</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">multi_pol</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">nested</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">u</span><span class="p">),</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">centered</span><span class="p">};</span>
+<span class="w">    </span><span class="n">multi_pol</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">set_chi</span><span class="p">(</span><span class="w"> </span><span class="n">multi_chi</span><span class="p">[</span><span class="n">u</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">multi_inv_pol</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">eps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">multi_eps</span><span class="p">[</span><span class="n">u</span><span class="p">],</span>
+<span class="w">                        </span><span class="n">pcg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">PCG</span><span class="o">&lt;</span><span class="n">Container</span><span class="o">&gt;</span><span class="p">(</span><span class="w"> </span><span class="n">multi_chi</span><span class="p">[</span><span class="n">u</span><span class="p">],</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="p">),</span>
+<span class="w">                        </span><span class="o">&amp;</span><span class="n">pol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">multi_pol</span><span class="p">[</span><span class="n">u</span><span class="p">])</span><span class="w"> </span><span class="p">]</span>
+<span class="w">        </span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">mutable</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Note that we do not need to provide an intial guess ourselves.</span>
+<span class="w">            </span><span class="c1">//It is already contained in x and will be provided by the multigrid solver.</span>
+<span class="w">            </span><span class="n">pcg</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="w"> </span><span class="n">pol</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">pol</span><span class="p">.</span><span class="n">precond</span><span class="p">(),</span><span class="w"> </span><span class="n">pol</span><span class="p">.</span><span class="n">weights</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">eps</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note how we init the solver in-place and capture the operator by reference in the lambda.
+This
+is very similar to how we constructed the preconditioner in section <a class="reference internal" href="#sec-preconditioner"><span class="std std-ref">preconditioner</span></a>.</p>
+<div class="admonition-nested-type admonition">
+<p class="admonition-title">Nested Type</p>
+<p>Note how we store the lambdas in a vector of <code class="docutils literal notranslate"><span class="pre">std::function</span></code>, which erases the type of the lambda.
+Therefore, it is possible to use different kind of solvers at each stage.</p>
+</div>
+<p>Often, the lambda body is used to provide more refined functionality.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="n">multi_inv_pol</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">u</span><span class="o">=</span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">eps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">multi_eps</span><span class="p">[</span><span class="n">u</span><span class="p">],</span>
+<span class="w">                        </span><span class="n">pcg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">PCG</span><span class="o">&lt;</span><span class="n">Container</span><span class="o">&gt;</span><span class="p">(</span><span class="w"> </span><span class="n">multi_chi</span><span class="p">[</span><span class="n">u</span><span class="p">],</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="p">),</span>
+<span class="w">                        </span><span class="o">&amp;</span><span class="n">pol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">multi_pol</span><span class="p">[</span><span class="n">u</span><span class="p">])</span><span class="w"> </span><span class="p">](</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="cp">#ifdef MPI_VERSION</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">;</span>
+<span class="w">        </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+<span class="cp">#endif </span><span class="c1">//MPI</span>
+<span class="w">        </span><span class="n">dg</span><span class="o">::</span><span class="n">Timer</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+<span class="w">        </span><span class="n">t</span><span class="p">.</span><span class="n">tic</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">u</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pcg</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="w"> </span><span class="n">pol</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">pol</span><span class="p">.</span><span class="n">precond</span><span class="p">(),</span><span class="w"> </span><span class="n">pol</span><span class="p">.</span><span class="n">weights</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">eps</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="c1">// check stopping criterion only every 10th iteration</span>
+<span class="w">            </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pcg</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="w"> </span><span class="n">pol</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">pol</span><span class="p">.</span><span class="n">precond</span><span class="p">(),</span><span class="w"> </span><span class="n">pol</span><span class="p">.</span><span class="n">weights</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">eps</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">);</span>
+<span class="w">        </span><span class="n">t</span><span class="p">.</span><span class="n">toc</span><span class="p">();</span>
+<span class="w">        </span><span class="n">DG_RANK0</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;# Nested iterations stage: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, iter: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, took &quot;</span><span class="o">&lt;&lt;</span><span class="n">t</span><span class="p">.</span><span class="n">diff</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&quot;s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Combining elliptic operators and PCG solves with nested iteration appears so often in application codes that we packaged it into the utilitiy class <code class="docutils literal notranslate"><span class="pre">dg::MultigridCG2d</span></code>. Check it out in the doxygen documentation.</p>
+</div>
+</section>
+<section id="solve">
+<h3>Solve<a class="headerlink" href="#solve" title="Link to this heading">#</a></h3>
+<p>The final step is simply to call the appropriate function</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">dg</span><span class="o">::</span><span class="n">nested_iterations</span><span class="p">(</span><span class="w"> </span><span class="n">multi_pol</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">multi_inv_pol</span><span class="p">,</span><span class="w"> </span><span class="n">nested</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>or in the functional programming style make the multigrid itself an inverse operator</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">inverse_op</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">]</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">nested_iterations</span><span class="p">(</span><span class="w"> </span><span class="n">multi_pol</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">multi_inv_pol</span><span class="p">,</span><span class="w"> </span><span class="n">nested</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<div class="admonition-combine-and-build admonition">
+<p class="admonition-title">Combine and build</p>
+<p>The possibility to use lambdas in our solve methods opens up the possibility to combine various solvers arbitrarily in Feltor. For example we could use <code class="docutils literal notranslate"><span class="pre">dg::fmg_solve</span></code> as a preconditioner for a <code class="docutils literal notranslate"><span class="pre">dg::PCG</span></code> solver.</p>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="grids.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Grids and derivatives</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="geometries.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Curvilinear grids</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-example-inverting-the-laplace-operator">A first example: inverting the Laplace operator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-an-operator-to-invert">Writing an operator to invert</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lambda-functions">Lambda functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overload-operator">Overload operator()</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preconditioning-and-inverse-operators">Preconditioning and inverse operators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multigrid-solvers">The multigrid solvers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construct-nested-grids">Construct Nested Grids</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construct-nested-operators-and-solvers">Construct Nested operators and solvers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solve">Solve</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Matthias Wiesenberger
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

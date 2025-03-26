@@ -1,0 +1,1219 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Create your own project &#8212; The Feltor guide book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'new-project';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Advanced Timesteppers" href="timesteppers2.html" />
+    <link rel="prev" title="Reproducibility and Accuracy" href="reproducibility.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">The Feltor guide book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">dg/algorithm.h</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vector-juggling.html">Vectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timesteppers.html">ODE integrators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grids.html">Grids and derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Solvers in Feltor</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">dg/geometries/geometries.h</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geometries.html">Curvilinear grids</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">dg/matrix/matrix.h</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="matrixfunction.html">Matrix functions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">dg/file/file.h</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="json-utilities.html">JSON utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netcdf-utilities.html">NetCDF utilities</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">dg/exblas/exblas.h</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="reproducibility.html">Reproducibility and Accuracy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Create your own project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timesteppers2.html">Advanced Timesteppers</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/new-project.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Create your own project</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-file-structure">Basic file structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-init-file">The init file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-diag-file">The diag file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-equations-file">The equations file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-main-file">The main file</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#front-matter">Front matter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-in-the-input-file">Read in the input file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construction-phase">Construction phase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-the-file-output">Initialize the file output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-output">File output</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-dimensions-and-variables">Defining dimensions and variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#output-the-static-list">Output the static list</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#first-file-output">First file output</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-timeloop">The timeloop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#closing">Closing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-makefile">The Makefile</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="create-your-own-project">
+<span id="sec-project"></span><h1>Create your own project<a class="headerlink" href="#create-your-own-project" title="Link to this heading">#</a></h1>
+<p>In this chapter we are going to learn how to write a code project implementing a set of equations from beginning to end including file I/O and diagnostics.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In principle you can write your own codes however you want. Feltor does not force any specific structure onto you or force you to use more of it than you want to. This chapter is a reflection of best practices that we currently use for our own projects and that have proven themselves in scientific analysis. It is for example specifically designed to interoperate well with python. This design has evolved through the last 10 years and, for example when new C++ features become available, will likely continue to evolve in the future.</p>
+</div>
+<p>We use the simple advection diffusion equation as a model equation</p>
+<div class="amsmath math notranslate nohighlight" id="equation-62f33b3f-ed1b-4cce-9501-713e26964cd1">
+<span class="eqno">(14)<a class="headerlink" href="#equation-62f33b3f-ed1b-4cce-9501-713e26964cd1" title="Permalink to this equation">#</a></span>\[\begin{align}
+    \frac{\partial \omega}{\partial t} &amp;= -v\cdot \nabla\omega + D \Delta \omega \\
+     -\Delta \phi &amp;= \omega \\
+     v_x &amp;:= -\partial_y \phi \\
+     v_y &amp;:= \partial_x \phi
+\end{align}\]</div>
+<section id="basic-file-structure">
+<h2>Basic file structure<a class="headerlink" href="#basic-file-structure" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">init.h</span></code> Contains a list of initial conditions that can be chosen in the inputfile</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">diag.h</span></code> Contains a list of diagnostic functions that should be executed periodically in the main timeloop. This will determine the content of the output file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Makefile</span></code> How to compile the main program</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parameters.h</span></code> [optional] Reads and stores parameters from the input file. The intention here is to provide quick (in terms of code length) access to often used parameters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">equations.h</span></code> Contains the main functor that is used in the timestepper. Implements the equations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">documentation.tex</span></code> Contains the documentation of the implemented equations, the numerical methods used, the initial conditions and the diagnostics. In particular it describes the parameters of the input file and what the output file contains.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input.json</span></code> The input file to a simulation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">myprogram.cpp</span></code> Here is the main function. It reads in the input file, calls the relevant initial condition, constructs the Equations functor(s) and the Timestepper. Then, it implements the main time loop, the diagnostics and output strategy.</p></li>
+</ul>
+<div class="admonition-i-o-file-formats admonition">
+<p class="admonition-title">I/O file formats</p>
+<p>We use and highly recommend <a class="reference external" href="https://en.wikipedia.org/wiki/JSON">json</a> for the input file and <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/">NetCDF-4</a> for the output file.
+The reason for this is that both of these formats interoperate well with many other programming languages, in particular python, which we use for data analysis.</p>
+</div>
+</section>
+<section id="the-init-file">
+<h2>The init file<a class="headerlink" href="#the-init-file" title="Link to this heading">#</a></h2>
+<p>The goal of the init file is to provide various initial conditions that can be selected in the input file</p>
+<div class="admonition-data-layout admonition">
+<p class="admonition-title">Data layout</p>
+<p>The return type of the initial conditions depends on what data layout you choose when implementing <a class="reference internal" href="#sec-equations"><span class="std std-ref">The equations file</span></a>. In this case it is <code class="docutils literal notranslate"><span class="pre">dg::x::DVec</span></code> because there is only one variable, but often used types are <code class="docutils literal notranslate"><span class="pre">std::vector&lt;dg::x::DVec&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">std::map&lt;std::string,</span> <span class="pre">dg::x::DVec&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">std::array&lt;dg::x::DVec,</span> <span class="pre">2&gt;</span></code></p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// init.h</span>
+<span class="cp">#pragma once</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">myproject</span>
+<span class="p">{</span>
+
+<span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="nf">initial_conditions</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">CartesianGrid2d</span><span class="o">&amp;</span><span class="w"> </span><span class="n">grid</span><span class="p">,</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">WrappedJsonValue</span><span class="w"> </span><span class="n">init</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">HVec</span><span class="w"> </span><span class="n">omega</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lamb&quot;</span><span class="p">).</span><span class="n">asString</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;zero&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">omega</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">evaluate</span><span class="p">(</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">zero</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;lamb&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">posX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;posX&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">).</span><span class="n">asDouble</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">posY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">init</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;posY&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">).</span><span class="n">asDouble</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w">    </span><span class="n">init</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;sigma&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">).</span><span class="n">asDouble</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">U</span><span class="w"> </span><span class="o">=</span><span class="w">    </span><span class="n">init</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;velocity&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">asDouble</span><span class="p">();</span>
+<span class="w">        </span><span class="n">dg</span><span class="o">::</span><span class="n">Lamb</span><span class="w"> </span><span class="n">lamb</span><span class="p">(</span><span class="w"> </span><span class="n">posX</span><span class="o">*</span><span class="n">grid</span><span class="p">.</span><span class="n">lx</span><span class="p">(),</span><span class="w"> </span><span class="n">posY</span><span class="o">*</span><span class="n">grid</span><span class="p">.</span><span class="n">ly</span><span class="p">(),</span><span class="w"> </span><span class="n">R</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">);</span>
+<span class="w">        </span><span class="n">omega</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">evaluate</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">lamb</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// ... implement more initial conditions here</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">Error</span><span class="p">(</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">Message</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Initial condition &quot;</span>
+<span class="w">                        </span><span class="o">&lt;&lt;</span><span class="n">initial</span><span class="o">&lt;&lt;</span><span class="s">&quot; not recognized!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">construct</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&gt;</span><span class="p">(</span><span class="n">omega</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">}</span><span class="w"> </span><span class="c1">//namespace myproject</span>
+</pre></div>
+</div>
+<p>The above example would require the following entry in the input file</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;init&quot;</span><span class="w"> </span><span class="p">:</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lamb&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;posX&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;posY&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;sigma&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;velocity&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If the zero initial condition is chosen, the entry has to look like</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;init&quot;</span><span class="w"> </span><span class="p">:</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;zero&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As you can see only the necessary parameters need to be present for each type of initial condition.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You will have to document each initial condition and what parameters can be chosen in the documentation.tex file Here the “minted” package is highly recommended to document json parameters.</p>
+</div>
+</section>
+<section id="the-diag-file">
+<h2>The diag file<a class="headerlink" href="#the-diag-file" title="Link to this heading">#</a></h2>
+<p>The desired list of variables in the output file typically grows (or sometimes shrinks) often during the lifetime of a project for example when new theoretical results are revealed or a new data-analysis needs to be performed.
+The goal of our design here is therefore to provide a flexible and importantly an <strong>extensible</strong> approach to generating file output.</p>
+<p>The purpose of the diag file is to provide one or more list of functions that generate output variables in the netcdf output file.
+Each item in the list is a record consisting of a name, a description and a function that generates the data points of the variable. The functions’ parameters are bundled in a struct <code class="docutils literal notranslate"><span class="pre">Variables</span></code>.
+It is important to note that the list of records (the diagnostics*_list ) can be easily extended without side-effects of the existing records. The Variables can be extended, but the Variable construction line in the main file also needs to extend then (see <a class="reference internal" href="#sec-main-file-construction"><span class="std std-ref">The main file</span></a> )</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// diag.h</span>
+<span class="cp">#pragma once</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;equations.h&quot;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">myproject</span>
+<span class="p">{</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">Variables</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Equations</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">CartesianGrid2d</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DMatrix</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">rhs</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">CartesianGrid2d</span><span class="o">&amp;</span><span class="w"> </span><span class="n">grid</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&amp;</span><span class="w"> </span><span class="n">omega</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">Record</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="c1">// variable name in the output file</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">long_name</span><span class="p">;</span><span class="w"> </span><span class="c1">// longer description as an attribute</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">Variables</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="n">function</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// function that generates the data points for the variable</span>
+<span class="p">};</span>
+
+<span class="c1">// time - independent output (only called once)</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Record</span><span class="o">&gt;</span><span class="w"> </span><span class="n">diagnostics2d_static_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;xc&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;x-coordinate in Cartesian coordinate system&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">[](</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">Variables</span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">evaluate</span><span class="p">(</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">cooX2d</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">grid</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;yc&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;y-coordinate in Cartesian coordinate system&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">[](</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">Variables</span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">evaluate</span><span class="p">(</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">cooY2d</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">grid</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;weights&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Gaussian integration weights&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">[](</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">Variables</span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">create</span><span class="o">::</span><span class="n">weights</span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">grid</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// ... extend here</span>
+<span class="p">};</span>
+
+<span class="c1">// time - dependent output (called periodically)</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Record</span><span class="o">&gt;</span><span class="w"> </span><span class="n">diagnostics2d_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">{</span><span class="s">&quot;vorticity&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Vorticity in 2d&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">[](</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">Variables</span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="s">&quot;potential&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;stream function&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">[](</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">Variables</span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">rhs</span><span class="p">.</span><span class="n">potential</span><span class="p">(),</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can write anything you want in the lambda, really.
+At least anything you want to happen periodically in the main time loop.</p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p">{</span><span class="s">&quot;enstrophy&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Squared vorticity&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">[](</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&amp;</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">Variables</span><span class="o">&amp;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="c1">// more complicated algorithms can be written here</span>
+<span class="w">             </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">pointwiseDot</span><span class="p">(</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="w">             </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">scal</span><span class="p">(</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="o">/</span><span class="mf">2.</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// ... extend here</span>
+<span class="p">};</span>
+
+<span class="c1">// ... write more lists, for example 1d diagnostics etc</span>
+<span class="c1">// each list requires a loop in the main program</span>
+
+
+<span class="p">}</span><span class="w"> </span><span class="c1">//namespace myproject</span>
+</pre></div>
+</div>
+</section>
+<section id="the-equations-file">
+<span id="sec-equations"></span><h2>The equations file<a class="headerlink" href="#the-equations-file" title="Link to this heading">#</a></h2>
+<p>Our timesteppers require functors that implement the right hand side of the differential equation.
+The purpose of the equations file is to provide such functor(s) for the specific equations at hand.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// equations.h</span>
+
+<span class="cp">#pragma once</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dg/algorithm.h&quot;</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">myproject</span>
+<span class="p">{</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Geometry</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Matrix</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Container</span><span class="o">&gt;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">Equations</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Equations</span><span class="p">(</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Geometry</span><span class="o">&amp;</span><span class="w"> </span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">WrappedJsonValue</span><span class="o">&amp;</span><span class="w"> </span><span class="n">js</span><span class="p">)</span><span class="o">:</span>
+<span class="w">        </span><span class="n">m_phi</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">evaluate</span><span class="p">(</span><span class="n">dg</span><span class="o">::</span><span class="n">zero</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">)),</span>
+<span class="w">        </span><span class="n">m_old_phi</span><span class="p">(</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">m_phi</span><span class="p">),</span>
+<span class="w">        </span><span class="n">m_adv</span><span class="p">(</span><span class="w"> </span><span class="n">grid</span><span class="p">),</span><span class="w"> </span><span class="c1">// use grid&#39;s boundary conditions</span>
+<span class="w">        </span><span class="n">m_lapM</span><span class="p">(</span><span class="w"> </span><span class="n">grid</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">m_v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">m_phi</span><span class="p">,</span><span class="w"> </span><span class="n">m_phi</span><span class="p">};</span>
+<span class="w">        </span><span class="n">m_pcg</span><span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">m_phi</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+<span class="w">        </span><span class="n">m_eps_pol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">js</span><span class="p">[</span><span class="s">&quot;elliptic&quot;</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;eps_pol&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">).</span><span class="n">asDouble</span><span class="p">();</span>
+<span class="w">        </span><span class="n">m_nu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">js</span><span class="p">[</span><span class="s">&quot;physical&quot;</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;nu&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-7</span><span class="p">).</span><span class="n">asDouble</span><span class="p">();</span>
+<span class="w">        </span><span class="n">m_centered</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">create</span><span class="o">::</span><span class="n">dx</span><span class="p">(</span><span class="w"> </span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">bcx</span><span class="p">(),</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">centered</span><span class="p">);</span>
+<span class="w">        </span><span class="n">m_centered</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">create</span><span class="o">::</span><span class="n">dy</span><span class="p">(</span><span class="w"> </span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">bcy</span><span class="p">(),</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">centered</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// accessors for diag.h</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">potential</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">m_phi</span><span class="p">;}</span>
+</pre></div>
+</div>
+<div class="amsmath math notranslate nohighlight" id="equation-664a3d4d-ef5d-4b5b-abed-e4e56d8cbe96">
+<span class="eqno">(15)<a class="headerlink" href="#equation-664a3d4d-ef5d-4b5b-abed-e4e56d8cbe96" title="Permalink to this equation">#</a></span>\[\begin{align}
+    \frac{\partial \omega}{\partial t} &amp;= -v\cdot \nabla\omega + D \Delta \omega \\
+     -\Delta \phi &amp;= \omega \\
+     v_x &amp;:= -\partial_y \phi \\
+     v_y &amp;:= \partial_x \phi
+\end{align}\]</div>
+<div class="admonition-data-layout admonition">
+<p class="admonition-title">Data layout</p>
+<p>Here, in the parameters for <code class="docutils literal notranslate"><span class="pre">operator()</span></code> you have to choose a suitable data-layout for the vector that is integrated in time. We chose a simple <code class="docutils literal notranslate"><span class="pre">Container</span></code> because there is only one dynamic variable in the equations. However, if there were three equations say then <code class="docutils literal notranslate"><span class="pre">std::array&lt;Container,3&gt;</span></code> could be a better type or even <code class="docutils literal notranslate"><span class="pre">std::vector&lt;Container&gt;</span></code> if you want to choose at runtime or the recently added <code class="docutils literal notranslate"><span class="pre">std::map&lt;std::string,</span> <span class="pre">Container&gt;</span></code> for a verbose access</p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c1">// We implement advection diffusion equations:</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="n">Container</span><span class="o">&amp;</span><span class="w"> </span><span class="n">omegaDot</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+
+<span class="w">        </span><span class="c1">// Solve potential equation</span>
+<span class="w">        </span><span class="n">m_old_phi</span><span class="p">.</span><span class="n">extrapolate</span><span class="p">(</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">m_phi</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// For demonstration we here use the simple unpreconditioned PCG</span>
+<span class="w">        </span><span class="c1">// solver. In real code it is highly recommended to use nested_iterations instead</span>
+<span class="w">        </span><span class="c1">// See &quot;Solvers&quot; chapter of this guide</span>
+<span class="w">        </span><span class="n">m_pcg</span><span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="w"> </span><span class="n">m_lapM</span><span class="p">,</span><span class="w"> </span><span class="n">m_phi</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">m_lapM</span><span class="p">.</span><span class="n">weights</span><span class="p">(),</span><span class="w"> </span><span class="n">m_eps_pol</span><span class="p">);</span>
+<span class="w">        </span><span class="n">m_old_phi</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">m_phi</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// add advection term</span>
+<span class="w">        </span><span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w"> </span><span class="mf">-1.</span><span class="p">,</span><span class="w"> </span><span class="n">m_centered</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">m_phi</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="n">m_v</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w"> </span><span class="o">+</span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">m_centered</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">m_phi</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="n">m_v</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">m_adv</span><span class="p">.</span><span class="n">upwind</span><span class="p">(</span><span class="w"> </span><span class="mf">-1.</span><span class="p">,</span><span class="w"> </span><span class="n">m_v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">m_v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="n">omegaDot</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// add diffusion</span>
+<span class="w">        </span><span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">symv</span><span class="p">(</span><span class="w"> </span><span class="o">-</span><span class="n">m_nu</span><span class="p">,</span><span class="w"> </span><span class="n">m_lapM</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">omegaDot</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="n">Container</span><span class="w"> </span><span class="n">m_phi</span><span class="p">;</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">Extrapolation</span><span class="o">&lt;</span><span class="n">Container</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_old_phi</span><span class="p">;</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">Advection</span><span class="o">&lt;</span><span class="n">Geometry</span><span class="p">,</span><span class="w"> </span><span class="n">Matrix</span><span class="p">,</span><span class="w"> </span><span class="n">Container</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_adv</span><span class="p">;</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">Elliptic</span><span class="o">&lt;</span><span class="w"> </span><span class="n">Geometry</span><span class="p">,</span><span class="w"> </span><span class="n">Matrix</span><span class="p">,</span><span class="w"> </span><span class="n">Container</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_lapM</span><span class="p">;</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">PCG</span><span class="o">&lt;</span><span class="n">Container</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_pcg</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">Matrix</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_centered</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">Container</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_v</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">m_eps_pol</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">m_nu</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="p">}</span><span class="c1">//namespace myproject</span>
+</pre></div>
+</div>
+<p>This necessitates two more parameters in the input file</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;physical&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;nu&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">1e-7</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;elliptic&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;eps_pol&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">1e-6</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We here showcase the simplest case where we implement everything explicitly (hence only one functor) and use a simple unpreconditioned PCG solver for the elliptic equation. This is just to show the basic structure. You can extend this however you want and make it arbitrarily complicated.</p>
+</section>
+<section id="the-main-file">
+<h2>The main file<a class="headerlink" href="#the-main-file" title="Link to this heading">#</a></h2>
+<p>The main function acts as a driver where everything comes together and has to be called in the right order.</p>
+<section id="front-matter">
+<h3>Front matter<a class="headerlink" href="#front-matter" title="Link to this heading">#</a></h3>
+<p>We here decide to write a program that works for both shared and distributed memory. In order for this to work we need to initialize MPI, but only in case we actually need it. Typically, we would do the following:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// myprogram.cpp</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
+
+<span class="cp">#ifdef WITH_MPI</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
+<span class="cp">#endif </span><span class="c1">//WITH_MPI</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dg/algorithm.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;dg/file/file.h&quot;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;equations.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;init.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;diag.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+<span class="cp">#ifdef WITH_MPI</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">mpi_init</span><span class="p">(</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+<span class="w">    </span><span class="n">MPI_Comm</span><span class="w"> </span><span class="n">comm</span><span class="p">;</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">mpi_init2d</span><span class="p">(</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="kt">DIR</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">PER</span><span class="p">,</span><span class="w"> </span><span class="n">comm</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">rank</span><span class="p">;</span>
+<span class="w">    </span><span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rank</span><span class="p">);</span>
+<span class="cp">#endif </span><span class="c1">//WITH_MPI</span>
+</pre></div>
+</div>
+<p>Here, we use a Macro <code class="docutils literal notranslate"><span class="pre">WITH_MPI</span></code> that is intended to be defined at compile-time.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We therefore add <code class="docutils literal notranslate"><span class="pre">-DWITH_MPI</span></code> to the mpi compiler flags in <a class="reference internal" href="#sec-makefile"><span class="std std-ref">the Makefile</span></a></p>
+</div>
+<p>Then in the main program we need to initialize MPI. The <code class="docutils literal notranslate"><span class="pre">dg::mpi_init2d</span></code> function generates a Cartesian Communicator that we will need to generate a grid and also will generate a prompt on <code class="docutils literal notranslate"><span class="pre">std::cin</span></code> asking the user to provide the partition of MPI processes.</p>
+<div class="admonition-mpi-partitioning admonition">
+<p class="admonition-title">MPI partitioning</p>
+<p>We have not found a good way yet to automate the process of partitioning MPI processes amoung the dimensions. Therefore the user will be responsible for providing this information. For example if we have 8 processes overall we can provide <code class="docutils literal notranslate"><span class="pre">npx</span> <span class="pre">=</span> <span class="pre">2</span></code>, <code class="docutils literal notranslate"><span class="pre">npy=</span> <span class="pre">4</span></code> or <code class="docutils literal notranslate"><span class="pre">npx</span> <span class="pre">=</span> <span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">npy</span> <span class="pre">=</span> <span class="pre">8</span></code> and so on.</p>
+</div>
+<p>Note that we here also need to distinguish between periodic and non-periodic boundary conditions in each direction (This influences the way communication needs to be set up).</p>
+</section>
+<section id="read-in-the-input-file">
+<h3>Read in the input file<a class="headerlink" href="#read-in-the-input-file" title="Link to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">WrappedJsonValue</span><span class="w"> </span><span class="nf">js</span><span class="p">(</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">error</span><span class="o">::</span><span class="n">is_throw</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">argc</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">DG_RANK0</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;ERROR: Wrong number of arguments!</span><span class="se">\n</span><span class="s">Usage: &quot;</span>
+<span class="w">            </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="s">&quot; [input.json] [output.nc]</span><span class="se">\n</span><span class="s"> </span><span class="se">\n</span><span class="s">&quot;</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">abort_program</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">try</span><span class="p">{</span>
+<span class="w">    </span><span class="n">js</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">file2Json</span><span class="p">(</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">DG_RANK0</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;ERROR in input file &quot;</span><span class="o">&lt;&lt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DG_RANK0</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">abort_program</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="n">DG_RANK0</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">js</span><span class="p">.</span><span class="n">toStyledString</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Here, we notice the <code class="docutils literal notranslate"><span class="pre">DG_RANK0</span></code> macro, which expands to <code class="docutils literal notranslate"><span class="pre">if(rank==0)</span></code> when compiled with MPI and else stays empty. Note that all processes read in the input file.</p>
+</section>
+<section id="construction-phase">
+<span id="sec-main-file-construction"></span><h3>Construction phase<a class="headerlink" href="#construction-phase" title="Link to this heading">#</a></h3>
+<p>Now, we have to construct the essential objects for time integration: Grid, vector with initial condition, Equations, Timestepper</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Construct grid</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">Nx</span><span class="p">,</span><span class="w"> </span><span class="n">Ny</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">y0</span><span class="p">,</span><span class="w"> </span><span class="n">y1</span><span class="p">;</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">bc</span><span class="w"> </span><span class="n">bcx</span><span class="p">,</span><span class="w"> </span><span class="n">bcy</span><span class="p">;</span>
+<span class="k">try</span><span class="p">{</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">WrappedJsonValue</span><span class="w"> </span><span class="n">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">js</span><span class="p">[</span><span class="s">&quot;grid&quot;</span><span class="p">];</span>
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;n&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">).</span><span class="n">asUInt</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Nx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Nx&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">48</span><span class="p">).</span><span class="n">asUInt</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Ny</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Ny&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">48</span><span class="p">).</span><span class="n">asUInt</span><span class="p">();</span>
+<span class="w">    </span><span class="n">x0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grid</span><span class="p">[</span><span class="s">&quot;x&quot;</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="w"> </span><span class="mi">0u</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="p">).</span><span class="n">asDouble</span><span class="p">();</span>
+<span class="w">    </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grid</span><span class="p">[</span><span class="s">&quot;x&quot;</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="w"> </span><span class="mi">1u</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">).</span><span class="n">asDouble</span><span class="p">();</span>
+<span class="w">    </span><span class="n">y0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grid</span><span class="p">[</span><span class="s">&quot;y&quot;</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="w"> </span><span class="mi">0u</span><span class="p">,</span><span class="w"> </span><span class="mf">0.</span><span class="p">).</span><span class="n">asDouble</span><span class="p">();</span>
+<span class="w">    </span><span class="n">y1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grid</span><span class="p">[</span><span class="s">&quot;y&quot;</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="w"> </span><span class="mi">1u</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">).</span><span class="n">asDouble</span><span class="p">();</span>
+<span class="w">    </span><span class="n">bcx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">str2bc</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">grid</span><span class="p">[</span><span class="s">&quot;bc&quot;</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="w"> </span><span class="mi">0u</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;DIR&quot;</span><span class="p">).</span><span class="n">asString</span><span class="p">());</span>
+<span class="w">    </span><span class="n">bcy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">str2bc</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">grid</span><span class="p">[</span><span class="s">&quot;bc&quot;</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="w"> </span><span class="mi">1u</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;PER&quot;</span><span class="p">).</span><span class="n">asString</span><span class="p">());</span>
+<span class="p">}</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">error</span><span class="p">){</span>
+<span class="w">    </span><span class="n">DG_RANK0</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Error in input file &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DG_RANK0</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">error</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">abort_program</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">CartesianGrid2d</span><span class="w"> </span><span class="n">grid</span><span class="p">(</span><span class="w"> </span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">y0</span><span class="p">,</span><span class="w"> </span><span class="n">y1</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">Nx</span><span class="p">,</span><span class="w"> </span><span class="n">Ny</span><span class="p">,</span><span class="w"> </span><span class="n">bcx</span><span class="p">,</span><span class="w"> </span><span class="n">bcy</span>
+<span class="w">    </span><span class="c1">// The MPI version of CartesianGrid2d needs a communicator:</span>
+<span class="w">    </span><span class="cp">#ifdef WITH_MPI</span>
+<span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="n">comm</span>
+<span class="w">    </span><span class="cp">#endif </span><span class="c1">//WITH_MPI</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="c1">// Construct Equations</span>
+<span class="n">myproject</span><span class="o">::</span><span class="n">Equations</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">CartesianGrid2d</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DMatrix</span><span class="p">,</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rhs</span><span class="p">(</span><span class="w"> </span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">js</span><span class="p">);</span>
+
+<span class="c1">// Construct initial condition</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="n">omega</span><span class="p">;</span>
+<span class="k">try</span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">omega</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myproject</span><span class="o">::</span><span class="n">initial_conditions</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">js</span><span class="p">[</span><span class="s">&quot;init&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">error</span><span class="p">){</span>
+<span class="w">    </span><span class="n">DG_RANK0</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Error in input file &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DG_RANK0</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">error</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">abort_program</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// Construct timestepper</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">tableau</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">rtol</span><span class="p">,</span><span class="w"> </span><span class="n">atol</span><span class="p">,</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.</span><span class="p">;</span>
+<span class="k">try</span><span class="p">{</span>
+<span class="w">    </span><span class="n">rtol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">js</span><span class="p">[</span><span class="s">&quot;timestepper&quot;</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;rtol&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-5</span><span class="p">).</span><span class="n">asDouble</span><span class="p">();</span>
+<span class="w">    </span><span class="n">atol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">js</span><span class="p">[</span><span class="s">&quot;timestepper&quot;</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;atol&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-5</span><span class="p">).</span><span class="n">asDouble</span><span class="p">();</span>
+<span class="w">    </span><span class="n">tableau</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">js</span><span class="p">[</span><span class="w"> </span><span class="s">&quot;timestepper&quot;</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;tableau&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Bogacki-Shampine-4-2-3&quot;</span><span class="p">).</span><span class="n">asString</span><span class="p">();</span>
+<span class="p">}</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">error</span><span class="p">){</span>
+<span class="w">    </span><span class="n">DG_RANK0</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Error in input file &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DG_RANK0</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">error</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">abort_program</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">Adaptive</span><span class="o">&lt;</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">ERKStep</span><span class="o">&lt;</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">adapt</span><span class="p">(</span><span class="n">tableau</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">);</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">AdaptiveTimeloop</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="o">&gt;</span><span class="w"> </span><span class="n">timeloop</span><span class="p">(</span><span class="w"> </span><span class="n">adapt</span><span class="p">,</span><span class="w"> </span><span class="n">rhs</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">dg</span><span class="o">::</span><span class="n">pid_control</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">l2norm</span><span class="p">,</span><span class="w"> </span><span class="n">rtol</span><span class="p">,</span><span class="w"> </span><span class="n">atol</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In this part we notice that we put more requirements on the input file.
+Specifically</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;grid&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;n&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Nx&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Ny&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;x&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;y&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;bc&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;DIR&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PER&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;timestepper&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;tableau&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bogacki-Shampine-4-2-3&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;rtol&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">1e-5</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;atol&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">1e-6</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Finally, we need to initialize the diag Variables</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">myproject</span><span class="o">::</span><span class="n">Variables</span><span class="w"> </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">};</span>
+<span class="c1">// trigger first computation of potential</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omega</span><span class="p">;</span>
+<span class="w">    </span><span class="n">rhs</span><span class="p">(</span><span class="w"> </span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="initialize-the-file-output">
+<span id="sec-main-file-output"></span><h3>Initialize the file output<a class="headerlink" href="#initialize-the-file-output" title="Link to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create netcdf file</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">NcFile</span><span class="w"> </span><span class="n">file</span><span class="p">;</span>
+<span class="k">try</span><span class="p">{</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">nc_clobber</span><span class="p">);</span>
+<span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">DG_RANK0</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;ERROR creating file &quot;</span><span class="o">&lt;&lt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">DG_RANK0</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">abort_program</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition-meta-data admonition">
+<p class="admonition-title">Meta-data</p>
+<p>In order to fulfill the CF conventions there is a set of standard fields that should go into any netcdf file that you produce:</p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">nc_att_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">atts</span><span class="p">;</span>
+<span class="n">atts</span><span class="p">[</span><span class="s">&quot;title&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Output file of myproject/myprogram.cpp&quot;</span><span class="p">;</span>
+<span class="n">atts</span><span class="p">[</span><span class="s">&quot;Conventions&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;CF-1.8&quot;</span><span class="p">;</span>
+<span class="n">atts</span><span class="p">[</span><span class="s">&quot;history&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">timestamp</span><span class="p">(</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+<span class="n">atts</span><span class="p">[</span><span class="s">&quot;comment&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Find more info in myproject/documentation.tex&quot;</span><span class="p">;</span>
+<span class="n">atts</span><span class="p">[</span><span class="s">&quot;source&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;FELTOR&quot;</span><span class="p">;</span>
+<span class="n">atts</span><span class="p">[</span><span class="s">&quot;references&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;https://github.com/myname/myproject&quot;</span><span class="p">;</span>
+<span class="c1">// Here we put the inputfile as a string without comments so that it can be read later by another parser</span>
+<span class="n">atts</span><span class="p">[</span><span class="s">&quot;inputfile&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">js</span><span class="p">.</span><span class="n">toStyledString</span><span class="p">();</span>
+<span class="n">file</span><span class="p">.</span><span class="n">put_atts</span><span class="p">(</span><span class="n">atts</span><span class="p">);</span>
+<span class="n">file</span><span class="p">.</span><span class="n">put_atts</span><span class="p">(</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">version_flags</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition-compile-time-macros admonition">
+<p class="admonition-title">Compile time Macros</p>
+<p>The relevant macros <code class="docutils literal notranslate"><span class="pre">GIT_HASH</span></code>, <code class="docutils literal notranslate"><span class="pre">GIT_BRANCH</span></code> and <code class="docutils literal notranslate"><span class="pre">COMPILE_TIME</span></code> used in <code class="docutils literal notranslate"><span class="pre">dg::file::version_flags</span></code> need to be defined at compile time. We provide the Makefile <code class="docutils literal notranslate"><span class="pre">feltor/config/version.mk</span></code>. Simply include it in your own Makefile and add <code class="docutils literal notranslate"><span class="pre">$(VERSION_FLAGS)</span></code> to your compilation command!</p>
+</div>
+</section>
+<section id="file-output">
+<h3>File output<a class="headerlink" href="#file-output" title="Link to this heading">#</a></h3>
+<p>For two-dimensional and three-dimensional programs it is often necessary to save on storage space when writing files. For this reason not every timestep is written to file but only every 100th say. Of course, the compression in time can be combined with a compression in space as well. In order to do so you would typically interpolate the simulation results onto a lower resolution grid.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this example we use the serial netcdf approach where all mpi threads send their data to the master thread which will write it to file. Pay special attention to which functions are called for all threads and which ones are only called by the master thread.</p>
+</div>
+<p>Let us set this up via some input parameters:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">unsigned</span><span class="w"> </span><span class="n">n_out</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">js</span><span class="p">[</span><span class="w"> </span><span class="s">&quot;output&quot;</span><span class="p">][</span><span class="s">&quot;n&quot;</span><span class="p">].</span><span class="n">asUInt</span><span class="p">(</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="n">Nx_out</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">js</span><span class="p">[</span><span class="w"> </span><span class="s">&quot;output&quot;</span><span class="p">][</span><span class="s">&quot;Nx&quot;</span><span class="p">].</span><span class="n">asUInt</span><span class="p">(</span><span class="w"> </span><span class="mi">48</span><span class="p">);</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="n">Ny_out</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">js</span><span class="p">[</span><span class="w"> </span><span class="s">&quot;output&quot;</span><span class="p">][</span><span class="s">&quot;Ny&quot;</span><span class="p">].</span><span class="n">asUInt</span><span class="p">(</span><span class="w"> </span><span class="mi">48</span><span class="p">);</span>
+
+<span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">CartesianGrid2d</span><span class="w"> </span><span class="nf">grid_out</span><span class="p">(</span><span class="w"> </span><span class="n">x0</span><span class="p">,</span><span class="w"> </span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">y0</span><span class="p">,</span><span class="w"> </span><span class="n">y1</span><span class="p">,</span>
+<span class="w">            </span><span class="n">n_out</span><span class="p">,</span><span class="w"> </span><span class="n">Nx_out</span><span class="p">,</span><span class="w"> </span><span class="n">Ny_out</span><span class="p">,</span><span class="w"> </span><span class="n">bcx</span><span class="p">,</span><span class="w"> </span><span class="n">bcy</span>
+<span class="w">            </span><span class="cp">#ifdef WITH_MPI</span>
+<span class="w">            </span><span class="p">,</span><span class="w"> </span><span class="n">comm</span>
+<span class="w">            </span><span class="cp">#endif </span><span class="c1">//WITH_MPI</span>
+<span class="w">            </span><span class="p">);</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">IHMatrix</span><span class="w"> </span><span class="n">projection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">create</span><span class="o">::</span><span class="n">interpolation</span><span class="p">(</span><span class="w"> </span><span class="n">grid_out</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">);</span>
+</pre></div>
+</div>
+<section id="defining-dimensions-and-variables">
+<h4>Defining dimensions and variables<a class="headerlink" href="#defining-dimensions-and-variables" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Define unlimited time dimension and variables</span>
+<span class="n">file</span><span class="p">.</span><span class="n">def_dimvar_as</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">NC_UNLIMITED</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s">&quot;axis&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="p">}});</span>
+<span class="c1">// the dimensions are the ones of grid_out!</span>
+<span class="n">file</span><span class="p">.</span><span class="n">defput_dim</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;x&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s">&quot;axis&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;X&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="s">&quot;long_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;x-coordinate in Cartesian system&quot;</span><span class="p">}},</span>
+<span class="w">    </span><span class="n">grid_out</span><span class="p">.</span><span class="n">abscissas</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+<span class="n">file</span><span class="p">.</span><span class="n">defput_dim</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;y&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s">&quot;axis&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Y&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="s">&quot;long_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;y-coordinate in Cartesian system&quot;</span><span class="p">}},</span>
+<span class="w">    </span><span class="n">grid_out</span><span class="p">.</span><span class="n">abscissas</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+
+<span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">record</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">myproject</span><span class="o">::</span><span class="n">diagnostics2d_list</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">def_var_as</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="w"> </span><span class="n">record</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;y&quot;</span><span class="p">,</span><span class="s">&quot;x&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{{</span><span class="s">&quot;long_name&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">record</span><span class="p">.</span><span class="n">long_name</span><span class="p">}});</span>
+<span class="w">    </span><span class="c1">// and the 1d fields (our idea is to just volume integrate the 2d fields</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">def_var_as</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="w"> </span><span class="n">record</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;_1d&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;time&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{{</span><span class="s">&quot;long_name&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">record</span><span class="p">.</span><span class="n">long_name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; (Volume integrated)&quot;</span><span class="p">}});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="output-the-static-list">
+<h4>Output the static list<a class="headerlink" href="#output-the-static-list" title="Link to this heading">#</a></h4>
+<p>For the static (time independent) data we do not need to store the variable ids, we can directly write the output.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">HVec</span><span class="w"> </span><span class="n">resultH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">evaluate</span><span class="p">(</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">zero</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">);</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">HVec</span><span class="w"> </span><span class="n">transferH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">evaluate</span><span class="p">(</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">zero</span><span class="p">,</span><span class="w"> </span><span class="n">grid_out</span><span class="p">);</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="n">resultD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transferH</span><span class="p">;</span><span class="w"> </span><span class="c1">// transfer to device</span>
+<span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">record</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">myproject</span><span class="o">::</span><span class="n">diagnostics2d_static_list</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">record</span><span class="p">.</span><span class="n">function</span><span class="p">(</span><span class="w"> </span><span class="n">resultD</span><span class="p">,</span><span class="w"> </span><span class="n">var</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">assign</span><span class="p">(</span><span class="w"> </span><span class="n">resultD</span><span class="p">,</span><span class="w"> </span><span class="n">resultH</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">gemv</span><span class="p">(</span><span class="w"> </span><span class="n">projection</span><span class="p">,</span><span class="w"> </span><span class="n">resultH</span><span class="p">,</span><span class="w"> </span><span class="n">transferH</span><span class="p">);</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">defput_var</span><span class="p">(</span><span class="w"> </span><span class="n">record</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;y&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;x&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{{</span><span class="s">&quot;long_name&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">record</span><span class="p">.</span><span class="n">long_name</span><span class="p">}},</span><span class="w"> </span><span class="n">grid_out</span><span class="p">,</span><span class="w"> </span><span class="n">transferH</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="first-file-output">
+<h4>First file output<a class="headerlink" href="#first-file-output" title="Link to this heading">#</a></h4>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">dg</span><span class="o">::</span><span class="n">x</span><span class="o">::</span><span class="n">DVec</span><span class="w"> </span><span class="n">volume</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">create</span><span class="o">::</span><span class="n">volume</span><span class="p">(</span><span class="w"> </span><span class="n">grid</span><span class="p">);</span>
+<span class="kt">size_t</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">record</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">myproject</span><span class="o">::</span><span class="n">diagnostics2d_list</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">record</span><span class="p">.</span><span class="n">function</span><span class="p">(</span><span class="w"> </span><span class="n">resultD</span><span class="p">,</span><span class="w"> </span><span class="n">var</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">volume</span><span class="p">,</span><span class="w"> </span><span class="n">resultD</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">assign</span><span class="p">(</span><span class="w"> </span><span class="n">resultD</span><span class="p">,</span><span class="w"> </span><span class="n">resultH</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">gemv</span><span class="p">(</span><span class="w"> </span><span class="n">projection</span><span class="p">,</span><span class="w"> </span><span class="n">resultH</span><span class="p">,</span><span class="w"> </span><span class="n">transferH</span><span class="p">);</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">put_var</span><span class="p">(</span><span class="w"> </span><span class="n">record</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">grid_out</span><span class="p">},</span><span class="w"> </span><span class="n">transferH</span><span class="p">);</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">put_var</span><span class="p">(</span><span class="w"> </span><span class="n">record</span><span class="p">.</span><span class="n">name</span><span class="o">+</span><span class="s">&quot;_1d&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">grid_out</span><span class="p">},</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">file</span><span class="p">.</span><span class="n">put_var</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">start</span><span class="p">},</span><span class="w"> </span><span class="n">time</span><span class="p">);</span>
+<span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="the-timeloop">
+<h3>The timeloop<a class="headerlink" href="#the-timeloop" title="Link to this heading">#</a></h3>
+<p>We are finally ready to construct the main timeloop.
+Normally, a file and/or dignostic output is wanted only at a fixed interval, determined by two of the three parameters</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b9fc09ac-641a-4469-8d12-c6ffcb860ff9">
+<span class="eqno">(16)<a class="headerlink" href="#equation-b9fc09ac-641a-4469-8d12-c6ffcb860ff9" title="Permalink to this equation">#</a></span>\[\begin{align}
+    \Delta T_{output} = \frac{T_{end}}{N_{output}}
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(T_{end}\)</span> is the simulation end time, <span class="math notranslate nohighlight">\(N_{output}\)</span> is the number
+of outputs in the output file and <span class="math notranslate nohighlight">\(\Delta T_{output}\)</span> is the time
+interval between outputs. Care must be taken that <span class="math notranslate nohighlight">\(N_{output}\)</span> is integer.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Usually, the adaptive time-output
+given by simply letting an adaptive time-stepper run for a fixed number
+of steps is not useful as it makes comparing simulations (with different spatial resolution say) difficult and
+takes away control from the user.</p>
+</div>
+<p>Optionally, there is also a second diagnostic frequency, where for example higher time-resolved (low spatial) diagnostics need to be computed.
+This requires a second output frequency</p>
+<div class="amsmath math notranslate nohighlight" id="equation-584f8f21-2d11-496f-bd67-fe1be058c0a8">
+<span class="eqno">(17)<a class="headerlink" href="#equation-584f8f21-2d11-496f-bd67-fe1be058c0a8" title="Permalink to this equation">#</a></span>\[\begin{align}
+    \delta T_{diag} = \frac{\Delta T_{output}}{N_{diag}}
+\end{align}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Especially for this higher frequency it is usually not necessary to output at <em>exactly</em>  the intermediary timesteps, just <em>close to those timesteps</em>. This is relevant because it is better to let the timestepper chose its own timestep over forcing it to land on a given point in time. This is shown in the following loop.</p>
+</div>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">Tend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">js</span><span class="p">[</span><span class="s">&quot;output&quot;</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;tend&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">).</span><span class="n">asDouble</span><span class="p">();</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="n">maxout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">js</span><span class="p">[</span><span class="s">&quot;output&quot;</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;maxout&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">).</span><span class="n">asUInt</span><span class="p">();</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">deltaT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Tend</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">maxout</span><span class="p">;</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">abort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">u</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="o">&lt;=</span><span class="n">maxout</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// the documentation of dg::aTimeloop holds more details about how this construct works ...</span>
+<span class="w">        </span><span class="n">timeloop</span><span class="p">.</span><span class="n">integrate</span><span class="p">(</span><span class="w"> </span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="n">u</span><span class="o">*</span><span class="n">deltaT</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span>
+<span class="w">                          </span><span class="n">u</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxout</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">to</span><span class="o">::</span><span class="n">at_least</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">to</span><span class="o">::</span><span class="n">exact</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">fail</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">DG_RANK0</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;ERROR in Timestepper</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">DG_RANK0</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fail</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="n">DG_RANK0</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Writing last output and exit ...&quot;</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="n">abort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u</span><span class="p">;</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">file</span><span class="o">::</span><span class="n">nc_write</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// First write the time variable</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">put_var</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">start</span><span class="p">},</span><span class="w"> </span><span class="n">time</span><span class="p">);</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">record</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">myproject</span><span class="o">::</span><span class="n">diagnostics2d_list</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">record</span><span class="p">.</span><span class="n">function</span><span class="p">(</span><span class="w"> </span><span class="n">resultD</span><span class="p">,</span><span class="w"> </span><span class="n">var</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">volume</span><span class="p">,</span><span class="w"> </span><span class="n">resultD</span><span class="p">);</span>
+<span class="w">        </span><span class="n">dg</span><span class="o">::</span><span class="n">assign</span><span class="p">(</span><span class="w"> </span><span class="n">resultD</span><span class="p">,</span><span class="w"> </span><span class="n">resultH</span><span class="p">);</span>
+<span class="w">        </span><span class="n">dg</span><span class="o">::</span><span class="n">blas2</span><span class="o">::</span><span class="n">gemv</span><span class="p">(</span><span class="w"> </span><span class="n">projection</span><span class="p">,</span><span class="w"> </span><span class="n">resultH</span><span class="p">,</span><span class="w"> </span><span class="n">transferH</span><span class="p">);</span>
+<span class="w">        </span><span class="n">file</span><span class="p">.</span><span class="n">put_var</span><span class="p">(</span><span class="w"> </span><span class="n">record</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">grid_out</span><span class="p">},</span><span class="w"> </span><span class="n">transferH</span><span class="p">);</span>
+<span class="w">        </span><span class="n">file</span><span class="p">.</span><span class="n">put_var</span><span class="p">(</span><span class="w"> </span><span class="n">record</span><span class="p">.</span><span class="n">name</span><span class="o">+</span><span class="s">&quot;_1d&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">grid_out</span><span class="p">},</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">abort</span><span class="p">)</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition-error-handling-mechanism admonition">
+<p class="admonition-title">Error handling mechanism</p>
+<p>Here, a graceful exit strategy is
+suggested, where an output is still written in case of failure in order to
+analyse the reasons for failure.</p>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;output&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;n&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Nx&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Ny&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;tend&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;maxout&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="closing">
+<h3>Closing<a class="headerlink" href="#closing" title="Link to this heading">#</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifdef WITH_MPI</span>
+<span class="w">    </span><span class="n">MPI_Finalize</span><span class="p">();</span>
+<span class="cp">#endif </span><span class="c1">// WITH_MPI</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">//end of main</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="the-makefile">
+<span id="sec-makefile"></span><h2>The Makefile<a class="headerlink" href="#the-makefile" title="Link to this heading">#</a></h2>
+<p>The easiest way to configure the Makefile variables is to simply include Feltor’s configuration in your own Makefile</p>
+<div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="c"># Makefile</span>
+<span class="nv">device</span><span class="o">=</span>omp
+<span class="nv">FELTOR_PATH</span><span class="o">=</span>../feltor
+
+<span class="c">#configure machine</span>
+<span class="cp">include $(FELTOR_PATH)/config/default.mk</span>
+<span class="cp">include $(FELTOR_PATH)/config/version.mk</span>
+<span class="cp">include $(FELTOR_PATH)/config/*.mk</span>
+<span class="cp">include $(FELTOR_PATH)/config/devices/devices.mk</span>
+
+<span class="nv">INCLUDE</span><span class="o">+=</span>-I<span class="k">$(</span>FELTOR_PATH<span class="k">)</span>/inc/
+
+<span class="nf">all</span><span class="o">:</span><span class="w"> </span><span class="n">myprogram_hpc</span> <span class="n">myprogram_mpi</span>
+
+<span class="c"># only necessary if you use the draw library</span>
+<span class="c">#myprogram: myprogram.cpp equations.h init.h diag.h</span>
+<span class="c">#    $(CC) $(OPT) $(CFLAGS) $&lt; -o $@ $(INCLUDE) $(GLFLAGS) $(JSONLIB) -g</span>
+
+<span class="nf">myprogram_hpc</span><span class="o">:</span><span class="w"> </span><span class="n">myprogram</span>.<span class="n">cpp</span> <span class="n">equations</span>.<span class="n">h</span> <span class="n">init</span>.<span class="n">h</span> <span class="n">diag</span>.<span class="n">h</span>
+<span class="w">    </span><span class="k">$(</span>CC<span class="k">)</span><span class="w"> </span><span class="k">$(</span>OPT<span class="k">)</span><span class="w"> </span><span class="k">$(</span>CFLAGS<span class="k">)</span><span class="w"> </span>$&lt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span><span class="w"> </span><span class="k">$(</span>INCLUDE<span class="k">)</span><span class="w"> </span><span class="k">$(</span>LIBS<span class="k">)</span><span class="w"> </span><span class="k">$(</span>JSONLIB<span class="k">)</span><span class="w"> </span><span class="k">$(</span>VERSION_FLAGS<span class="k">)</span><span class="w"> </span>-g
+
+<span class="nf">myprogram_mpi</span><span class="o">:</span><span class="w"> </span><span class="n">myprogram</span>.<span class="n">cpp</span> <span class="n">equations</span>.<span class="n">h</span> <span class="n">init</span>.<span class="n">h</span> <span class="n">diag</span>.<span class="n">h</span>
+<span class="w">    </span><span class="k">$(</span>MPICC<span class="k">)</span><span class="w"> </span><span class="k">$(</span>OPT<span class="k">)</span><span class="w"> </span><span class="k">$(</span>MPICFLAGS<span class="k">)</span><span class="w"> </span>$&lt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span><span class="w"> </span><span class="k">$(</span>INCLUDE<span class="k">)</span><span class="w"> </span><span class="k">$(</span>LIBS<span class="k">)</span><span class="w"> </span><span class="k">$(</span>JSONLIB<span class="k">)</span><span class="w"> </span>-DWITH_MPI<span class="w"> </span><span class="k">$(</span>VERSION_FLAGS<span class="k">)</span><span class="w"> </span>-g
+
+<span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="n">clean</span>
+
+<span class="nf">clean</span><span class="o">:</span>
+<span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>myprogram<span class="w"> </span>myprogram_hpc<span class="w"> </span>myprogram_mpi
+</pre></div>
+</div>
+<div class="admonition-git admonition">
+<p class="admonition-title">git</p>
+<p>If you change the <code class="docutils literal notranslate"><span class="pre">FELTOR_PATH</span></code> locally and you want git to ignore this line in the Makefile when you commit, you can follow this <a class="reference external" href="https://stackoverflow.com/questions/6557467/can-git-ignore-a-specific-line">stackoverflow question</a></p>
+</div>
+<p>Now you can compile your program like any feltor program. For example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>myprogram_hpc<span class="w"> </span><span class="nv">device</span><span class="o">=</span>gpu<span class="w"> </span><span class="c1"># Compile for shared memory GPU platform</span>
+<span class="c1"># or</span>
+make<span class="w"> </span>myprogram_mpi<span class="w"> </span><span class="nv">device</span><span class="o">=</span>cpu<span class="w"> </span><span class="c1"># Compile pure mpi version</span>
+</pre></div>
+</div>
+<p>Then call the program with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./myprogram_hpc<span class="w"> </span>input.json<span class="w"> </span>output.nc
+<span class="c1"># or</span>
+<span class="nb">echo</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>mpirun<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>./myprogram_mpi<span class="w"> </span>input.json<span class="w"> </span>output.nc
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="reproducibility.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Reproducibility and Accuracy</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="timesteppers2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Advanced Timesteppers</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-file-structure">Basic file structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-init-file">The init file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-diag-file">The diag file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-equations-file">The equations file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-main-file">The main file</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#front-matter">Front matter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-in-the-input-file">Read in the input file</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construction-phase">Construction phase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-the-file-output">Initialize the file output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-output">File output</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-dimensions-and-variables">Defining dimensions and variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#output-the-static-list">Output the static list</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#first-file-output">First file output</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-timeloop">The timeloop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#closing">Closing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-makefile">The Makefile</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Matthias Wiesenberger
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

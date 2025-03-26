@@ -1,0 +1,786 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ODE integrators &#8212; The Feltor guide book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'timesteppers';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Grids and derivatives" href="grids.html" />
+    <link rel="prev" title="Vectors" href="vector-juggling.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="welcome.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">The Feltor guide book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">dg/algorithm.h</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vector-juggling.html">Vectors</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">ODE integrators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grids.html">Grids and derivatives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solvers.html">Solvers in Feltor</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">dg/geometries/geometries.h</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="geometries.html">Curvilinear grids</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">dg/matrix/matrix.h</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="matrixfunction.html">Matrix functions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">dg/file/file.h</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="json-utilities.html">JSON utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="netcdf-utilities.html">NetCDF utilities</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">dg/exblas/exblas.h</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="reproducibility.html">Reproducibility and Accuracy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="new-project.html">Create your own project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timesteppers2.html">Advanced Timesteppers</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/timesteppers.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>ODE integrators</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrate-odes-in-feltor-first-timesteppers-and-simple-time-loops">Integrate ODEs in Feltor - first timesteppers and simple time loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-runge-kutta-fixed-step">Explicit Runge-Kutta - fixed step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-multistep-fixed-step">Implicit Multistep  - fixed step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedded-explicit-runge-kutta-adaptive-step">Embedded explicit Runge Kutta - adaptive step</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-timeloops-with-dg-atimeloop">Abstract timeloops with dg::aTimeloop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-daes-solver-only-implicit-integrators">Integrating DAEs - solver only implicit integrators</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ode-integrators">
+<span id="sec-timesteppers"></span><h1>ODE integrators<a class="headerlink" href="#ode-integrators" title="Link to this heading">#</a></h1>
+<p>This chapter deals with how to integrate differential equations of the form</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5f751647-b842-434a-aef2-b19f8eabcf25">
+<span class="eqno">(1)<a class="headerlink" href="#equation-5f751647-b842-434a-aef2-b19f8eabcf25" title="Permalink to this equation">#</a></span>\[\begin{align}
+M(y,t) \frac{d}{dt}y = F(y,t)
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(M\)</span> is the mass matrix and <span class="math notranslate nohighlight">\(F\)</span> is the right hand side.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Generally we need three things to solve an ODE numerically</p>
+<ul class="simple">
+<li><p><strong>the stepper method</strong> (there are several stepper classes each coming with a range of tableaus to chose from: Runge Kutta vs Multistep, explicit vs implicit and more) e.g. <code class="docutils literal notranslate"><span class="pre">dg::ExplicitMultistep&lt;Vector&gt;</span></code></p></li>
+<li><p><strong>the ode itself</strong>, this has to be provided by the user as the right hand side functor or tuple of functors including the solver method if an implicit stepper is used and then tied to a single object typically using <code class="docutils literal notranslate"><span class="pre">std::tie</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">std::tie(</span> <span class="pre">ex,</span> <span class="pre">im,</span> <span class="pre">solve);</span></code></p></li>
+<li><p><strong>the timeloop</strong> (adaptive timestep vs fixed timestep) -&gt; can be implemented by the user or in Feltor represented by an instance of <code class="docutils literal notranslate"><span class="pre">dg::aTimeloop</span></code> class (useful if one wants to choose a method at runtime) e.g. <code class="docutils literal notranslate"><span class="pre">dg::AdaptiveTimeloop&lt;Vector&gt;</span></code>. The timeloop includes the <strong>initial condition</strong> and the integration boundaries (these are the paramters to the integrate function) <code class="docutils literal notranslate"><span class="pre">timeloop.integrate(</span> <span class="pre">t0,</span> <span class="pre">u0,</span> <span class="pre">t1,</span> <span class="pre">u1);</span></code>
+.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">dg</span></code> library provides a wide selection of explicit, implicit and imex timesteppers:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::ERKStep</span></code> embedded Runge Kutta</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::DIRKStep</span></code> diagonally implicit Runge Kutta</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::ARKStep</span></code> additive Runge Kutta (imex)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::ExplicitMultistep</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::ImplicitMultistep</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::ImExMultistep</span></code></p></li>
+<li><p>see <a class="reference external" href="https://mwiesenberger.github.io/feltor/dg/html/group__time.html">doxygen documentation</a> for a full list</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">dg::ERKStep</span></code>, <code class="docutils literal notranslate"><span class="pre">dg::DIRKStep</span></code> and <code class="docutils literal notranslate"><span class="pre">dg::ARKStep</span></code> (and in general any embedded method) can be used as a driver for an adaptive Timestepper</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::Adaptive</span></code></p></li>
+</ul>
+<div class="admonition-vector-type admonition">
+<p class="admonition-title">Vector type</p>
+<p>All of the above classes are templates of the Vector type in use. Chosing an appropriate type for the integration variable(s) is usually the first decision to make when implementing a differential equation. Anything that works in the <code class="docutils literal notranslate"><span class="pre">dg::blas1</span></code> functions is allowed so check out the <a class="reference internal" href="vector-juggling.html#sec-vectors"><span class="std std-ref">Vectors</span></a> chapter.</p>
+</div>
+<p>In order to implement any Runge-Kutta or multistep algorithm we need to be able to solve two general types of equations (see <a class="reference external" href="https://www.overleaf.com/read/dfxncmnnpzfm">theory guide on overleaf</a>):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-62eaf0b6-f950-4300-85e9-a3b042d8a5c6">
+<span class="eqno">(2)<a class="headerlink" href="#equation-62eaf0b6-f950-4300-85e9-a3b042d8a5c6" title="Permalink to this equation">#</a></span>\[\begin{align}
+    k =  M(y,t)^{-1} \cdot F(y,t) &amp;\text{ given $t,y$ return $k$} \\
+    M(y,t)\cdot ( y-y^*) - \alpha F(y,t) = 0 &amp;\text{ given $\alpha, t, y^*$ return $y$}
+\end{align}\]</div>
+<p>For any explicit (part of the) equation we need to solve the first and for any implicit (part of the) equation  we need to solve both the first and the second equation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is important to realize that the timestepper needs to know neither <span class="math notranslate nohighlight">\(F\)</span> nor <span class="math notranslate nohighlight">\(M\)</span>, nor how they are implemented or how the implicit equation is solved.
+The user just needs to provide oblique functor
+objects with the signature</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// given t y write ydot</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="w"> </span><span class="n">value_type</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ContainerType0</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">ContainerType1</span><span class="o">&amp;</span><span class="w"> </span><span class="n">ydot</span><span class="p">);</span>
+<span class="c1">// given \alpha, t and y^* write a new y</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="w"> </span><span class="n">value_type</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">value_type</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">ContainerType</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ContainerType1</span><span class="o">&amp;</span><span class="w"> </span><span class="n">ystar</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<p>More than one functor is needed for implicit or semi-implicit timesteppers. These are then expected as a <code class="docutils literal notranslate"><span class="pre">std::tuple</span></code> of functors.
+Typically one would use <code class="docutils literal notranslate"><span class="pre">std::tie</span></code> to tie together two or more objects into a functor.</p>
+<p>The timesteppers themselves are implemented using <code class="docutils literal notranslate"><span class="pre">dg::blas1</span></code> vector additions and all have a <code class="docutils literal notranslate"><span class="pre">step</span></code> method that advances the ode for one timestep</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">dirk</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="w"> </span><span class="n">implicit_part</span><span class="p">,</span><span class="w"> </span><span class="n">solver</span><span class="p">),</span><span class="w"> </span><span class="n">t0</span><span class="p">,</span><span class="w"> </span><span class="n">y0</span><span class="p">,</span><span class="w"> </span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">y1</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This step method can be called in a loop to advance the ode for an arbitrary time. Or you can use one of the <code class="docutils literal notranslate"><span class="pre">dg::aTimeloop</span></code> classes</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::AdaptiveTimeloop</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::SinglestepTimeloop</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dg::MultistepTimeloop</span></code></p></li>
+</ul>
+<p>These classes abstract the integration loop and can be called via a common interface</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">timeloop</span><span class="p">.</span><span class="n">integrate</span><span class="p">(</span><span class="w"> </span><span class="n">t0</span><span class="p">,</span><span class="w"> </span><span class="n">y0</span><span class="p">,</span><span class="w"> </span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">y1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This is useful especially if you want to choose various timesteppers at runtime.</p>
+<p>We will now study a few case scenarios to clarify the above explanations.</p>
+</section>
+<section id="integrate-odes-in-feltor-first-timesteppers-and-simple-time-loops">
+<h2>Integrate ODEs in Feltor - first timesteppers and simple time loops<a class="headerlink" href="#integrate-odes-in-feltor-first-timesteppers-and-simple-time-loops" title="Link to this heading">#</a></h2>
+<p>As an example we solve the damped driven harmonic oscillator</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7cf937f4-100f-48f2-b338-ce09f78fdbc1">
+<span class="eqno">(3)<a class="headerlink" href="#equation-7cf937f4-100f-48f2-b338-ce09f78fdbc1" title="Permalink to this equation">#</a></span>\[\begin{align}
+    \frac{d x}{d t} &amp;= v \\
+    \frac{d v}{d t} &amp;= -2 \nu \omega_0 v - \omega_0^2 x + \sin (\omega_d t)
+\end{align}\]</div>
+<p>Since we have two scalar variables we will use a <code class="docutils literal notranslate"><span class="pre">std::array&lt;double,2&gt;</span></code> as the vector type to use.
+Let us first choose some (somewhat random) parameters</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">damping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="n">omega_0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="n">omega_drive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.9</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>We know that we can solve this ODE analytically. This comes in handy to verify our implementation.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// We have an analytical solution</span>
+<span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">solution</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">tmp1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">omega_0</span><span class="o">*</span><span class="n">damping</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">tmp2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">omega_0</span><span class="o">*</span><span class="n">omega_0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">omega_drive</span><span class="o">*</span><span class="n">omega_drive</span><span class="p">)</span><span class="o">/</span><span class="n">omega_drive</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">amp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="w"> </span><span class="n">tmp1</span><span class="o">*</span><span class="n">tmp1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tmp2</span><span class="o">*</span><span class="n">tmp2</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atan</span><span class="p">(</span><span class="w"> </span><span class="mf">2.</span><span class="o">*</span><span class="n">omega_drive</span><span class="o">*</span><span class="n">omega_0</span><span class="o">*</span><span class="n">damping</span><span class="o">/</span><span class="p">(</span><span class="n">omega_drive</span><span class="o">*</span><span class="n">omega_drive</span><span class="o">-</span><span class="n">omega_0</span><span class="o">*</span><span class="n">omega_0</span><span class="p">));</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">amp</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">omega_drive</span><span class="o">*</span><span class="n">t</span><span class="o">+</span><span class="n">phi</span><span class="p">)</span><span class="o">/</span><span class="n">omega_drive</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">amp</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">omega_drive</span><span class="o">*</span><span class="n">t</span><span class="o">+</span><span class="n">phi</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="n">x</span><span class="p">,</span><span class="n">v</span><span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<section id="explicit-runge-kutta-fixed-step">
+<h3>Explicit Runge-Kutta - fixed step<a class="headerlink" href="#explicit-runge-kutta-fixed-step" title="Link to this heading">#</a></h3>
+<p>First, show how to implement a simple timeloop with a fixed stepsize Runge Kutta integrator. We choose the classic 4-th order scheme, but consult the <a class="reference external" href="https://mwiesenberger.github.io/feltor/dg/html/group__time.html">documentation</a> for an extensive list of available tableaus.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// The right hand side needs to be a callable function in Feltor.</span>
+<span class="c1">// In modern C++ this can for example be a lambda function:</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">rhs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span>
+<span class="w">            </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">yp</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">//damped driven harmonic oscillator</span>
+<span class="w">    </span><span class="c1">// x -&gt; y[0] , v -&gt; y[1]</span>
+<span class="w">    </span><span class="n">yp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="w">    </span><span class="n">yp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-2.</span><span class="o">*</span><span class="n">damping</span><span class="o">*</span><span class="n">omega_0</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">omega_0</span><span class="o">*</span><span class="n">omega_0</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">omega_drive</span><span class="o">*</span><span class="n">t</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="c1">// Let us choose an initial condition and the integration boundaries</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">u0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">solution</span><span class="p">(</span><span class="n">t0</span><span class="p">);</span>
+
+<span class="c1">// Here, we choose the classic Runge-Kutta scheme to solve</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">RungeKutta</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">rk</span><span class="p">(</span><span class="s">&quot;Runge-Kutta-4-4&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u0</span><span class="p">);</span>
+<span class="c1">// Now we are ready to construct a time-loop by repeatedly stepping</span>
+<span class="c1">// the Runge Kutta solve with a constant timestep</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t0</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">u1</span><span class="p">(</span><span class="w"> </span><span class="n">u0</span><span class="p">);</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="n">rk</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="w"> </span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">u1</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">u1</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N</span><span class="w"> </span><span class="p">);</span>
+
+<span class="c1">// Now let us compute the error</span>
+<span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">solution</span><span class="p">(</span><span class="n">t1</span><span class="p">);</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">sol</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mf">-1.</span><span class="p">,</span><span class="w"> </span><span class="n">u1</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Norm of error is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">u1</span><span class="p">,</span><span class="w"> </span><span class="n">u1</span><span class="p">))</span><span class="o">&lt;&lt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="c1">//Norm of error is 8.17315e-08</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Notice how the above program consists of the three mentioned ingredients. We wrote the ode as a single functor <code class="docutils literal notranslate"><span class="pre">rhs</span></code> expecting to use the explicit single step Runge Kutta method <code class="docutils literal notranslate"><span class="pre">dg::RungeKutta</span></code>. We then wrote a timeloop starting from the solution at time <code class="docutils literal notranslate"><span class="pre">t0</span></code>.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Lambdas are so useful that they appear at several places in the user-guide and the <code class="docutils literal notranslate"><span class="pre">dg</span></code> library generally accepts them in many places. If you are not familiar with them, a good start is to watch youtube! For example <a class="reference external" href="https://www.youtube.com/watch?v=3jCOwajNch0">Lambdas from Scratch - Arthur O’Dwye</a></p>
+</div>
+</section>
+<section id="implicit-multistep-fixed-step">
+<h3>Implicit Multistep  - fixed step<a class="headerlink" href="#implicit-multistep-fixed-step" title="Link to this heading">#</a></h3>
+<p>In the next example we want to solve the same ode with an implicit multistep method:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// First we need to provide a solution method for the prototypical implicit equation</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">solve</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">yp</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// y - alpha RHS( t, y) = rho</span>
+<span class="w">    </span><span class="c1">// can be solved analytically</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">yp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">alpha</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">omega_drive</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">alpha</span><span class="o">*</span><span class="n">omega_0</span><span class="o">*</span><span class="n">omega_0</span><span class="o">*</span><span class="n">yp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span>
+<span class="w">           </span><span class="p">(</span><span class="mf">1.</span><span class="o">+</span><span class="mf">2.</span><span class="o">*</span><span class="n">alpha</span><span class="o">*</span><span class="n">damping</span><span class="o">*</span><span class="n">omega_0</span><span class="o">+</span><span class="n">alpha</span><span class="o">*</span><span class="n">alpha</span><span class="o">*</span><span class="n">omega_0</span><span class="o">*</span><span class="n">omega_0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">yp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">alpha</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="p">};</span>
+<span class="c1">// Now we can construct a multistep method</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">ImplicitMultistep</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">multi</span><span class="p">(</span><span class="s">&quot;ImEx-BDF-3-3&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u0</span><span class="p">);</span>
+<span class="c1">// Let us choose the same initial conditions as before</span>
+<span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t0</span><span class="p">;</span><span class="w"> </span><span class="n">u1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u0</span><span class="p">;</span>
+<span class="c1">// Finally, we can construct a timeloop</span>
+<span class="n">multi</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="w"> </span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span><span class="n">solve</span><span class="p">),</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">u0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N</span><span class="p">);</span>
+<span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="n">multi</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span><span class="n">solve</span><span class="p">),</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">u1</span><span class="p">);</span>
+
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">sol</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mf">-1.</span><span class="p">,</span><span class="w"> </span><span class="n">u1</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Norm of error is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">u1</span><span class="p">,</span><span class="w"> </span><span class="n">u1</span><span class="p">))</span><span class="o">&lt;&lt;</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="c1">//dg::make_odeint( dirk, std::tie( rhs, solve), (t1-t0)/20.)-&gt;integrate( t0, u0, t1, u1);</span>
+<span class="c1">//Norm of error is 3.60666e-05</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Notice the use of <code class="docutils literal notranslate"><span class="pre">std::tie</span></code> in the <code class="docutils literal notranslate"><span class="pre">init</span></code> and <code class="docutils literal notranslate"><span class="pre">step</span></code> methods. Since an implicit method needs both the implicit part <code class="docutils literal notranslate"><span class="pre">rhs</span></code> and an implicit solver <code class="docutils literal notranslate"><span class="pre">solve</span></code> to solve it.</p>
+</div>
+</section>
+<section id="embedded-explicit-runge-kutta-adaptive-step">
+<h3>Embedded explicit Runge Kutta - adaptive step<a class="headerlink" href="#embedded-explicit-runge-kutta-adaptive-step" title="Link to this heading">#</a></h3>
+<p>As a last example we want to integrate the ode with an adaptive timestepper</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">dg</span><span class="o">::</span><span class="n">Adaptive</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">ERKStep</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">adapt</span><span class="p">(</span><span class="s">&quot;Tsitouras11-7-4-5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u0</span><span class="p">);</span>
+<span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t0</span><span class="p">;</span><span class="w"> </span><span class="n">u1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u0</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">;</span>
+<span class="k">while</span><span class="p">(</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">t1</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">t1</span><span class="p">)</span>
+<span class="w">        </span><span class="n">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+<span class="w">    </span><span class="n">adapt</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="w"> </span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">u1</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">u1</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">pid_control</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">fast_l2norm</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">sol</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mf">-1.</span><span class="p">,</span><span class="w"> </span><span class="n">u1</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Norm of error is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">u1</span><span class="p">,</span><span class="w"> </span><span class="n">u1</span><span class="p">))</span>
+<span class="w">    </span><span class="o">&lt;&lt;</span><span class="s">&quot; with &quot;</span><span class="o">&lt;&lt;</span><span class="n">adapt</span><span class="p">.</span><span class="n">nsteps</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="s">&quot; steps </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="c1">// Norm of error is 2.66678e-07 with 8 steps</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="abstract-timeloops-with-dg-atimeloop">
+<h2>Abstract timeloops with dg::aTimeloop<a class="headerlink" href="#abstract-timeloops-with-dg-atimeloop" title="Link to this heading">#</a></h2>
+<p>We have seen that the main difference between the three previous methods was how to construct the timeloop. Runge-Kutta was just a basic for loop, Multistep needed to be initialized before usage, while the adaptive stepper needed to run in a while loop and needed a bunch of additional parameters. We will now introduce
+an abstract interface that lets you choose at runtime which integration method to use:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Vec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="o">*</span><span class="w"> </span><span class="n">nsteps</span><span class="p">;</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">stepper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Adaptive&quot;</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">stepper</span><span class="p">;</span>
+
+<span class="c1">// A pointer to an abstract integrator</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">odeint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">aTimeloop</span><span class="o">&lt;</span><span class="n">Vec</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+
+<span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Adaptive&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">stepper</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">Adaptive</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">ERKStep</span><span class="o">&lt;</span><span class="n">Vec</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">adapt</span><span class="p">(</span><span class="s">&quot;Tsitouras11-7-4-5&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">odeint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">AdaptiveTimeloop</span><span class="o">&lt;</span><span class="n">Vec</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="w"> </span><span class="n">adapt</span><span class="p">,</span>
+<span class="w">                </span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">pid_control</span><span class="p">,</span><span class="w"> </span><span class="n">dg</span><span class="o">::</span><span class="n">fast_l2norm</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-6</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nsteps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">adapt</span><span class="p">.</span><span class="n">nsteps</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Singlestep&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">stepper</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">RungeKutta</span><span class="o">&lt;</span><span class="n">Vec</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rk</span><span class="p">(</span><span class="s">&quot;Runge-Kutta-4-4&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">odeint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">SinglestepTimeloop</span><span class="o">&lt;</span><span class="n">Vec</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="w"> </span><span class="n">rk</span><span class="p">,</span>
+<span class="w">                                         </span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nsteps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">N</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;Multistep&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">stepper</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">dg</span><span class="o">::</span><span class="n">ExplicitMultistep</span><span class="o">&lt;</span><span class="n">Vec</span><span class="o">&gt;</span><span class="w"> </span><span class="n">multi</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;ImEx-BDF-3-3&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">u0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">odeint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">MultistepTimeloop</span><span class="o">&lt;</span><span class="n">Vec</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="w"> </span><span class="n">multi</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span><span class="n">t0</span><span class="p">,</span><span class="w"> </span><span class="n">u0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nsteps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">N</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Stepper &quot;</span><span class="o">&lt;&lt;</span><span class="n">stepper</span><span class="o">&lt;&lt;</span><span class="s">&quot; not known!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="n">odeint</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">integrate</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span><span class="w"> </span><span class="n">u0</span><span class="p">,</span><span class="w"> </span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">u1</span><span class="p">);</span>
+
+<span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">axpby</span><span class="p">(</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="n">sol</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mf">-1.</span><span class="p">,</span><span class="w"> </span><span class="n">u1</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Norm of error is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dg</span><span class="o">::</span><span class="n">blas1</span><span class="o">::</span><span class="n">dot</span><span class="p">(</span><span class="w"> </span><span class="n">u1</span><span class="p">,</span><span class="w"> </span><span class="n">u1</span><span class="p">))</span>
+<span class="w">    </span><span class="o">&lt;&lt;</span><span class="s">&quot; with &quot;</span><span class="o">&lt;&lt;*</span><span class="n">nsteps</span><span class="o">&lt;&lt;</span><span class="s">&quot; steps </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>In order to build more complicated examples we will first need to learn how geometry and derivatives work and how we can build advanced solvers. We will revisit the timesteppers in <a class="reference internal" href="timesteppers2.html#sec-pdes"><span class="std std-ref">Section PDEs</span></a>.</p>
+</section>
+<section id="integrating-daes-solver-only-implicit-integrators">
+<h2>Integrating DAEs - solver only implicit integrators<a class="headerlink" href="#integrating-daes-solver-only-implicit-integrators" title="Link to this heading">#</a></h2>
+<p>Consider the van der Pol oscillator</p>
+<div class="amsmath math notranslate nohighlight" id="equation-38210b03-f4aa-4818-bb95-050006fcc375">
+<span class="eqno">(4)<a class="headerlink" href="#equation-38210b03-f4aa-4818-bb95-050006fcc375" title="Permalink to this equation">#</a></span>\[\begin{align}
+    \dot x &amp;= v \\
+    \dot v &amp;= \sigma ( 1-x^2) v -x
+ \end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma\)</span> represents the stiffness parameter. For
+very large values these equations become <strong>differential-algebraic equations of index 1</strong> (which is easily seen if one divides by sigma and sets <span class="math notranslate nohighlight">\(1/\sigma = 0\)</span>, the remaining equation does not have derivatives, hence algebraic, index 1 means it is solvable).
+It is then a singular perturbation problem.
+This behaviour is difficult for time-integrators insofar it reduces the error of the method to its so-called <em>stage-order</em>.</p>
+<p>Furthermore, for higher <span class="math notranslate nohighlight">\(\sigma\)</span> it becomes paramount to use implicit integrators and sometimes it might be desirable to completely avoid any explicit stage altogether (recall that for example EDIRK schems have an explicit first stage). For this reason the doxygen documentation highlights implicit integrators of that sort:</p>
+<ul class="simple">
+<li><p>all of the implicit multistep methods avoid calling the rhs directly, however, currently only the <code class="docutils literal notranslate"><span class="pre">dg::BDF_X_X</span></code> schemes can avoid it in the initialization phase as well</p></li>
+<li><p>of the DIRK schemes only the SDIRK and symplectic DIRK schemes do not call the rhs.</p></li>
+</ul>
+<p>This means for such schemes we only need to implement a single functor, namely one that solves</p>
+<div class="amsmath math notranslate nohighlight" id="equation-80540371-2731-462e-985b-1d74aab13f4c">
+<span class="eqno">(5)<a class="headerlink" href="#equation-80540371-2731-462e-985b-1d74aab13f4c" title="Permalink to this equation">#</a></span>\[\begin{align}
+    M(y,t)\cdot ( y-y^*) - \alpha F(y,t) = 0 &amp;\text{ given $\alpha, t, y^*$ return $y$} 
+\end{align}\]</div>
+<p>Here we outline the structure of a possible implementation</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">VanderPolSolver</span>
+<span class="p">{</span>
+<span class="w">     </span><span class="kt">void</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="mi">2</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">yp</span><span class="p">)</span>
+<span class="w">     </span><span class="p">{</span>
+<span class="w">         </span><span class="c1">// solve y - alpha F(y,t) = yp</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">doNotCall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Just to be entirely certain</span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="nb">false</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s">&quot;This should never be called!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">VanderPolSolver</span><span class="w"> </span><span class="n">solver</span><span class="p">(</span><span class="w"> </span><span class="p">...);</span>
+<span class="n">dg</span><span class="o">::</span><span class="n">DIRKStep</span><span class="o">&lt;</span><span class="n">Vec</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dirk</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;SDIRK-4-2-3&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y0</span><span class="p">);</span>
+
+<span class="n">odeint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">dg</span><span class="o">::</span><span class="n">SinglestepTimeloop</span><span class="o">&lt;</span><span class="n">Vec</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="w"> </span><span class="n">dirk</span><span class="p">,</span>
+<span class="w">                                                       </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="w"> </span><span class="n">doNotCall</span><span class="p">,</span><span class="w"> </span><span class="n">solver</span><span class="p">),</span>
+<span class="w">                                                       </span><span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">N</span><span class="p">);</span>
+<span class="n">odeint</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">integrate</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span><span class="w"> </span><span class="n">u0</span><span class="p">,</span><span class="w"> </span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">u1</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="vector-juggling.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Vectors</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="grids.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Grids and derivatives</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrate-odes-in-feltor-first-timesteppers-and-simple-time-loops">Integrate ODEs in Feltor - first timesteppers and simple time loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-runge-kutta-fixed-step">Explicit Runge-Kutta - fixed step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-multistep-fixed-step">Implicit Multistep  - fixed step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedded-explicit-runge-kutta-adaptive-step">Embedded explicit Runge Kutta - adaptive step</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abstract-timeloops-with-dg-atimeloop">Abstract timeloops with dg::aTimeloop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-daes-solver-only-implicit-integrators">Integrating DAEs - solver only implicit integrators</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Matthias Wiesenberger
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
