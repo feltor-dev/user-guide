@@ -8,72 +8,155 @@ We usually provide Meta-data in the file based on the [CF-conventions](https://c
 ```{seealso}
 Read more about the [NetCDF user-guide](https://docs.unidata.ucar.edu/nug/current/best_practices.html) and [C documentation](https://www.unidata.ucar.edu/netcdf/docs) and [python documentation](http://unidata.github.io/netcdf4-python/)
 ```
-Unfortunately, netCDF is a C-library with a frankly terrible interface.
+Unfortunately, netCDF is a C-library with a from a C++ perspective frankly terrible interface.
 In particular the task of "just write it to file" can be daunting with pure netCDF functions involving many low-level steps like creating and writing dimensions, managing variable ids, creating variables, and then only finally writing a variable. A bit further reaching is the question how to write to file in a MPI environment.
 
-The goal of writing utility functions is to
-- simplify error handling,
-- simplify the creation of Dimensions for quantities that are defined on `dg` grids
-- simplify the data management for writing `dg` data to file involved in a multi-threaded MPI program.
+For this reason we provide the `dg::file::NcFile` class, which is a modern
+C++-17 style implementation of the [NetCDF Data Model](https://docs.unidata.ucar.edu/netcdf-c/4.9.2/netcdf_data_model.html).
+The goal of the class is to simplify reading and writing of data from/to NetCDF files to the degree that you can "just do it".
 
-## Handling errors from netcdf calls
-We provide a convenient class `dg.:file::NC_Error_Handle` which constructs from a netcdf return integer. If the integer is not zero it will throw.
-
+## Opening and closing a file
+Opening and closing a file is as simple as
 ``` cpp
 #include <iostream>
 #include "dg/file/nc_utilities.h"
 
 int main()
 {
-    dg::file::NC_Error_Handle err;
-    int ncid=-1;
-    try{
-        err = nc_create( "outputfile.nc", NC_NETCDF4|NC_CLOBBER, &ncid);
-    }catch( std::exception& e)
-    {
-        std::cerr << "ERROR creating file outputfile.nc"<<std::endl;
-        std::cerr << e.what()<<std::endl;
-    }
+    // Create a file "outputfile.nc", overwrite ("clobber") if exists
+    dg::file::NcFile file( "outputfile.nc", dg::file::nc_clobber);
+    // Close the file
+    file.close();
+    return 0;
 }
 ```
+## Defining Attributes for a file
+Attributes can be written with the `put_att` family of member functions
+``` cpp
+#include <iostream>
+#include "dg/file/nc_utilities.h"
+
+int main()
+{
+    // Create a file "outputfile.nc", overwrite ("clobber") if exists
+    dg::file::NcFile file( "outputfile.nc", dg::file::nc_clobber);
+    // A string attribute named "title" for the file
+    file.put_att( {"title", "My title"});
+    // A integer attribute named "truth"
+    file.put_att( {"truth", 42});
+    // Close the file
+    file.close();
+    return 0;
+}
+```
+
 ## Defining dimensions
-We simplify the creation of dimensions given a `dg` grid. The product space nature of our grid maps directly to the netCDF data model. For example
+We simplify the creation of dimensions given a `dg` grid. The product space nature of our grid maps directly to the netCDF data model. For example:
 ```cpp
-int dim_ids[3], tvarID;
-dg::CartesianGrid2d grid(...);
-err = dg::file::define_dimensions( ncid, dim_ids, &tvarID, grid,
-                {"time", "y", "x"});
+    // Generate a grid
+    const double x0 = 0., x1 = 2.*M_PI;
+    dg::x::CartesianGrid2d grid( x0,x1,x0,x1,3,10,10);
+    // and put dimensions to file
+    file.defput_dim( "x", {{"axis", "X"},
+        {"long_name", "x-coordinate in Cartesian system"}},
+        grid.abscissas(0));
+    file.defput_dim( "y", {{"axis", "Y"},
+        {"long_name", "y-coordinate in Cartesian system"}},
+        grid.abscissas(1));
+```
+creates two one-dimensional dimensions "x" and "y" and corresponding dimension variables with the same names. The data for "x" and "y" is written directly to file and is generated from the Gaussian nodes of the grid in x and y directly.
+The two dimension variables are created together with two attritubes "axis" and "long_name" each.
+
+## Defining and writing static variables
+The netCDF-4 standard mandates that a variable should have dimensions and data and can have attributes.
+```cpp
+    // Generate some data and write to file
+    dg::x::HVec data = dg::evaluate( function, grid);
+    // Defne and write a variable in one go
+    file.defput_var( "variable", {"y", "x"},
+                {{"long_name", "A long explanation"}, {"unit", "m/s"}},
+                grid, data);
+```
+Here, we defined a variable named "variable" with dimensions "x" and "y" and two attributes "long_name" and "unit". Note here that the "y" dimension comes first because our dg grids have the "x" dimension contiguous in memory.
+Also note that grid appears in the defput member function. This is necessary to tell the library the extent of the
+given data to write (Theoretically, you could just write a portion of the data, or in an MPI environment the grid tells the library which part of the data it should write).
+
+## Defining and writing dynamic variables
+The first thing to do to create a time series is to create an unlimited time dimension.
+Afterwards we can define another variable, which depends on time and then write a time-series
+```cpp
+    // Generate an unlimited dimension and define another variable
+    file.def_dimvar_as<double>( "time", NC_UNLIMITED, {{"axis", "T"}});
+    file.def_var_as<double>( "dependent", {"time", "y", "x"},
+        {{"long_name", "Really interesting"}});
+    // Write timeseries
+    for( unsigned u=0; u<=2; u++)
+    {
+        double time = u*0.01;
+        file.put_var("time", {u}, time);
+        // We can write directly from GPU
+        dg::x::DVec data = dg::evaluate( function, grid);
+        dg::blas1::scal( data, cos(time));
+        file.put_var( "dependent", {u, grid}, data);
+    }
 ```
 
-creates three one-dimensional dimensions "time", "x" and "y" and corresponding dimension variables with the same names. The data for "x" and "y" is written directly to file and is generated from the Gaussian nodes of the grid in x and y directly. The time variable is an _unlimited_ variable expecting a time simulation with an unknown number of steps. Therefore, the function returns the id of the time variable for the user to write.
-```{seealso}
-See the `dg::file::define_dimensions` family of functions in the doxygen documentation. There is one for each grid.
+## Reading variables
+In order to read the data that we have just written we open the file in read mode
+```cpp
+    // Open file for reading
+    file.open( "test.nc", dg::file::nc_nowrite);
+    std::string title = file.get_att_as<std::string>( "title");
+    // In MPI all ranks automatically get the right chunk of data
+    file.get_var( "variable", grid, data);
+    unsigned NT = file.get_dim_size( "time");
+    // CHECK( NT == 3);
+    double time;
+    file.get_var( "time", {0}, time);
+    file.close();
 ```
 
-## Defining and writing variables
-The netCDF-4 standard mandates that a variable should have dimensions and data.
-The netCDF C-interface already defines ready-to-use functions `nc_def_var`, `nc_put_var_double` (for writing variables in a single call) and `nc_put_vara_double` (for writing variables in chunks) for defining variables and writing data to file. The only issue when writing data to file is what to do in an MPI setting where the data is distributed among processes. NetCDF offers a parallel writing backend, however in our tests this turned out to be slow and the compilation and linking of a program becomes more complicated.
+## What if my grid is not equidistant, curvilinear or even unstructured?
+The `dg::file::NcFile` is just a wrapper around the underlying netcdf C-library so in principle
+you should be able to do whatever you want.
+For example let's view the example of a logarithmic grid (between $10^{-3}$ and $10^2$):
+``` cpp
+#include <iostream>
+#include "dg/file/file.h"
 
-A better approach is to use **serial netCDF**. Simply send all data to the master process, which then funnels the data into the output file. The management of these data transfers and communication is hidden in the `dg::file::put_var_double` and `dg::file::put_vara_double` family of functions.
-```cpp
-int varID;
-std::string name = "variable";
-// only the master thread needs to define the variable
-DG_RANK0 err = nc_def_var( ncid, name.data(), NC_DOUBLE, 3, dim_ids, &varID);
-// generate data
-dg::x::HVec transferH = ...;
-int start = 0; // which timestep
-// all threads need to call the writing function
-dg::file::put_vara_double( ncid, varID, start, grid, transferH);
+int main()
+{
+    // create a netcdf file
+    dg::file::NcFile file( "test.nc", dg::file::nc_clobber);
+
+    // Computational grid
+    dg::Grid2d g2d( -3,2 , -3,2, 1, 10, 20); //equidistant cell-centered grid
+    // If you want to include the end points we need to massage the Grid constructor a bit:
+    // double x0 = -3, x1 = 2;
+    // double h = (x1-x0)/(N-1)
+    // dg::Grid2d g2d( -3-h,2+h , -3-h,2+h, 1, 10, 20); //equidistant edge centered grid
+
+    // Product space
+    auto xpoints = dg::evaluate( [] (double x){ return pow( 10, x);}, g2d.gx());
+    auto ypoints = dg::evaluate( [] (double y){ return pow( 10, y);}, g2d.gy());
+
+    auto data = dg::kronecker( [](double x, double y){ return sin(x)*sin(y);},
+                                     xpoints, ypoints);
+
+    // Write the data and the actual grid points as variables
+    file.defput_dim( "x", {}, xpoints);
+    file.defput_dim( "y", {}, ypoints);
+    file.defput_var( "Vector", {"y", "x"}, {}, g2d, data);
+
+    // Close the file
+    file.close();
+
+    return 0;
+}
 ```
-In a serial environment the `dg::file::put_var[a]_double` functions become simple wrappers around the corresponding netCDF function. They can therefore be used in a platform independent environment.
-````{note}
-If you actually do want to use the _parallel netcdf_ interface, you can use a hidden parameter in the function
-```cpp
-// now each process writes to the file in parallel
-dg::file::put_vara_double( ncid, varID, start, grid, transferH, true);
-```
-````
-```cpp
- err = nc_close(ncid);
- ```
+
+## What to do for MPI distributed vectors
+
+When writing data to file in an MPI setting data is distributed among processes. NetCDF offers a parallel writing backend, however in our tests this turned out to be slow and the compilation and linking of a program becomes more complicated.
+A better approach is to use **serial netCDF**. Simply send all data to the master process, which then funnels the data into the output file.
+Our `dg::file::NcFile` class automatically recognises if it is being used in an MPI environment and automatically dispatches all calls to the corresponding MPI call. This means that in MPI the class can be used exactly like in a shared memory environment.
